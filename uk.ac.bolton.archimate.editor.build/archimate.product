@@ -19,7 +19,6 @@
 
    <windowImages i16="/uk.ac.bolton.archimate.editor/img/app-16.png" i32="/uk.ac.bolton.archimate.editor/img/app-32.png" i48="/uk.ac.bolton.archimate.editor/img/app-48.png" i64="/uk.ac.bolton.archimate.editor/img/app-64.png" i128="/uk.ac.bolton.archimate.editor/img/app-128.png"/>
 
-
    <launcher name="Archi">
       <linux icon="/uk.ac.bolton.archimate.editor.build/branding/linux/icon.xpm"/>
       <macosx icon="/uk.ac.bolton.archimate.editor.build/branding/mac/app/Contents/Resources/icon.icns"/>
@@ -30,17 +29,18 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
-
 
    <plugins>
       <plugin id="com.ibm.icu"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.servlet.jsp"/>
+      <plugin id="javax.transaction" fragment="true"/>
       <plugin id="org.apache.ant"/>
+      <plugin id="org.apache.commons.codec"/>
       <plugin id="org.apache.commons.el"/>
+      <plugin id="org.apache.commons.httpclient"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.jasper"/>
       <plugin id="org.apache.lucene"/>
@@ -71,6 +71,9 @@
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.datatools.connectivity"/>
       <plugin id="org.eclipse.draw2d"/>
+      <plugin id="org.eclipse.emf.cdo"/>
+      <plugin id="org.eclipse.emf.cdo.common"/>
+      <plugin id="org.eclipse.emf.cdo.tests.model1"/>
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.ecore"/>
       <plugin id="org.eclipse.emf.ecore.xmi"/>
@@ -98,6 +101,14 @@
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.jface.text"/>
+      <plugin id="org.eclipse.net4j"/>
+      <plugin id="org.eclipse.net4j.defs"/>
+      <plugin id="org.eclipse.net4j.http"/>
+      <plugin id="org.eclipse.net4j.http.common"/>
+      <plugin id="org.eclipse.net4j.jvm"/>
+      <plugin id="org.eclipse.net4j.tcp"/>
+      <plugin id="org.eclipse.net4j.util"/>
+      <plugin id="org.eclipse.net4j.util.defs"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.swt"/>

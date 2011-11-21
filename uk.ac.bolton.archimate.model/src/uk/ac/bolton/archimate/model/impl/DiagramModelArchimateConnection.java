@@ -34,7 +34,7 @@ public class DiagramModelArchimateConnection extends DiagramModelConnection impl
     /**
      * Wrapped Archimate relationship
      */
-    private IRelationship fRelationship;
+//    private IRelationship fRelationship;
 
     /**
 	 * <!-- begin-user-doc -->
@@ -106,7 +106,7 @@ public class DiagramModelArchimateConnection extends DiagramModelConnection impl
      * @generated NOT
      */
     public IRelationship getRelationship() {
-        return fRelationship;
+    	return (IRelationship) eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_ARCHIMATE_CONNECTION__RELATIONSHIP, true);
     }
 
     /**
@@ -115,7 +115,7 @@ public class DiagramModelArchimateConnection extends DiagramModelConnection impl
      * @generated NOT
      */
     public void setRelationship(IRelationship relationship) {
-        fRelationship = relationship;
+    	eSet(IArchimatePackage.Literals.DIAGRAM_MODEL_ARCHIMATE_CONNECTION__RELATIONSHIP, relationship);
     }
 
     /**

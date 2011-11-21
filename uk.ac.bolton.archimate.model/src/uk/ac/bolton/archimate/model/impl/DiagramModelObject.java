@@ -165,7 +165,8 @@ public abstract class DiagramModelObject extends DiagramModelComponent implement
     public int getTextAlignment() {
         // Check for backward compatibility where default is 0 and not persisted
     	Integer textAlignment = (Integer)eGet(IArchimatePackage.Literals.FONT_ATTRIBUTE__FONT_COLOR, true);
-        if(textAlignment == TEXT_ALIGNMENT_NONE) {
+    	
+        if((null == textAlignment)||(textAlignment == TEXT_ALIGNMENT_NONE)) {
             textAlignment = getDefaultTextAlignment();
         }
         return textAlignment;

@@ -42,10 +42,6 @@ import uk.ac.bolton.archimate.model.IFolder;
  */
 public class DiagramModelArchimateObject extends DiagramModelObject implements IDiagramModelArchimateObject {
     
-    /**
-     * Wrapped Archimate Element
-     */
-    private IArchimateElement fArchimateElement;
 
     /**
 	 * <!-- begin-user-doc -->
@@ -99,7 +95,7 @@ public class DiagramModelArchimateObject extends DiagramModelObject implements I
      * @generated NOT
      */
     public IArchimateElement getArchimateElement() {
-        return fArchimateElement;
+    	return (IArchimateElement)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_ARCHIMATE_OBJECT__ARCHIMATE_ELEMENT, true);
     }
 
     /**
@@ -108,7 +104,7 @@ public class DiagramModelArchimateObject extends DiagramModelObject implements I
      * @generated NOT
      */
     public void setArchimateElement(IArchimateElement archimateElement) {
-        fArchimateElement = archimateElement;
+		eSet(IArchimatePackage.Literals.DIAGRAM_MODEL_ARCHIMATE_OBJECT__ARCHIMATE_ELEMENT, archimateElement);
     }
 
     /**
