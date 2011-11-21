@@ -304,13 +304,14 @@ public class DiagramModelConnection extends DiagramModelComponent implements IDi
         }
         
         // Same as before, don't bother
-        if(this.source == source && this.target == target) {
+
+        if(getSource() == source && getTarget() == target) {
             return;
         }
         
         disconnect();
-        this.source = source;
-        this.target = target;        
+        setSource(source);
+        setTarget(target);
         reconnect();
     }
 
@@ -320,6 +321,8 @@ public class DiagramModelConnection extends DiagramModelComponent implements IDi
      * @generated NOT
      */
     public void disconnect() {
+    	IDiagramModelObject source = getSource();
+    	IDiagramModelObject target = getTarget();
         if(source != null && target != null) {
             source.removeConnection(this);
             target.removeConnection(this);
@@ -332,6 +335,8 @@ public class DiagramModelConnection extends DiagramModelComponent implements IDi
      * @generated NOT
      */
     public void reconnect() {
+    	IDiagramModelObject source = getSource();
+    	IDiagramModelObject target = getTarget();
         if(source != null && target != null) {
             source.addConnection(this);
             target.addConnection(this);

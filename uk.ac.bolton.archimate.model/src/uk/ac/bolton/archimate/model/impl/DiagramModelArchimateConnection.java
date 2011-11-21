@@ -82,6 +82,8 @@ public class DiagramModelArchimateConnection extends DiagramModelConnection impl
 
     @Override
     public void reconnect() {
+    	IDiagramModelObject source = getSource();
+    	IDiagramModelObject target = getTarget();
         if(source != null && target != null) {
             super.reconnect();
 

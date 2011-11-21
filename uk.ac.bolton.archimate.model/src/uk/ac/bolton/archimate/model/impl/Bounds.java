@@ -139,7 +139,7 @@ public class Bounds extends CDOObjectImpl implements IBounds {
      * @generated NOT
      */
     public void setHeight(int newHeight) {
-        height = newHeight;
+    	eSet(IArchimatePackage.Literals.BOUNDS__HEIGHT, newHeight);
     }
 
     /**
