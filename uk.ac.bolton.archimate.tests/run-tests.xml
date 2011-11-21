@@ -22,7 +22,7 @@
     <!-- Set directory locations for this Ant script -->
 	<!-- Users may need to set these locations to their own local settings -->
 	
-	<property name="eclipse.plugins" 		location="d:\dev\eclipse3.6\plugins"/>
+	<property name="eclipse.plugins" 		location="/build/mag/eclipse/plugins/"/>
 	
     <property name="output.dir" 			location="archi-tests"/>
     <property name="temp.dir" 			    location="${output.dir}/temp"/>
@@ -65,6 +65,9 @@
             <pathelement path="${archi.editor-bin.dir}"/>
         	<pathelement path="${archi.model-bin.dir}"/>
             <pathelement path="${tests-bin.dir}"/>
+            <pathelement path="/build/mag/eclipse/plugins/junit-4.10.jar"/>
+        	
+        	
         	
         	<fileset dir="${eclipse.plugins}">
         		<include name="org.eclipse.emf*.jar" />
