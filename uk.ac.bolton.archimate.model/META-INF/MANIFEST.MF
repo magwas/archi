@@ -11,8 +11,8 @@ Export-Package: uk.ac.bolton.archimate.model,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.eclipse.emf.cdo.common;bundle-version="2.0.0"
+ org.eclipse.emf.cdo.common;bundle-version="2.0.0",
+ org.eclipse.emf.cdo;bundle-version="2.0.0",
+ org.eclipse.net4j.util;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.eclipse.emf.cdo;version="2.0.0",
- org.eclipse.emf.internal.cdo
