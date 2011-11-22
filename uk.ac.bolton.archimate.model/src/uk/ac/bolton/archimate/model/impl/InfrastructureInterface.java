@@ -6,10 +6,8 @@
  */
 package uk.ac.bolton.archimate.model.impl;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import uk.ac.bolton.archimate.model.IArchimatePackage;
 import uk.ac.bolton.archimate.model.IInfrastructureInterface;
 import uk.ac.bolton.archimate.model.IInterfaceElement;
