@@ -68,6 +68,8 @@
             <pathelement path="/build/mag/eclipse/plugins/junit-4.10.jar"/>
             <pathelement path="/build/mag/eclipse/plugins/org.eclipse.net4j.util_2.0.0.v200906160348.jar"/>
             <pathelement path="/build/mag/eclipse/plugins/org.eclipse.core.runtime_3.7.0.v20110110.jar"/>
+        	<pathelement path="/build/mag/eclipse/plugins/org.eclipse.ui.workbench_3.7.0.I20110519-0100.jar"/>
+        	<pathelement path="/build/mag/eclipse/plugins/org.eclipse.equinox.common_3.6.0.v20110523.jar"/>
         	
         	
         	
