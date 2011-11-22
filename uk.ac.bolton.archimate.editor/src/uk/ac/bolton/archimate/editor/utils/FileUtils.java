@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
@@ -296,27 +298,29 @@ public final class FileUtils  {
 	        return files;
 	    }
 	    
-		Vector<File> v = new Vector<File>();
 		
 		// Folders
+		Vector<File> folders = new Vector<File>();
 		for(int i = 0; i < files.length; i++) {
 			File file = files[i];
 			if(file.isDirectory()) {
-				v.add(file);
+				folders.add(file);
 			}
 		}
-		
+		Collections.sort(folders);
 		// Files
+		Vector<File> philes = new Vector<File>();
 		for(int i = 0; i < files.length; i++) {
 			File file = files[i];
 			if(!file.isDirectory()){
-				v.add(file);
+				philes.add(file);
 			}
 		}
-		
-		File[] f = new File[v.size()];
-		v.copyInto(f);
-		v = null;
+		Collections.sort(philes);
+		folders.addAll(philes);
+		File[] f = new File[folders.size()];
+		folders.copyInto(f);
+		folders = null;
 		return f;
 	}
 	
