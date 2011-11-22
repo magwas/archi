@@ -66,6 +66,9 @@
         	<pathelement path="${archi.model-bin.dir}"/>
             <pathelement path="${tests-bin.dir}"/>
             <pathelement path="/build/mag/eclipse/plugins/junit-4.10.jar"/>
+            <pathelement path="/build/mag/eclipse/plugins/org.eclipse.net4j.util_2.0.0.v200906160348.jar"/>
+            <pathelement path="/build/mag/eclipse/plugins/org.eclipse.core.runtime_3.7.0.v20110110.jar"/>
+        	
         	
         	
         	
