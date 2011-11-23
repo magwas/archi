@@ -5798,7 +5798,7 @@ public interface IArchimatePackage extends EPackage {
 	 * The meta object id for the '<em>File</em>' data type.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @see java.io.File
+	 * @see org.eclipse.emf.common.util.URI
 	 * @see uk.ac.bolton.archimate.model.impl.ArchimatePackage#getFile()
 	 * @generated
 	 */
@@ -7166,12 +7166,12 @@ public interface IArchimatePackage extends EPackage {
     EEnum getFolderType();
 
     /**
-	 * Returns the meta object for data type '{@link java.io.File <em>File</em>}'.
+	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>File</em>}'.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>File</em>'.
-	 * @see java.io.File
-	 * @model instanceClass="java.io.File" serializeable="false"
+	 * @see org.eclipse.emf.common.util.URI
+	 * @model instanceClass="org.eclipse.emf.common.util.URI" serializeable="false"
 	 * @generated
 	 */
     EDataType getFile();
@@ -8412,7 +8412,7 @@ public interface IArchimatePackage extends EPackage {
 		 * The meta object literal for the '<em>File</em>' data type.
 		 * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-		 * @see java.io.File
+		 * @see org.eclipse.emf.common.util.URI
 		 * @see uk.ac.bolton.archimate.model.impl.ArchimatePackage#getFile()
 		 * @generated
 		 */

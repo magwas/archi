@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.zip.ZipOutputStream;
 
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -163,7 +164,7 @@ public class SaveModelAsTemplateWizard extends Wizard {
             zOut = new ZipOutputStream(out);
 
             // Model File
-            File modelFile = saveModelToTempFile();
+            File modelFile = new File(saveModelToTempFile().toFileString());
             ZipUtils.addFileToZip(modelFile, TemplateManager.ZIP_ENTRY_MODEL, zOut);
             if(modelFile != null) {
                 modelFile.delete();
@@ -227,10 +228,11 @@ public class SaveModelAsTemplateWizard extends Wizard {
         return JDOMUtils.write2XMLString(doc);
     }
 
-    private File saveModelToTempFile() throws IOException {
-        File tmp = File.createTempFile("architemplate", null);
-        tmp.deleteOnExit();
-        Resource resource = ArchimateResourceFactory.createResource(tmp);
+    private URI saveModelToTempFile() throws IOException {
+    	File file = File.createTempFile("architemplate", null);
+        URI tmp = URI.createFileURI(file.getAbsolutePath());
+        file.deleteOnExit();
+        Resource resource = ArchimateResourceFactory.staticCreateResource(tmp);
         resource.getContents().add(fModel);
         resource.save(null);
         resource.getContents().remove(fModel);

@@ -9,6 +9,7 @@ package uk.ac.bolton.archimate.templates.wizard;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.custom.BusyIndicator;
@@ -65,7 +66,7 @@ public class NewArchimateModelFromTemplateWizard extends Wizard {
                         tmp.deleteOnExit();
                         File file = ZipUtils.extractZipEntry(zipFile, TemplateManager.ZIP_ENTRY_MODEL, tmp);
                         if(file != null && file.exists()) {
-                            IArchimateModel model = IEditorModelManager.INSTANCE.openModel(file);
+                            IArchimateModel model = IEditorModelManager.INSTANCE.openModel(URI.createFileURI(file.getAbsolutePath()));
                             if(model != null) {
                                 // New name
                                 model.setName("(new) " + model.getName());

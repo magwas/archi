@@ -129,6 +129,7 @@ implements IArchimateDiagramEditor {
         viewer.setEditPartFactory(new ArchimateDiagramEditPartFactory());
         
         // Set Model
+        //System.out.println("diagram model for "+this+" is "+getModel());
         viewer.setContents(getModel());
         
         // Add Selection Sync

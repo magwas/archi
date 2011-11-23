@@ -6,7 +6,6 @@
  */
 package uk.ac.bolton.archimate.model.util;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,22 +49,17 @@ public class ArchimateResourceFactory extends ResourceFactoryImpl {
      * @return a Resource that allows saving and loading files with any type of file extension
      *          as registered in plugin.xml
      */
-    public static Resource createResource(File file) {
-        ResourceSet resourceSet = createResourceSet();
-        
-        // This will return an ArchimateResource as registered in plugin.xml
-        Resource resource = resourceSet.createResource(URI.createFileURI(file.getAbsolutePath()));
-        return resource;
-    }
-
-    /**
-     * @return a ResourceSet that allows saving and loading files with any type of extension
-     */
-    public static ResourceSet createResourceSet() {
-        ResourceSet resourceSet = new ResourceSetImpl();
-        // Register the * extension on the ResourceSet to over-ride the ECore global one
-        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new ArchimateResourceFactory());
-        return resourceSet;
+    public static Resource staticCreateResource(URI uri) {
+    	if(uri.isFile()) {
+        	ResourceSet resourceSet = createResourceSet();
+        	// This will return an ArchimateResource as registered in plugin.xml
+        	Resource resource = resourceSet.createResource(uri);
+        	return resource;    		
+    	}  else if(uri.scheme().equals("cdo")){
+    		return CDOResourceSet.getOrCreateResourceByURI(uri);    		
+    	} else {
+    		throw new Error("Uri scheme unrecognized:"+uri.scheme());
+    	}
     }
 
     /**
@@ -76,11 +70,29 @@ public class ArchimateResourceFactory extends ResourceFactoryImpl {
      */
     @Override
     public Resource createResource(URI uri) {
-        ArchimateResource result = new ArchimateResource(uri);
-        result.getDefaultLoadOptions().putAll(getOptions());
-        result.getDefaultSaveOptions().putAll(getOptions());
-        return result;
+    	if (uri.isFile()){
+            ArchimateResource result = new ArchimateResource(uri);
+            result.getDefaultLoadOptions().putAll(getOptions());
+            result.getDefaultSaveOptions().putAll(getOptions());
+            return result;
+    	} else if(uri.scheme().equals("cdo")) {
+    		return CDOResourceSet.getOrCreateResourceByURI(uri);
+    	} else {
+    		throw new Error("Uri scheme unrecognized:"+uri.scheme());
+    	}
+    		
     }
+    /**
+     * @return a ResourceSet that allows saving and loading files with any type of extension
+     */
+    public static ResourceSet createResourceSet() {
+        ResourceSet resourceSet = new ResourceSetImpl();
+        // Register the * extension on the ResourceSet to over-ride the ECore global one
+        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new ArchimateResourceFactory());
+        return resourceSet;
+    }
+
+
     
     /**
      * Add customisation to serialsiation

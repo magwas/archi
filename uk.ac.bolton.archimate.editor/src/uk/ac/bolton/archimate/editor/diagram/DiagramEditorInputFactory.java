@@ -9,6 +9,7 @@ package uk.ac.bolton.archimate.editor.diagram;
 import java.io.File;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.ui.IElementFactory;
 import org.eclipse.ui.IMemento;
 
@@ -44,7 +45,7 @@ public class DiagramEditorInputFactory implements IElementFactory {
         String viewName = memento.getString(TAG_VIEW_NAME);
 
         if(viewID != null && fileName != null) {
-            File file = new File(fileName);
+            URI file = URI.createURI(fileName);
             for(IArchimateModel model : IEditorModelManager.INSTANCE.getModels()) {
                 if(file.equals(model.getFile())) {
                     for(IDiagramModel diagramModel : model.getDiagramModels()) {
@@ -74,9 +75,10 @@ public class DiagramEditorInputFactory implements IElementFactory {
             if(name != null) {
                 memento.putString(TAG_VIEW_NAME, name);
             }
-            File file = diagramModel.getArchimateModel().getFile();
+            URI file = diagramModel.getArchimateModel().getFile();
             if(file != null) {
-                memento.putString(TAG_VIEW_FILE, file.getAbsolutePath());
+            	//System.out.println("adding to memento:"+file.toString());
+                memento.putString(TAG_VIEW_FILE, file.toString());
             }
         }
     }

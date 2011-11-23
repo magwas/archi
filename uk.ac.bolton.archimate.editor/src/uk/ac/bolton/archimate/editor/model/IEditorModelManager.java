@@ -7,9 +7,11 @@
 package uk.ac.bolton.archimate.editor.model;
 
 import java.beans.PropertyChangeListener;
-import java.io.File;
+
 import java.io.IOException;
 import java.util.List;
+
+import org.eclipse.emf.common.util.URI;
 
 import uk.ac.bolton.archimate.editor.model.impl.EditorModelManager;
 import uk.ac.bolton.archimate.model.IArchimateModel;
@@ -65,7 +67,7 @@ public interface IEditorModelManager {
      * Open a model by loading it and opening its Views
      * @return The newly opened model or null
      */
-    IArchimateModel openModel(File file);
+    IArchimateModel openModel(URI file);
     
     /**
      * Open an existing model
@@ -78,7 +80,7 @@ public interface IEditorModelManager {
      * @param file
      * @return The newly loaded model or null
      */
-    IArchimateModel loadModel(File file);
+    IArchimateModel loadModel(URI file);
     
     /**
      * Close a model
@@ -121,7 +123,7 @@ public interface IEditorModelManager {
      * @param file
      * @return True if the model backed by file is already loaded
      */
-    boolean isModelLoaded(File file);
+    boolean isModelLoaded(URI file);
     
     /**
      * Add a Property Change Listener
@@ -143,4 +145,5 @@ public interface IEditorModelManager {
      * @param newValue New Value
      */
     void firePropertyChange(Object source, String prop, Object oldValue, Object newValue);
+
 }

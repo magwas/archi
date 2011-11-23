@@ -16,6 +16,7 @@ import java.util.EventObject;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.gef.commands.CommandStack;
@@ -150,10 +151,10 @@ implements IEditorModelManager {
     }
     
     @Override
-    public IArchimateModel openModel(File file) {
-        if(file == null || !file.exists() || isModelLoaded(file)) {
+    public IArchimateModel openModel(URI file) {
+        if(file == null || !(file.isFile() && new File(file.toFileString()).exists()) || isModelLoaded(file)) {
             return null;
-        }
+        } //else { System.out.println("not opening "+file.toString()); }
         
         IArchimateModel model = loadModel(file);
         if(model != null) {
@@ -184,18 +185,23 @@ implements IEditorModelManager {
     }
     
     @Override
-    public IArchimateModel loadModel(File file) {
-        if(file == null || !file.exists()) {
+    public IArchimateModel loadModel(URI uri) {
+        if(uri == null) {
             return null;
         }
+        if(uri.isFile()&&!(new File(uri.toFileString()).exists())) {
+        	return null;
+        } //else { System.out.println("not opening2 "+uri.toString()); }
         
-        Resource resource = ArchimateResourceFactory.createResource(file);
-        
+        Resource resource = ArchimateResourceFactory.staticCreateResource(uri);
+        //System.out.println("resource="+resource+", isfile="+uri.isFile()+", asfile="+new File(uri.toFileString()).getAbsolutePath());
         try {
             resource.load(null);
         }
         catch(IOException ex) {
             // Error occured loading model. Was it a disaster?
+        	//System.out.println("exception:"+ex);
+        	//ex.printStackTrace();
             try {
                 ModelVersionChecker.checkErrors(resource);
             }
@@ -204,14 +210,16 @@ implements IEditorModelManager {
                 Logger.logError("Error opening model", exception);
                 MessageDialog.openError(Display.getCurrent().getActiveShell(),
                         "Error opening model",
-                        "Cannot open '" + file +  "'. This version is incompatible. Please update to the latest version of Archi.");
+                        "Cannot open '" + uri +  "'. This version is incompatible. Please update to the latest version of Archi.");
                 return null;
             }
             // Wrong file type
             catch(Exception ex2) {
+            	System.out.println("exception:"+ex2);
+            	ex2.printStackTrace();
                 MessageDialog.openError(Display.getCurrent().getActiveShell(),
                         "Error opening model",
-                        "Cannot open '" + file +  "'.");
+                        "Cannot open '" + uri +  "'.");
                 return null;
             }
         }
@@ -223,14 +231,14 @@ implements IEditorModelManager {
         catch(LaterModelVersionException exception) {
             boolean answer = MessageDialog.openQuestion(Display.getCurrent().getActiveShell(),
                     "Opening model",
-                    "'" + file +  "' is a later version model. Are you sure you want to continue opening it?");
+                    "'" + uri +  "' is a later version model. Are you sure you want to continue opening it?");
             if(!answer) {
                 return null;
             }
         }
 
         IArchimateModel model = (IArchimateModel)resource.getContents().get(0);
-        model.setFile(file);
+        model.setFile(uri);
         model.setDefaults();
         getModels().add(model);
         model.eAdapters().add(new ECoreAdapter());
@@ -307,22 +315,23 @@ implements IEditorModelManager {
     public boolean saveModel(IArchimateModel model) throws IOException {
         // First time to save...
         if(model.getFile() == null) {
-            File file = askSaveModel();
+            URI file = askSaveModel();
             if(file == null) { // cancelled
                 return false;
             }
             model.setFile(file);
         }
         
-        // Save backup
-        if(model.getFile().exists()) {
-            FileUtils.copyFile(model.getFile(), new File(model.getFile().getAbsolutePath() + ".bak"), false);
+        // Save backup if it is a file
+        URI file = model.getFile();
+        if((file.isFile() && new File(file.toFileString()).exists())) {
+            FileUtils.copyFile(new File(model.getFile().toFileString()), new File(model.getFile().toFileString() + ".bak"), false);
         }
         
         // Set model version
         model.setVersion(ModelVersion.VERSION);
         
-        Resource resource = ArchimateResourceFactory.createResource(model.getFile());
+        Resource resource = ArchimateResourceFactory.staticCreateResource(model.getFile());
         resource.getContents().add(model);
         resource.save(null);
         resource.getContents().remove(model);
@@ -343,7 +352,7 @@ implements IEditorModelManager {
     
     @Override
     public boolean saveModelAs(IArchimateModel model) throws IOException {
-        File file = askSaveModel();
+        URI file = askSaveModel();
         if(file == null) {
             return false;
         }
@@ -352,7 +361,7 @@ implements IEditorModelManager {
     }
     
     @Override
-    public boolean isModelLoaded(File file) {
+    public boolean isModelLoaded(URI file) {
         if(file != null) {
             for(IArchimateModel model : getModels()) {
                 if(file.equals(model.getFile())) {
@@ -378,7 +387,7 @@ implements IEditorModelManager {
      * Ask user for file name to save model
      * @return the file or null
      */
-    private File askSaveModel() {
+    private URI askSaveModel() {
         // On Mac if the app is minimised in the dock Display.getCurrent().getActiveShell() will return null
         Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
         shell.setActive(); // Get focus on Mac
@@ -398,7 +407,7 @@ implements IEditorModelManager {
             path += ".xml";
         }
         
-        File file = new File(path);
+        URI file = URI.createFileURI(path);//FIXME the above dialog should be modified to make possible to give CDO uris
         
         // Make sure we don't already have it open
         for(IArchimateModel m : getModels()) {
@@ -410,7 +419,7 @@ implements IEditorModelManager {
         }
         
         // Make sure the file does not already exist
-        if(file.exists()) {
+        if(file.isFile() && new File(file.toFileString()).exists()) {
             boolean result = MessageDialog.openQuestion(shell, "Save Model", "'" + file +
                     "' already exists. Are you sure you want to overwrite it?");
             if(!result) {
@@ -469,10 +478,14 @@ implements IEditorModelManager {
         Element rootElement = new Element("models");
         doc.setRootElement(rootElement);
         for(IArchimateModel model : getModels()) {
-            File file = model.getFile(); // has been saved
+            URI file = model.getFile(); // has been saved
             if(file != null) {
                 Element modelElement = new Element("model");
-                modelElement.setAttribute("file", file.getAbsolutePath());
+                if(file.hasAbsolutePath()) {
+                	modelElement.setAttribute("file", file.toString());
+                } else {
+                	modelElement.setAttribute("file",file.toFileString());
+                }
                 rootElement.addContent(modelElement);
             }
         }
@@ -488,7 +501,7 @@ implements IEditorModelManager {
                     Element modelElement = (Element)e;
                     String filePath = modelElement.getAttributeValue("file");
                     if(filePath != null) {
-                        loadModel(new File(filePath));
+                        loadModel(URI.createURI(filePath));
                     }
                 }
             }

@@ -8,6 +8,7 @@ package uk.ac.bolton.archimate.editor.views.tree;
 
 import java.io.File;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CompoundCommand;
@@ -199,9 +200,11 @@ public class TreeModelViewerDragDropHandler {
                 for(String path : paths) {
                     File file = new File(path);
                     // Archi
-                    if(file.getName().toLowerCase().endsWith(IEditorModelManager.ARCHIMATE_FILE_EXTENSION)
-                            && !IEditorModelManager.INSTANCE.isModelLoaded(file)) {
-                        IEditorModelManager.INSTANCE.openModel(file);
+                    if(file.getName().toLowerCase().endsWith(IEditorModelManager.ARCHIMATE_FILE_EXTENSION)) {
+                    	URI uri = URI.createFileURI(path);
+                        if(!IEditorModelManager.INSTANCE.isModelLoaded(uri)) {
+                        	IEditorModelManager.INSTANCE.openModel(uri);
+                        }
                     }
                 }
             }

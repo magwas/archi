@@ -6,8 +6,7 @@
  *******************************************************************************/
 package uk.ac.bolton.archimate.editor.actions;
 
-import java.io.File;
-
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -43,16 +42,15 @@ implements IWorkbenchAction
     public void run() {
         FileDialog dialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.OPEN);
         dialog.setFilterExtensions(new String[] { IEditorModelManager.ARCHIMATE_FILE_WILDCARD, "*.xml", "*.*" } );
-        String path = dialog.open();
+        String path = dialog.open();//FIXME change the dialog to handle CDO
         if(path != null) {
-            final File file = new File(path);
-            
+            final URI file = URI.createFileURI(path); //FIXME this becomes createURI
             // Check it's not already open
             IArchimateModel model = getModel(file);
             if(model != null) {
                 MessageDialog.openInformation(Display.getCurrent().getActiveShell(),
                                                 "Open Model",
-                                                "File '" + file.getName() + "' " +
+                                                "Model '" + file.toString() + "' " +
                                                 "is already open." +
                                                 " Its model name is '" + model.getName() + "'.");
                 return;
@@ -74,7 +72,7 @@ implements IWorkbenchAction
     /**
      * Get model if it is already open
      */
-    private IArchimateModel getModel(File file) {
+    private IArchimateModel getModel(URI file) {
         if(file != null) {
             for(IArchimateModel model : IEditorModelManager.INSTANCE.getModels()) {
                 if(file.equals(model.getFile())) {

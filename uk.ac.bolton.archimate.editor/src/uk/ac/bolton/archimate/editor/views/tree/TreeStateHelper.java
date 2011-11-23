@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.events.DisposeEvent;
@@ -136,14 +137,14 @@ public class TreeStateHelper {
      * @param memento
      */
     void saveStateOnApplicationClose(IMemento memento) {
-        Hashtable<File, String> map = new Hashtable<File, String>();
+        Hashtable<URI, String> map = new Hashtable<URI, String>();
         
         IMemento expandedMem = memento.createChild(MEMENTO_EXPANDED);
 
         for(Object element : fTreeViewer.getVisibleExpandedElements()) {
             if(element instanceof IIdentifier && element instanceof IArchimateModelElement) {
                 // Only store if saved in a file
-                File file = ((IArchimateModelElement)element).getArchimateModel().getFile();
+                URI file = ((IArchimateModelElement)element).getArchimateModel().getFile();
                 if(file != null) {
                     String id = ((IIdentifier)element).getId();
                     String string = map.get(file);
@@ -158,9 +159,9 @@ public class TreeStateHelper {
             }
         }
         
-        for(File file : map.keySet()) {
+        for(URI file : map.keySet()) {
             IMemento elementMem = expandedMem.createChild(MEMENTO_MODEL);
-            elementMem.putString(MEMENTO_FILE, file.getAbsolutePath());
+            elementMem.putString(MEMENTO_FILE, file.toString());
             elementMem.putString(MEMENTO_ELEMENTS, map.get(file));
         }
     }

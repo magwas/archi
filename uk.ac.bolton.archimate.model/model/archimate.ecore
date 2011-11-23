@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model"
     nsURI="http://www.bolton.ac.uk/archimate" nsPrefix="archimate">
-  <eClassifiers xsi:type="ecore:EDataType" name="File" instanceClassName="java.io.File"
+  <eClassifiers xsi:type="ecore:EDataType" name="File" instanceClassName="org.eclipse.emf.common.util.URI"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EClass" name="Adapter" abstract="true" interface="true">
     <eOperations name="getAdapter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">

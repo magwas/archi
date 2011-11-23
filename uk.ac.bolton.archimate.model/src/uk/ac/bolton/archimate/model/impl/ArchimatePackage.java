@@ -6,7 +6,7 @@
  */
 package uk.ac.bolton.archimate.model.impl;
 
-import java.io.File;
+import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -2593,7 +2593,7 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
 		addEEnumLiteral(folderTypeEEnum, FolderType.DERIVED);
 
 		// Initialize data types
-		initEDataType(fileEDataType, File.class, "File", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEDataType(fileEDataType, URI.class, "File", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		// Create resource
 		createResource(eNS_URI);

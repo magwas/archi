@@ -6,11 +6,11 @@
  *******************************************************************************/
 package uk.ac.bolton.archimate.editor.propertysections;
 
-import java.io.File;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -127,9 +127,9 @@ public class ArchimateModelSection extends AbstractArchimatePropertySection {
     }
     
     protected void refreshFileField() {
-        File file = fModel.getFile();
+        URI file = fModel.getFile();
         if(file != null) {
-            fTextFile.setText(file.getAbsolutePath());
+            fTextFile.setText(file.toString());
         }
         else{
             fTextFile.setText("(not saved)");

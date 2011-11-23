@@ -6,10 +6,9 @@
  */
 package uk.ac.bolton.archimate.model;
 
-import java.io.File;
-
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -66,24 +65,24 @@ public interface IArchimateModel extends IFolderContainer, INameable, IIdentifie
      * </p>
      * <!-- end-user-doc -->
 	 * @return the value of the '<em>File</em>' attribute.
-	 * @see #setFile(File)
+	 * @see #setFile(URI)
 	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getArchimateModel_File()
 	 * @model dataType="uk.ac.bolton.archimate.model.File" transient="true"
 	 * @generated
 	 */
-    File getFile();
+    URI getFile();
 
     /**
 	 * Sets the value of the '{@link uk.ac.bolton.archimate.model.IArchimateModel#getFile <em>File</em>}' attribute.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>File</em>' attribute.
 	 * @see #getFile()
 	 * @generated
 	 */
-    void setFile(File value);
+	void setFile(URI value);
 
-    /**
+				/**
 	 * Returns the value of the '<em><b>Version</b></em>' attribute.
 	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->

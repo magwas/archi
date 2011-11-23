@@ -6,13 +6,13 @@
  */
 package uk.ac.bolton.archimate.model.impl;
 
-import java.io.File;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.internal.cdo.CDOObjectImpl;
@@ -373,20 +373,20 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public File getFile() {
-		return (File)eGet(IArchimatePackage.Literals.ARCHIMATE_MODEL__FILE, true);
+    public URI getFile() {
+		return (URI)eGet(IArchimatePackage.Literals.ARCHIMATE_MODEL__FILE, true);
 	}
 
     /**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setFile(File newFile) {
+	public void setFile(URI newFile) {
 		eSet(IArchimatePackage.Literals.ARCHIMATE_MODEL__FILE, newFile);
 	}
 
-    /**
+				/**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated

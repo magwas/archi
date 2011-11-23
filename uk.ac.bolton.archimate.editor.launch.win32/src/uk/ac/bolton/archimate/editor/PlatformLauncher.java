@@ -11,6 +11,7 @@ import java.lang.reflect.Method;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.swt.events.ShellAdapter;
 import org.eclipse.swt.events.ShellEvent;
 import org.eclipse.swt.widgets.Shell;
@@ -77,7 +78,7 @@ public class PlatformLauncher implements IPlatformLauncher {
             state.delete();
             
             if(s != null) {
-                File file = new File(s);
+                URI file = URI.createURI(s);
                 if(file.isFile() && !IEditorModelManager.INSTANCE.isModelLoaded(file)) {
                     IEditorModelManager.INSTANCE.openModel(file);
                 }

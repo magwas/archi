@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.osgi.service.datalocation.Location;
 import org.eclipse.swt.events.ShellAdapter;
 import org.eclipse.swt.events.ShellEvent;
@@ -62,8 +63,9 @@ public class PlatformLauncher implements IPlatformLauncher {
             if(openingFile.isFile() && openingFile.canRead()) {
                 try {
                     String fileName = readFileAsString(openingFile);
+                	//System.out.println("opening "+fileName+" from "+ openingFile.getAbsolutePath());
                     if(fileName != null) {
-                        File file = new File(fileName);
+                        URI file = URI.createURI(fileName);
                         if(file.isFile() && !IEditorModelManager.INSTANCE.isModelLoaded(file)) {
                             IEditorModelManager.INSTANCE.openModel(file);
                         }

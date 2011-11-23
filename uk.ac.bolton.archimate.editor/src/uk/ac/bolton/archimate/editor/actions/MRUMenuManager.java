@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
@@ -37,7 +38,7 @@ public class MRUMenuManager extends MenuManager implements PropertyChangeListene
     
     private static final String MRU_PREFS_KEY = "MRU";
     
-    private List<File> fMRU_List = new ArrayList<File>();
+    private List<URI> fMRU_List = new ArrayList<URI>();
     
     private IWorkbenchWindow fWindow;
     
@@ -73,27 +74,36 @@ public class MRUMenuManager extends MenuManager implements PropertyChangeListene
                                         IEditorModelManager.PROPERTY_MODEL_SAVED == evt.getPropertyName()) {
             
             IArchimateModel model = (IArchimateModel)evt.getNewValue();
-            if(model != null && model.getFile() != null && !isTempFile(model.getFile()) && model.getFile().exists()) {
+            if(model != null && model.getFile() != null && !isTempFile(model.getFile()) && isExistingFile(model.getFile())) {
                 addToList(model.getFile());
                 createMenuItems();
-            }
+            } /*else {
+            	System.out.println("not added to list:"+model);
+            	System.out.println("not added to list:"+model.getFile());
+            }*/
         }
     }
     
-    /**
+    private boolean isExistingFile(URI file) {
+    	return (file.isFile() && new File(file.toFileString()).exists());
+	}
+
+	/**
      * Don't show temp files
      */
-    private boolean isTempFile(File file) {
-        return file != null && file.getName().startsWith("~");
+    private boolean isTempFile(URI uri) {
+        return uri != null && 
+        		uri.isFile() &&
+        	uri.toFileString().startsWith("~");
     }
     
-    private void addToList(File file) {
-        if(fMRU_List.contains(file)) {
-            fMRU_List.remove(file);
-            fMRU_List.add(0, file);
+    private void addToList(URI uri) {
+        if(fMRU_List.contains(uri)) {
+            fMRU_List.remove(uri);
+            fMRU_List.add(0, uri);
         }
         else {
-            fMRU_List.add(0, file);
+            fMRU_List.add(0, uri);
             while(fMRU_List.size() > MAX) {
                 fMRU_List.remove(fMRU_List.size() - 1);
             }
@@ -103,7 +113,7 @@ public class MRUMenuManager extends MenuManager implements PropertyChangeListene
     private void createMenuItems() {
         removeAll();
         
-        for(File file : fMRU_List) {
+        for(URI file : fMRU_List) {
             add(new RecentFileAction(file));
         }
         
@@ -122,7 +132,8 @@ public class MRUMenuManager extends MenuManager implements PropertyChangeListene
         for(int i = 0; i < MAX; i++) {
             String path = Preferences.STORE.getString(MRU_PREFS_KEY + i);
             if(StringUtils.isSet(path)) {
-                File file = new File(path);
+            	//System.out.println("adding to the list:"+path);
+                URI file = URI.createURI(path);
                 fMRU_List.add(file);
             }
         }
@@ -144,7 +155,8 @@ public class MRUMenuManager extends MenuManager implements PropertyChangeListene
         
         // Save
         for(int i = 0; i < fMRU_List.size(); i++) {
-            Preferences.STORE.setValue(MRU_PREFS_KEY + i, fMRU_List.get(i).getAbsolutePath());
+        	//System.out.println("saving list item:"+fMRU_List.get(i).toString());
+            Preferences.STORE.setValue(MRU_PREFS_KEY + i, fMRU_List.get(i).toString());
         }
     }
     
@@ -155,52 +167,41 @@ public class MRUMenuManager extends MenuManager implements PropertyChangeListene
         saveList();
     }
     
-    private static String getShortPath(File file) {
-        String path = file.getAbsolutePath();
-        
-        try {
-            String pathPart = file.getParent();
-            final int maxLength = 38;
-            if(pathPart.length() > maxLength) {
-                pathPart = pathPart.substring(0, maxLength - 3);
-                pathPart += "..." + File.separator;
-                path = pathPart += file.getName();
-            }
+    private static String getShortPath(URI uri2) {
+        String path = uri2.toString();
+        final int maxLength = 38;
+        if(path.length() > maxLength) {
+            path = path.substring(0, maxLength - 3);
+            path += "...";
         }
-        catch(Exception ex) { // Catch any exceptions otherwise the app won't load
-            ex.printStackTrace();
-        }
-        
         return path;
     }
     
     private class RecentFileAction extends Action {
-        File file;
+        URI uri;
         
-        RecentFileAction(File file) {
-            this.file = file;
-            setText(getShortPath(file));
+        RecentFileAction(URI uri2) {
+            this.uri = uri2;
+            setText(getShortPath(uri2));
         }
         
         @Override
         public void run() {
-            if(file.exists()) {
-                if(!IEditorModelManager.INSTANCE.isModelLoaded(file)) {
-                    BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
-                        public void run() {
-                            IEditorModelManager.INSTANCE.openModel(file);
+            if(!IEditorModelManager.INSTANCE.isModelLoaded(uri)) {
+                BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
+                    public void run() {
+                    	IArchimateModel openedmodel;
+                        openedmodel = IEditorModelManager.INSTANCE.openModel(uri);
+                        if (null == openedmodel) {//FIXME is the cleanup correct this way?
+                            MessageDialog.openInformation(fWindow.getShell(),
+                                    "Open File",
+                                    "'" + uri + "' cannot be found");
+                            
+                            fMRU_List.remove(uri);
+                            createMenuItems();                        	
                         }
-                    });
-                }
-            }
-            else {
-                // File does not exist
-                MessageDialog.openInformation(fWindow.getShell(),
-                        "Open File",
-                        "'" + file + "' cannot be found");
-                
-                fMRU_List.remove(file);
-                createMenuItems();
+                    }
+                });
             }
         }
     }
