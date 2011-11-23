@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
 
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -36,6 +37,7 @@ import org.jdom.JDOMException;
 
 import uk.ac.bolton.archimate.editor.ArchimateEditorPlugin;
 import uk.ac.bolton.archimate.editor.Logger;
+import uk.ac.bolton.archimate.editor.diagram.dialog.TargetSelectionDialog;
 import uk.ac.bolton.archimate.editor.diagram.util.AnimationUtil;
 import uk.ac.bolton.archimate.editor.model.IEditorModelManager;
 import uk.ac.bolton.archimate.editor.model.impl.ModelVersionChecker.IncompatibleModelVersionException;
@@ -192,8 +194,8 @@ implements IEditorModelManager {
         if(uri.isFile()&&!(new File(uri.toFileString()).exists())) {
         	return null;
         } //else { System.out.println("not opening2 "+uri.toString()); }
-        
-        Resource resource = ArchimateResourceFactory.staticCreateResource(uri);
+        Resource resource = ArchimateResourceFactory.getOrCreateResource(uri);
+
         //System.out.println("resource="+resource+", isfile="+uri.isFile()+", asfile="+new File(uri.toFileString()).getAbsolutePath());
         try {
             resource.load(null);
@@ -269,7 +271,11 @@ implements IEditorModelManager {
         EditorManager.closeDiagramEditors(model);
         
         getModels().remove(model);
-        model.eAdapters().clear();
+        //FIXME throws org.eclipse.net4j.util.ImplementationError
+    	//  at org.eclipse.emf.internal.cdo.CDOStore.isSet(CDOStore.java:187)
+        if(model.getFile().isFile()) {
+        	model.eAdapters().clear();
+        }
         firePropertyChange(this, PROPERTY_MODEL_REMOVED, null, model);
         
         // Delete the CommandStack *LAST* because GEF Editor(s) will still reference it!
@@ -331,11 +337,13 @@ implements IEditorModelManager {
         // Set model version
         model.setVersion(ModelVersion.VERSION);
         
-        Resource resource = ArchimateResourceFactory.staticCreateResource(model.getFile());
+        Resource resource = ArchimateResourceFactory.getOrCreateResource(model.getFile());
         resource.getContents().add(model);
         resource.save(null);
-        resource.getContents().remove(model);
-        
+        if(model.getFile().isFile()) {
+        	//FIXME maybe with cdo should not be removed
+        	resource.getContents().remove(model);
+        }
         // Set CommandStack Save point
         CommandStack stack = (CommandStack)model.getAdapter(CommandStack.class);
         stack.markSaveLocation();
@@ -391,43 +399,41 @@ implements IEditorModelManager {
         // On Mac if the app is minimised in the dock Display.getCurrent().getActiveShell() will return null
         Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
         shell.setActive(); // Get focus on Mac
-        
-        FileDialog dialog = new FileDialog(shell, SWT.SAVE);
-        dialog.setFilterExtensions(new String[] { ARCHIMATE_FILE_WILDCARD, "*.xml", "*.*" } );
-        String path = dialog.open();
-        if(path == null) {
+       	TargetSelectionDialog dialog = new TargetSelectionDialog(Display.getCurrent().getActiveShell(),SWT.SAVE);
+        URI uri = dialog.open();
+        if(uri == null) {
             return null;
-        }
+        } 
         
-        // Only Windows adds the extension by default
-        if(dialog.getFilterIndex() == 0 && !path.endsWith(ARCHIMATE_FILE_EXTENSION)) {
-            path += ARCHIMATE_FILE_EXTENSION;
+        Integer filterindex = dialog.getFilterIndex();
+        if((!(null == filterindex ))&&uri.isFile()) {
+            // Only Windows adds the extension by default
+            if(filterindex == 0 && !uri.toFileString().endsWith(ARCHIMATE_FILE_EXTENSION)) {
+                uri = URI.createFileURI(uri.toFileString()+ ARCHIMATE_FILE_EXTENSION);
+            } else if(filterindex == 1 && !uri.toFileString().endsWith(".xml")) {
+            	uri = URI.createFileURI(uri.toFileString()+ ".xml");
+            }
         }
-        else if(dialog.getFilterIndex() == 1 && !path.endsWith(".xml")) {
-            path += ".xml";
-        }
-        
-        URI file = URI.createFileURI(path);//FIXME the above dialog should be modified to make possible to give CDO uris
         
         // Make sure we don't already have it open
         for(IArchimateModel m : getModels()) {
-            if(file.equals(m.getFile())) {
-                MessageDialog.openWarning(shell, "Save Model", "' " + file +
+            if(uri.equals(m.getFile())) {
+                MessageDialog.openWarning(shell, "Save Model", "' " + uri +
                         "' is already already open. Please choose another file name.");
                 return null;
             }
         }
         
         // Make sure the file does not already exist
-        if(file.isFile() && new File(file.toFileString()).exists()) {
-            boolean result = MessageDialog.openQuestion(shell, "Save Model", "'" + file +
+        if(uri.isFile() && new File(uri.toFileString()).exists()) {
+            boolean result = MessageDialog.openQuestion(shell, "Save Model", "'" + uri +
                     "' already exists. Are you sure you want to overwrite it?");
             if(!result) {
                 return null;
             }
         }
         
-        return file;
+        return uri;
     }
     
     /**

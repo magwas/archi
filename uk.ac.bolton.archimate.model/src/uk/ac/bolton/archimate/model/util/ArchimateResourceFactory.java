@@ -49,14 +49,14 @@ public class ArchimateResourceFactory extends ResourceFactoryImpl {
      * @return a Resource that allows saving and loading files with any type of file extension
      *          as registered in plugin.xml
      */
-    public static Resource staticCreateResource(URI uri) {
+    public static Resource getOrCreateResource(URI uri) {
     	if(uri.isFile()) {
         	ResourceSet resourceSet = createResourceSet();
         	// This will return an ArchimateResource as registered in plugin.xml
         	Resource resource = resourceSet.createResource(uri);
         	return resource;    		
     	}  else if(uri.scheme().equals("cdo")){
-    		return CDOResourceSet.getOrCreateResourceByURI(uri);    		
+    		return CDOResourceSet.getOrCreateResource(uri);
     	} else {
     		throw new Error("Uri scheme unrecognized:"+uri.scheme());
     	}
@@ -76,7 +76,7 @@ public class ArchimateResourceFactory extends ResourceFactoryImpl {
             result.getDefaultSaveOptions().putAll(getOptions());
             return result;
     	} else if(uri.scheme().equals("cdo")) {
-    		return CDOResourceSet.getOrCreateResourceByURI(uri);
+    		return CDOResourceSet.getOrCreateResource(uri);
     	} else {
     		throw new Error("Uri scheme unrecognized:"+uri.scheme());
     	}

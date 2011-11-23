@@ -235,7 +235,7 @@ implements IDiagramModelEditor, IContextProvider, ITabbedPropertySheetPageContri
     @Override
     public void createPartControl(Composite parent) {
         // Show error message
-        if(fNullInput != null) {//FIXME why? 	
+        if(fNullInput != null) {
             createErrorComposite(parent);            
         } else {
             super.createPartControl(parent);

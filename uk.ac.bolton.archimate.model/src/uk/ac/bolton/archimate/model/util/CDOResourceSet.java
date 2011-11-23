@@ -1,12 +1,11 @@
 package uk.ac.bolton.archimate.model.util;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 
-import uk.ac.bolton.archimate.model.IArchimateModel;
 import uk.ac.bolton.archimate.model.impl.ArchimatePackage;
 
 import org.eclipse.emf.cdo.eresource.CDOResource;
@@ -27,16 +26,29 @@ import org.eclipse.net4j.util.om.log.PrintLogHandler;
 import org.eclipse.net4j.util.om.trace.PrintTraceHandler;
 import org.eclipse.emf.common.util.URI;
 
+import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
 
 
-public class CDOResourceSet extends ArchimateResourceFactory implements Resource.Factory {
+public class CDOResourceSet extends ResourceSetImpl implements ResourceSet {
     // Enable logging and tracing
 
-	static void initCDO () {
+	private IBufferProvider bufferProvider=null;
+	private ExecutorService receiveExecutor;
+	private IProtocolProvider protocolProvider;
+	private ITCPSelector selector;
+
+	private CDOTransaction transaction;
+	private CDOSession session;
+	private Lifecycle connector;
+	private static HashMap<URI,CDOResource> resources = new HashMap<URI,CDOResource>();
+
+
+	public CDOResourceSet() {
+		super();
 	    OMPlatform.INSTANCE.setDebugging(false);
 	    OMPlatform.INSTANCE.addLogHandler(PrintLogHandler.CONSOLE);
 	    OMPlatform.INSTANCE.addTraceHandler(PrintTraceHandler.CONSOLE);
@@ -65,18 +77,37 @@ public class CDOResourceSet extends ArchimateResourceFactory implements Resource
 	    ((Lifecycle) selector).activate();
 	}
 
-	private static IBufferProvider bufferProvider;
-	private static ExecutorService receiveExecutor;
-	private static IProtocolProvider protocolProvider;
-	private static ITCPSelector selector;
-
-	private CDOTransaction transaction;
-	private CDOSession session;
-	private Lifecycle connector;
 	
-	private void prepareConnector(String host,Integer port, String reponame) {
-	    // Prepare connector
-	    org.eclipse.net4j.internal.tcp.TCPClientConnector connector = new org.eclipse.net4j.internal.tcp.TCPClientConnector();
+	public CDOResource createResource(URI uri) {
+		// url for CDO is cdo:<reponame>/</path/to/resource>
+		System.out.println("uri="+uri);
+		if(!uri.scheme().equals("cdo")) {
+			throw new Error("sceme must be cdo");
+		}
+		
+		String host = uri.host();
+		if (host == null || host.equals("")) {
+			host = "localhost";
+		}
+		String portstring = uri.port();
+		int port;
+		if (portstring == null) {
+			port = 2036;
+		} else {
+			port = new Integer(portstring);
+		}
+		
+		if(uri.segmentCount()<2) {
+			throw new Error("CDO resource path has no repo name and resource name");
+		}
+		String reponame = uri.segment(0);
+		String resourcepath = "";
+		for (String s : uri.segmentsList().subList(1, uri.segmentCount())) {
+			resourcepath += "/" + s;
+		}
+		System.out.println("scheme="+uri.scheme()+", host="+host+", port="+
+				port+"reponame="+reponame+" resourcepath="+resourcepath+"segmentslist="+uri.segmentsList());
+		org.eclipse.net4j.internal.tcp.TCPClientConnector connector = new org.eclipse.net4j.internal.tcp.TCPClientConnector();
 	    connector.getConfig().setBufferProvider(bufferProvider);
 	    connector.getConfig().setReceiveExecutor(receiveExecutor);
 	    connector.getConfig().setProtocolProvider(protocolProvider);
@@ -97,16 +128,29 @@ public class CDOResourceSet extends ArchimateResourceFactory implements Resource
 
 	    // Open transaction
 	    transaction = session.openTransaction();
-
+	    CDOResource res = transaction.getOrCreateResource(resourcepath);
+	    System.out.println("resource="+res); //org.eclipse.net4j.util.container.FactoryNotFoundException
+	    resources.put(uri,res);
+	    return res;
 	}
-	
-	public CDOResource getOrCreateResource(String path) {
+
+	public static Resource getOrCreateResource(URI uri) {
+		if (resources.containsKey(uri)) {
+			return resources.get(uri);
+		}
+		ResourceSet resourceSet = new CDOResourceSet();
+		return resourceSet.createResource(uri);
+	}
+
+
+	/*
+	public CDOResource dummy(String path) {
 		
 	    // Get or create resource
-	    CDOResource resource = transaction.getOrCreateResource("/path/to/my/resource"); //$NON-NLS-1$
+; //$NON-NLS-1$
 
 	    // Work with the resource and commit the transaction
-	    IArchimateModel object = null;//FIXME
+	    IArchimateModel object = null;
 	    System.out.println("adding "+object);
 	    boolean u = resource.getContents().add(object);
 	    System.out.println("returned "+u+"state="+resource.cdoState());
@@ -126,33 +170,7 @@ public class CDOResourceSet extends ArchimateResourceFactory implements Resource
 	    connector.deactivate();
 		return resource;
 	}
+*/
 
-	public static CDOResource getOrCreateResourceByURI(URI uri) {
-		// url for CDO is cdo:<reponame>/</path/to/resource>
-		System.out.println("uri="+uri);
-		if(!uri.scheme().equals("cdo")) {
-			throw new Error("sceme must be cdo");
-		}
-		
-		String host = uri.host();
-		if (host == null || host.equals("")) {
-			host = "localhost";
-		}
-		String port = uri.port();
-		if (port == null) {
-			port = "2036";
-		}
-		String path = uri.path();
-		if(path == null || path.equals("")) {
-			throw new Error("CDO resource path is empty");
-		}
-		System.out.println("scheme="+uri.scheme()+", host="+host+", port="+port+", path="+path);
-		return null;
-	}
 
-	@Override
-	public Resource createResource(URI uri) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

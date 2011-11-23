@@ -13,10 +13,10 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
+import uk.ac.bolton.archimate.editor.diagram.dialog.TargetSelectionDialog;
 import uk.ac.bolton.archimate.editor.model.IEditorModelManager;
 import uk.ac.bolton.archimate.editor.ui.IArchimateImages;
 import uk.ac.bolton.archimate.model.IArchimateModel;
@@ -40,17 +40,15 @@ implements IWorkbenchAction
     
     @Override
     public void run() {
-        FileDialog dialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.OPEN);
-        dialog.setFilterExtensions(new String[] { IEditorModelManager.ARCHIMATE_FILE_WILDCARD, "*.xml", "*.*" } );
-        String path = dialog.open();//FIXME change the dialog to handle CDO
-        if(path != null) {
-            final URI file = URI.createFileURI(path); //FIXME this becomes createURI
+    	TargetSelectionDialog dialog = new TargetSelectionDialog(Display.getCurrent().getActiveShell(),SWT.OPEN);
+        final URI uri = dialog.open();
+        if(uri != null) {
             // Check it's not already open
-            IArchimateModel model = getModel(file);
+            IArchimateModel model = getModel(uri);
             if(model != null) {
                 MessageDialog.openInformation(Display.getCurrent().getActiveShell(),
                                                 "Open Model",
-                                                "Model '" + file.toString() + "' " +
+                                                "Model '" + uri.toString() + "' " +
                                                 "is already open." +
                                                 " Its model name is '" + model.getName() + "'.");
                 return;
@@ -58,7 +56,7 @@ implements IWorkbenchAction
             
             BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
                 public void run() {
-                    IEditorModelManager.INSTANCE.openModel(file);
+                    IEditorModelManager.INSTANCE.openModel(uri);
                 }
             });
         }

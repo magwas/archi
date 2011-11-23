@@ -232,7 +232,7 @@ public class SaveModelAsTemplateWizard extends Wizard {
     	File file = File.createTempFile("architemplate", null);
         URI tmp = URI.createFileURI(file.getAbsolutePath());
         file.deleteOnExit();
-        Resource resource = ArchimateResourceFactory.staticCreateResource(tmp);
+        Resource resource = ArchimateResourceFactory.getOrCreateResource(tmp);
         resource.getContents().add(fModel);
         resource.save(null);
         resource.getContents().remove(fModel);

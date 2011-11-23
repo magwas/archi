@@ -15,7 +15,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.views,
  org.eclipse.ui.views.properties.tabbed,
  uk.ac.bolton.archimate.model;visibility:=reexport,
- uk.ac.bolton.jdom
+ uk.ac.bolton.jdom,
+ org.junit
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: uk.ac.bolton.archimate.editor.jar
 Export-Package: .,
@@ -66,4 +67,5 @@ Export-Package: .,
  uk.ac.bolton.archimate.editor.views.tree.commands,
  uk.ac.bolton.archimate.editor.views.tree.search
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.eclipse.emf.cdo
+Import-Package: org.eclipse.emf.cdo,
+ org.eclipse.emf.cdo.eresource;version="2.0.0"
