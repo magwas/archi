@@ -85,6 +85,9 @@ public class MRUMenuManager extends MenuManager implements PropertyChangeListene
     }
     
     private boolean isExistingFile(URI file) {
+    	if(!file.isFile()) {//FIXME we treat CDO uris as always existing
+    		return true;
+    	}
     	return (file.isFile() && new File(file.toFileString()).exists());
 	}
 

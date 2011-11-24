@@ -154,9 +154,11 @@ implements IEditorModelManager {
     
     @Override
     public IArchimateModel openModel(URI file) {
-        if(file == null || !(file.isFile() && new File(file.toFileString()).exists()) || isModelLoaded(file)) {
-            return null;
-        } //else { System.out.println("not opening "+file.toString()); }
+        if(file == null || (file.isFile() && ! new File(file.toFileString()).exists()) || isModelLoaded(file)) {
+        	System.out.println("not opening. isfile="+file.isFile()+
+        			",loaded="+isModelLoaded(file));
+        	return null;
+        }
         
         IArchimateModel model = loadModel(file);
         if(model != null) {
@@ -188,15 +190,15 @@ implements IEditorModelManager {
     
     @Override
     public IArchimateModel loadModel(URI uri) {
-        if(uri == null) {
+    	if(uri == null) {
+        	System.out.println("loadModel null");
             return null;
         }
         if(uri.isFile()&&!(new File(uri.toFileString()).exists())) {
+        	System.out.println("not opening2 "+uri.toString());
         	return null;
-        } //else { System.out.println("not opening2 "+uri.toString()); }
+        }
         Resource resource = ArchimateResourceFactory.getOrCreateResource(uri);
-
-        //System.out.println("resource="+resource+", isfile="+uri.isFile()+", asfile="+new File(uri.toFileString()).getAbsolutePath());
         try {
             resource.load(null);
         }
@@ -243,8 +245,9 @@ implements IEditorModelManager {
         model.setFile(uri);
         model.setDefaults();
         getModels().add(model);
-        model.eAdapters().add(new ECoreAdapter());
-
+        if(model.getFile().isFile()) {//FIXME another call to CDOStore.isSet
+        	model.eAdapters().add(new ECoreAdapter());
+        }
         // New Command Stack
         createNewCommandStack(model);
 
