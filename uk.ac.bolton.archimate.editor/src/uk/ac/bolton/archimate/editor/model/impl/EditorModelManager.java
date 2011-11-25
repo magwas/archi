@@ -245,7 +245,9 @@ implements IEditorModelManager {
         model.setFile(uri);
         model.setDefaults();
         getModels().add(model);
-        model.eAdapters().add(new ECoreAdapter());
+        if(model.getFile().isFile()) {//FIXME another call to CDOStore.isSet
+        	model.eAdapters().add(new ECoreAdapter());
+        }
         // New Command Stack
         createNewCommandStack(model);
 
@@ -272,7 +274,11 @@ implements IEditorModelManager {
         EditorManager.closeDiagramEditors(model);
         
         getModels().remove(model);
-        model.eAdapters().clear();
+        //FIXME throws org.eclipse.net4j.util.ImplementationError
+    	//  at org.eclipse.emf.internal.cdo.CDOStore.isSet(CDOStore.java:187)
+        if(model.getFile().isFile()) {
+        	model.eAdapters().clear();
+        }
         firePropertyChange(this, PROPERTY_MODEL_REMOVED, null, model);
         
         // Delete the CommandStack *LAST* because GEF Editor(s) will still reference it!
@@ -337,7 +343,10 @@ implements IEditorModelManager {
         Resource resource = ArchimateResourceFactory.getOrCreateResource(model.getFile());
         resource.getContents().add(model);
         resource.save(null);
-        resource.getContents().remove(model);
+        if(model.getFile().isFile()) {
+        	//FIXME maybe with cdo should not be removed
+        	resource.getContents().remove(model);
+        }
         // Set CommandStack Save point
         CommandStack stack = (CommandStack)model.getAdapter(CommandStack.class);
         stack.markSaveLocation();
