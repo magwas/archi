@@ -13,6 +13,7 @@ import org.eclipse.emf.cdo.net4j.CDONet4jUtil;
 import org.eclipse.emf.cdo.net4j.CDOSessionConfiguration;
 import org.eclipse.emf.cdo.session.CDOSession;
 import org.eclipse.emf.cdo.transaction.CDOTransaction;
+import org.eclipse.emf.cdo.view.CDOAdapterPolicy;
 
 import org.eclipse.net4j.FactoriesProtocolProvider;
 import org.eclipse.net4j.Net4jUtil;
@@ -128,6 +129,7 @@ public class CDOResourceSet extends ResourceSetImpl implements ResourceSet {
 
 	    // Open transaction
 	    transaction = session.openTransaction();
+	    transaction.options().addChangeSubscriptionPolicy(CDOAdapterPolicy.ALL);
 	    CDOResource res = transaction.getOrCreateResource(resourcepath);
 	    System.out.println("resource="+res); //org.eclipse.net4j.util.container.FactoryNotFoundException
 	    resources.put(uri,res);
