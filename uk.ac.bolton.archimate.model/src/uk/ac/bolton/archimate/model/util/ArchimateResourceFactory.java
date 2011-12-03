@@ -56,7 +56,7 @@ public class ArchimateResourceFactory extends ResourceFactoryImpl {
         	Resource resource = resourceSet.createResource(uri);
         	return resource;    		
     	}  else if(uri.scheme().equals("cdo")){
-    		return CDOResourceSet.getOrCreateResource(uri);
+    		return CDOResourceSet.getResourceSet().getOrCreateResource(uri);
     	} else {
     		throw new Error("Uri scheme unrecognized:"+uri.scheme());
     	}
@@ -76,7 +76,7 @@ public class ArchimateResourceFactory extends ResourceFactoryImpl {
             result.getDefaultSaveOptions().putAll(getOptions());
             return result;
     	} else if(uri.scheme().equals("cdo")) {
-    		return CDOResourceSet.getOrCreateResource(uri);
+    		return CDOResourceSet.getResourceSet().getOrCreateResource(uri);
     	} else {
     		throw new Error("Uri scheme unrecognized:"+uri.scheme());
     	}

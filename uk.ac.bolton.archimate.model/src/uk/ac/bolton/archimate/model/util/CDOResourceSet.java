@@ -18,8 +18,12 @@ import org.eclipse.emf.cdo.view.CDOAdapterPolicy;
 import org.eclipse.net4j.FactoriesProtocolProvider;
 import org.eclipse.net4j.Net4jUtil;
 import org.eclipse.net4j.buffer.IBufferProvider;
+import org.eclipse.net4j.connector.IConnector;
 import org.eclipse.net4j.protocol.IProtocolProvider;
 import org.eclipse.net4j.tcp.ITCPSelector;
+import org.eclipse.net4j.tcp.TCPUtil;
+import org.eclipse.net4j.util.container.ContainerUtil;
+import org.eclipse.net4j.util.container.IManagedContainer;
 import org.eclipse.net4j.util.lifecycle.Lifecycle;
 import org.eclipse.net4j.util.lifecycle.LifecycleUtil;
 import org.eclipse.net4j.util.om.OMPlatform;
@@ -28,6 +32,7 @@ import org.eclipse.net4j.util.om.trace.PrintTraceHandler;
 import org.eclipse.emf.common.util.URI;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -35,49 +40,30 @@ import java.util.concurrent.ThreadFactory;
 
 
 public class CDOResourceSet extends ResourceSetImpl implements ResourceSet {
-    // Enable logging and tracing
+    private IManagedContainer container;
+    static CDOResourceSet INSTANCE=null;
 
-	private IBufferProvider bufferProvider=null;
-	private ExecutorService receiveExecutor;
-	private IProtocolProvider protocolProvider;
-	private ITCPSelector selector;
-
-	private CDOTransaction transaction;
-	private CDOSession session;
-	private Lifecycle connector;
-	private static HashMap<URI,CDOResource> resources = new HashMap<URI,CDOResource>();
-
-
-	public CDOResourceSet() {
+	private CDOResourceSet() {
 		super();
 	    OMPlatform.INSTANCE.setDebugging(false);
 	    OMPlatform.INSTANCE.addLogHandler(PrintLogHandler.CONSOLE);
 	    OMPlatform.INSTANCE.addTraceHandler(PrintTraceHandler.CONSOLE);
+	    uriResourceMap = new HashMap<URI, Resource>();
 
-	    // Prepare receiveExecutor
-	    final ThreadGroup threadGroup = new ThreadGroup("net4j"); //$NON-NLS-1$
-	    receiveExecutor = Executors.newCachedThreadPool(new ThreadFactory()
-	    {
-	      public Thread newThread(Runnable r)
-	      {
-	        Thread thread = new Thread(threadGroup, r);
-	        thread.setDaemon(true);
-	        return thread;
-	      }
-	    });
-
-	    // Prepare bufferProvider
-	   bufferProvider = Net4jUtil.createBufferPool();
-	    LifecycleUtil.activate(bufferProvider);
-
-	    protocolProvider = new FactoriesProtocolProvider(
-	        new org.eclipse.emf.internal.cdo.net4j.protocol.CDOClientProtocolFactory());
-
-	    // Prepare selector
-	    selector = new org.eclipse.net4j.internal.tcp.TCPSelector();
-	    ((Lifecycle) selector).activate();
+	    // Prepare container
+	    container = ContainerUtil.createContainer();
+	    Net4jUtil.prepareContainer(container); // Register Net4j factories
+	    TCPUtil.prepareContainer(container); // Register TCP factories
+	    CDONet4jUtil.prepareContainer(container); // Register CDO factories
+	    container.activate();
 	}
 
+	public static CDOResourceSet getResourceSet() {
+		if(null == INSTANCE) {
+			INSTANCE = new CDOResourceSet();
+		}
+		return INSTANCE;
+	}
 	
 	public CDOResource createResource(URI uri) {
 		// url for CDO is cdo:<reponame>/</path/to/resource>
@@ -93,7 +79,7 @@ public class CDOResourceSet extends ResourceSetImpl implements ResourceSet {
 		String portstring = uri.port();
 		int port;
 		if (portstring == null) {
-			port = 2036;
+			port = 3126;
 		} else {
 			port = new Integer(portstring);
 		}
@@ -108,37 +94,32 @@ public class CDOResourceSet extends ResourceSetImpl implements ResourceSet {
 		}
 		System.out.println("scheme="+uri.scheme()+", host="+host+", port="+
 				port+"reponame="+reponame+" resourcepath="+resourcepath+"segmentslist="+uri.segmentsList());
-		org.eclipse.net4j.internal.tcp.TCPClientConnector connector = new org.eclipse.net4j.internal.tcp.TCPClientConnector();
-	    connector.getConfig().setBufferProvider(bufferProvider);
-	    connector.getConfig().setReceiveExecutor(receiveExecutor);
-	    connector.getConfig().setProtocolProvider(protocolProvider);
-	    connector.getConfig().setNegotiator(null);
-	    connector.setSelector(selector);
-	    connector.setHost(host);
-	    connector.setPort(port);
-	    connector.activate();
+		
+	    // Create connector
+	    IConnector connector = TCPUtil.getConnector(container, host + ":" + port); //$NON-NLS-1$
 
 	    // Create configuration
 	    CDOSessionConfiguration configuration = CDONet4jUtil.createSessionConfiguration();
 	    configuration.setConnector(connector);
-	    configuration.setRepositoryName(reponame);
+	    configuration.setRepositoryName(reponame); //$NON-NLS-1$
 
 	    // Open session
-	    session = configuration.openSession();
+	    CDOSession session = configuration.openSession();
 	    session.getPackageRegistry().putEPackage(ArchimatePackage.eINSTANCE);
 
+
 	    // Open transaction
-	    transaction = session.openTransaction();
+	    CDOTransaction transaction = session.openTransaction();
 	    transaction.options().addChangeSubscriptionPolicy(CDOAdapterPolicy.ALL);
 	    CDOResource res = transaction.getOrCreateResource(resourcepath);
 	    System.out.println("resource="+res); //org.eclipse.net4j.util.container.FactoryNotFoundException
-	    resources.put(uri,res);
+	    uriResourceMap.put(uri,res);
 	    return res;
 	}
 
-	public static Resource getOrCreateResource(URI uri) {
-		if (resources.containsKey(uri)) {
-			return resources.get(uri);
+	public Resource getOrCreateResource(URI uri) {
+		if (uriResourceMap.containsKey(uri)) {
+			return uriResourceMap.get(uri);
 		}
 		ResourceSet resourceSet = new CDOResourceSet();
 		return resourceSet.createResource(uri);
