@@ -207,9 +207,7 @@ implements IDiagramModelEditor, IContextProvider, ITabbedPropertySheetPageContri
         fDiagramModel = ((DiagramEditorInput)input).getDiagramModel();
         
         // Listen to its notifications
-        if(fDiagramModel.getArchimateModel().getFile().isFile()) { //FIXME org.eclipse.emf.internal.cdo.CDOStore.isSet
-        	fDiagramModel.getArchimateModel().eAdapters().add(eCoreAdapter);
-        }
+       	fDiagramModel.getArchimateModel().eAdapters().add(eCoreAdapter);
         
         // Edit Domain before init
         // Use CommandStack from Model
