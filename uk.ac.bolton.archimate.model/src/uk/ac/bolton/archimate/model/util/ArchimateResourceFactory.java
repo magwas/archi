@@ -56,7 +56,8 @@ public class ArchimateResourceFactory extends ResourceFactoryImpl {
         	Resource resource = resourceSet.createResource(uri);
         	return resource;    		
     	}  else if(uri.scheme().equals("cdo")){
-    		return CDOResourceSet.getResourceSet().getOrCreateResource(uri);
+    		Resource res = CDOResourceSet.getResourceSet().getOrCreateResource(uri);
+    		return res;
     	} else {
     		throw new Error("Uri scheme unrecognized:"+uri.scheme());
     	}

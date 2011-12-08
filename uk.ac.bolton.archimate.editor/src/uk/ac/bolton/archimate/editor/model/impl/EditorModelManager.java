@@ -17,7 +17,9 @@ import java.util.List;
 
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.gef.commands.CommandStack;
@@ -335,7 +337,25 @@ implements IEditorModelManager {
         model.setVersion(ModelVersion.VERSION);
         
         Resource resource = ArchimateResourceFactory.getOrCreateResource(model.getFile());
-        resource.getContents().add(model);
+        //FIXME: we should be able to come up with the resource actually containing the model, and save that.
+        System.out.println("got resource");
+        EList<EObject> contents = resource.getContents();
+        for (EObject i: resource.getContents()) {
+        	System.out.println("in resource: "+ i);
+        }
+        if (contents.isEmpty()) {
+        	resource.getContents().add(model);
+            System.out.println("added model");
+        } else {
+        	resource.getContents().clear();
+        	resource.getContents().add(model);
+            System.out.println("added model");
+        	
+        }
+        System.out.println("saving model");
+        for (EObject i: resource.getContents()) {
+        	System.out.println("in resource: "+ i);
+        }
         resource.save(null);
        	resource.getContents().remove(model);
         // Set CommandStack Save point

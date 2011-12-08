@@ -45,7 +45,7 @@ public class CDOResourceSet extends ResourceSetImpl implements ResourceSet {
 
 	private CDOResourceSet() {
 		super();
-	    OMPlatform.INSTANCE.setDebugging(false);
+	    OMPlatform.INSTANCE.setDebugging(true);
 	    OMPlatform.INSTANCE.addLogHandler(PrintLogHandler.CONSOLE);
 	    OMPlatform.INSTANCE.addTraceHandler(PrintTraceHandler.CONSOLE);
 	    uriResourceMap = new HashMap<URI, Resource>();
