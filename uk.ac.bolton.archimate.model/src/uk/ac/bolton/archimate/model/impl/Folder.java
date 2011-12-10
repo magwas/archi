@@ -56,10 +56,11 @@ public class Folder extends CDOObjectImpl implements IFolder {
     /**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
     protected Folder() {
 		super();
+		setId("id_"+this.hashCode());
 	}
 
     /**

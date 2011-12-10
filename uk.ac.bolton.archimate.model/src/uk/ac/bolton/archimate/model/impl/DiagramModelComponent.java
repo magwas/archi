@@ -45,10 +45,11 @@ public abstract class DiagramModelComponent extends CDOObjectImpl implements IDi
     /**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
     protected DiagramModelComponent() {
 		super();
+		setId("id_"+this.hashCode());
 	}
 
     /**

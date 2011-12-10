@@ -63,10 +63,11 @@ public abstract class DiagramModel extends CDOObjectImpl implements IDiagramMode
     /**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
     protected DiagramModel() {
 		super();
+		setId("id_"+this.hashCode());
 	}
 
     /**

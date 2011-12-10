@@ -105,6 +105,7 @@ public class CDOResourceSet extends ResourceSetImpl implements ResourceSet {
 
 	    // Open session
 	    CDOSession session = configuration.openSession();
+	    ((org.eclipse.emf.cdo.net4j.CDOSession.Options) session.options()).setCommitTimeout(40000);
 	    session.getPackageRegistry().putEPackage(ArchimatePackage.eINSTANCE);
 
 

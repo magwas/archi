@@ -38,6 +38,7 @@ public interface IIdentifier extends CDOObject {
 	 * @see #setId(String)
 	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getIdentifier_Id()
 	 * @model id="true"
+	 *        annotation="teneo.jpa value='@Id'"
 	 * @generated
 	 */
     String getId();

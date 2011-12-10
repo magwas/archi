@@ -77,6 +77,7 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
     protected ArchimateModel() {
         super();
         eAdapters().add(fIDAdapter);
+		setId("id_"+this.hashCode());
     }
     
     /**

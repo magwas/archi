@@ -58,7 +58,6 @@ public class NewElementCommand extends Command {
     @Override
     public void redo() {
         fFolder.getElements().add(fElement);
-        
         // Select
         UIRequestManager.INSTANCE.fireRequest(new TreeSelectionRequest(this, new StructuredSelection(fElement), true));
     }

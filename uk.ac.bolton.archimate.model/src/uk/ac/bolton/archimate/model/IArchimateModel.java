@@ -41,7 +41,7 @@ public interface IArchimateModel extends IFolderContainer, INameable, IIdentifie
 	 * @return the value of the '<em>Purpose</em>' attribute.
 	 * @see #setPurpose(String)
 	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getArchimateModel_Purpose()
-	 * @model
+	 * @model annotation="teneo.jpa value='@Lob\n@Type(type = \"org.hibernate.type.TextType\")'"
 	 * @generated
 	 */
     String getPurpose();
@@ -164,5 +164,6 @@ public interface IArchimateModel extends IFolderContainer, INameable, IIdentifie
 	 * @generated
 	 */
     IFolder getFolder(FolderType type);
+
 
 } // IArchimateModel

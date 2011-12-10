@@ -13,11 +13,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EventObject;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -51,6 +54,7 @@ import uk.ac.bolton.archimate.model.FolderType;
 import uk.ac.bolton.archimate.model.IArchimateFactory;
 import uk.ac.bolton.archimate.model.IArchimateModel;
 import uk.ac.bolton.archimate.model.IDiagramModel;
+import uk.ac.bolton.archimate.model.IIdentifier;
 import uk.ac.bolton.archimate.model.ModelVersion;
 import uk.ac.bolton.archimate.model.util.ArchimateResourceFactory;
 import uk.ac.bolton.jdom.JDOMUtils;
@@ -79,6 +83,12 @@ implements IEditorModelManager {
      * Models Open
      */
     private List<IArchimateModel> fModels;
+    
+    /**
+     * Which model in which resource?
+     */
+    
+    private Map<IArchimateModel,Resource> fRepoContents = new HashMap<IArchimateModel,Resource>();
     
     /**
      * Backing File
@@ -247,6 +257,7 @@ implements IEditorModelManager {
         model.setFile(uri);
         model.setDefaults();
         getModels().add(model);
+        fRepoContents.put(model,resource);
        	model.eAdapters().add(new ECoreAdapter());
         // New Command Stack
         createNewCommandStack(model);
@@ -274,6 +285,7 @@ implements IEditorModelManager {
         EditorManager.closeDiagramEditors(model);
         
         getModels().remove(model);
+        fRepoContents.remove(model);
         model.eAdapters().clear();
         firePropertyChange(this, PROPERTY_MODEL_REMOVED, null, model);
         
@@ -316,14 +328,29 @@ implements IEditorModelManager {
         return true;
     }
 
+    private void checkForIds(IArchimateModel model) {
+    	TreeIterator<EObject> iter = ((EObject)model).eAllContents();
+    	while(iter.hasNext()) {
+    		EObject o = iter.next();
+    		if (o instanceof IIdentifier) {
+    			if(null == ((IIdentifier) o).getId()) {
+    				System.out.println("Unidentifiered F...lying EObject: "+o);
+    			}
+    		}
+    	}
+    }
     @Override
     public boolean saveModel(IArchimateModel model) throws IOException {
+    	checkForIds(model);
         // First time to save...
         if(model.getFile() == null) {
             URI file = askSaveModel();
             if(file == null) { // cancelled
                 return false;
             }
+            Resource resource = ArchimateResourceFactory.getOrCreateResource(file);
+            resource.getContents().add(model);
+            fRepoContents.put(model, resource);
             model.setFile(file);
         }
         
@@ -332,11 +359,14 @@ implements IEditorModelManager {
         if((file.isFile() && new File(file.toFileString()).exists())) {
             FileUtils.copyFile(new File(model.getFile().toFileString()), new File(model.getFile().toFileString() + ".bak"), false);
         }
-        
+
         // Set model version
         model.setVersion(ModelVersion.VERSION);
-        
+        fRepoContents.get(model).save(null);
+
+        /*        
         Resource resource = ArchimateResourceFactory.getOrCreateResource(model.getFile());
+        
         //FIXME: we should be able to come up with the resource actually containing the model, and save that.
         System.out.println("got resource");
         EList<EObject> contents = resource.getContents();
@@ -347,9 +377,7 @@ implements IEditorModelManager {
         	resource.getContents().add(model);
             System.out.println("added model");
         } else {
-        	resource.getContents().clear();
-        	resource.getContents().add(model);
-            System.out.println("added model");
+            System.out.println("doing nothing");
         	
         }
         System.out.println("saving model");
@@ -359,6 +387,7 @@ implements IEditorModelManager {
         resource.save(null);
        	resource.getContents().remove(model);
         // Set CommandStack Save point
+        */
         CommandStack stack = (CommandStack)model.getAdapter(CommandStack.class);
         stack.markSaveLocation();
         // Send notification to Tree
@@ -378,7 +407,11 @@ implements IEditorModelManager {
         if(file == null) {
             return false;
         }
-        model.setFile(file);
+        model.setFile(file);        
+        Resource resource = ArchimateResourceFactory.getOrCreateResource(file);
+        resource.getContents().add(model);
+        fRepoContents.remove(model);
+        fRepoContents.put(model, resource);
         return saveModel(model);
     }
     

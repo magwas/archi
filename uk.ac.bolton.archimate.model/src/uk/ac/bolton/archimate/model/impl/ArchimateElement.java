@@ -54,10 +54,11 @@ public abstract class ArchimateElement extends CDOObjectImpl implements IArchima
     /**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
     protected ArchimateElement() {
 		super();
+		setId("id_"+this.hashCode());
 	}
 
     /**
