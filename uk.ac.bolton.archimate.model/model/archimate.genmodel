@@ -35,6 +35,9 @@
       <genEnumLiterals ecoreEnumLiteral="archimate.ecore#//FolderType/derived"/>
     </genEnums>
     <genDataTypes ecoreDataType="archimate.ecore#//File"/>
+    <genClasses image="false" ecoreClass="archimate.ecore#//Identifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute archimate.ecore#//Identifier/id"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="archimate.ecore#//Adapter">
       <genOperations ecoreOperation="archimate.ecore#//Adapter/getAdapter">
         <genParameters ecoreParameter="archimate.ecore#//Adapter/getAdapter/adapter"/>
@@ -43,9 +46,6 @@
         <genParameters ecoreParameter="archimate.ecore#//Adapter/setAdapter/adapter"/>
         <genParameters ecoreParameter="archimate.ecore#//Adapter/setAdapter/object"/>
       </genOperations>
-    </genClasses>
-    <genClasses image="false" ecoreClass="archimate.ecore#//Identifier">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute archimate.ecore#//Identifier/id"/>
     </genClasses>
     <genClasses ecoreClass="archimate.ecore#//Property">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute archimate.ecore#//Property/key"/>
@@ -70,7 +70,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference archimate.ecore#//FolderContainer/folders"/>
     </genClasses>
     <genClasses ecoreClass="archimate.ecore#//ArchimateModel">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute archimate.ecore#//ArchimateModel/purpose"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute archimate.ecore#//ArchimateModel/file"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute archimate.ecore#//ArchimateModel/version"/>
       <genOperations ecoreOperation="archimate.ecore#//ArchimateModel/setDefaults"/>

@@ -273,7 +273,7 @@ public class HTMLReportExporter {
         writer.write("</tr>\n");
         
         writer.write("<tr>\n");
-        String doc = StringUtils.safeString(model.getPurpose());
+        String doc = StringUtils.safeString(model.getDocumentation());
         doc = parseCharsAndLinks(doc);
         writer.write("<td valign=\"top\">Purpose</td>\n");
         writer.write("<td valign=\"top\">" + doc + "</td>\n");

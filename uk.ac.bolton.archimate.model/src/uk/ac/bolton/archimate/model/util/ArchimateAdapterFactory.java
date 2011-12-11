@@ -150,12 +150,12 @@ public class ArchimateAdapterFactory extends AdapterFactoryImpl {
     protected ArchimateSwitch<Adapter> modelSwitch =
         new ArchimateSwitch<Adapter>() {
 			@Override
-			public Adapter caseAdapter(IAdapter object) {
-				return createAdapterAdapter();
-			}
-			@Override
 			public Adapter caseIdentifier(IIdentifier object) {
 				return createIdentifierAdapter();
+			}
+			@Override
+			public Adapter caseAdapter(IAdapter object) {
+				return createAdapterAdapter();
 			}
 			@Override
 			public Adapter caseProperty(IProperty object) {

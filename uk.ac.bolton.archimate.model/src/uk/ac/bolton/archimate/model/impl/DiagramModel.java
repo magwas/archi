@@ -41,13 +41,13 @@ import uk.ac.bolton.archimate.model.IProperty;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getArchimateModel <em>Archimate Model</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getId <em>Id</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getName <em>Name</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getProperties <em>Properties</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getDocumentation <em>Documentation</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getArchimateModel <em>Archimate Model</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getDiagramModel <em>Diagram Model</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getChildren <em>Children</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getDocumentation <em>Documentation</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getProperties <em>Properties</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModel#getConnectionRouterType <em>Connection Router Type</em>}</li>
  * </ul>
  * </p>
@@ -249,20 +249,31 @@ public abstract class DiagramModel extends CDOObjectImpl implements IDiagramMode
 	 */
     @Override
     public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == IIdentifier.class) {
+		if (baseClass == INameable.class) {
 			switch (derivedFeatureID) {
-				case IArchimatePackage.DIAGRAM_MODEL__ID: return IArchimatePackage.IDENTIFIER__ID;
+				case IArchimatePackage.DIAGRAM_MODEL__NAME: return IArchimatePackage.NAMEABLE__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == IProperties.class) {
+			switch (derivedFeatureID) {
+				case IArchimatePackage.DIAGRAM_MODEL__PROPERTIES: return IArchimatePackage.PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
+		if (baseClass == IDocumentable.class) {
+			switch (derivedFeatureID) {
+				case IArchimatePackage.DIAGRAM_MODEL__DOCUMENTATION: return IArchimatePackage.DOCUMENTABLE__DOCUMENTATION;
+				default: return -1;
+			}
+		}
+		if (baseClass == IAdapter.class) {
+			switch (derivedFeatureID) {
 				default: return -1;
 			}
 		}
 		if (baseClass == ICloneable.class) {
 			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == INameable.class) {
-			switch (derivedFeatureID) {
-				case IArchimatePackage.DIAGRAM_MODEL__NAME: return IArchimatePackage.NAMEABLE__NAME;
 				default: return -1;
 			}
 		}
@@ -278,18 +289,6 @@ public abstract class DiagramModel extends CDOObjectImpl implements IDiagramMode
 				default: return -1;
 			}
 		}
-		if (baseClass == IDocumentable.class) {
-			switch (derivedFeatureID) {
-				case IArchimatePackage.DIAGRAM_MODEL__DOCUMENTATION: return IArchimatePackage.DOCUMENTABLE__DOCUMENTATION;
-				default: return -1;
-			}
-		}
-		if (baseClass == IProperties.class) {
-			switch (derivedFeatureID) {
-				case IArchimatePackage.DIAGRAM_MODEL__PROPERTIES: return IArchimatePackage.PROPERTIES__PROPERTIES;
-				default: return -1;
-			}
-		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -300,20 +299,31 @@ public abstract class DiagramModel extends CDOObjectImpl implements IDiagramMode
 	 */
     @Override
     public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == IIdentifier.class) {
+		if (baseClass == INameable.class) {
 			switch (baseFeatureID) {
-				case IArchimatePackage.IDENTIFIER__ID: return IArchimatePackage.DIAGRAM_MODEL__ID;
+				case IArchimatePackage.NAMEABLE__NAME: return IArchimatePackage.DIAGRAM_MODEL__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == IProperties.class) {
+			switch (baseFeatureID) {
+				case IArchimatePackage.PROPERTIES__PROPERTIES: return IArchimatePackage.DIAGRAM_MODEL__PROPERTIES;
+				default: return -1;
+			}
+		}
+		if (baseClass == IDocumentable.class) {
+			switch (baseFeatureID) {
+				case IArchimatePackage.DOCUMENTABLE__DOCUMENTATION: return IArchimatePackage.DIAGRAM_MODEL__DOCUMENTATION;
+				default: return -1;
+			}
+		}
+		if (baseClass == IAdapter.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}
 		if (baseClass == ICloneable.class) {
 			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == INameable.class) {
-			switch (baseFeatureID) {
-				case IArchimatePackage.NAMEABLE__NAME: return IArchimatePackage.DIAGRAM_MODEL__NAME;
 				default: return -1;
 			}
 		}
@@ -326,18 +336,6 @@ public abstract class DiagramModel extends CDOObjectImpl implements IDiagramMode
 		if (baseClass == IDiagramModelContainer.class) {
 			switch (baseFeatureID) {
 				case IArchimatePackage.DIAGRAM_MODEL_CONTAINER__CHILDREN: return IArchimatePackage.DIAGRAM_MODEL__CHILDREN;
-				default: return -1;
-			}
-		}
-		if (baseClass == IDocumentable.class) {
-			switch (baseFeatureID) {
-				case IArchimatePackage.DOCUMENTABLE__DOCUMENTATION: return IArchimatePackage.DIAGRAM_MODEL__DOCUMENTATION;
-				default: return -1;
-			}
-		}
-		if (baseClass == IProperties.class) {
-			switch (baseFeatureID) {
-				case IArchimatePackage.PROPERTIES__PROPERTIES: return IArchimatePackage.DIAGRAM_MODEL__PROPERTIES;
 				default: return -1;
 			}
 		}

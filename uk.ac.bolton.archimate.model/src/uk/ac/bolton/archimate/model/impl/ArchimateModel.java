@@ -27,7 +27,9 @@ import uk.ac.bolton.archimate.model.IArchimateModelElement;
 import uk.ac.bolton.archimate.model.IArchimatePackage;
 import uk.ac.bolton.archimate.model.IBusinessLayerElement;
 import uk.ac.bolton.archimate.model.IDiagramModel;
+import uk.ac.bolton.archimate.model.IDocumentable;
 import uk.ac.bolton.archimate.model.IFolder;
+import uk.ac.bolton.archimate.model.IFolderContainer;
 import uk.ac.bolton.archimate.model.IIdentifier;
 import uk.ac.bolton.archimate.model.IJunctionElement;
 import uk.ac.bolton.archimate.model.INameable;
@@ -44,12 +46,12 @@ import uk.ac.bolton.archimate.model.util.IDAdapter;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getFolders <em>Folders</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getId <em>Id</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getArchimateModel <em>Archimate Model</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getProperties <em>Properties</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getPurpose <em>Purpose</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getDocumentation <em>Documentation</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getArchimateModel <em>Archimate Model</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getFolders <em>Folders</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getFile <em>File</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateModel#getVersion <em>Version</em>}</li>
  * </ul>
@@ -343,23 +345,23 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
 
     /**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getPurpose() {
-		return (String)eGet(IArchimatePackage.Literals.ARCHIMATE_MODEL__PURPOSE, true);
+	public String getDocumentation() {
+		return (String)eGet(IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, true);
 	}
 
-    /**
+				/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setPurpose(String newPurpose) {
-		eSet(IArchimatePackage.Literals.ARCHIMATE_MODEL__PURPOSE, newPurpose);
+	public void setDocumentation(String newDocumentation) {
+		eSet(IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, newDocumentation);
 	}
 
-    /**
+				/**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
@@ -435,9 +437,15 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
 				default: return -1;
 			}
 		}
-		if (baseClass == IIdentifier.class) {
+		if (baseClass == IProperties.class) {
 			switch (derivedFeatureID) {
-				case IArchimatePackage.ARCHIMATE_MODEL__ID: return IArchimatePackage.IDENTIFIER__ID;
+				case IArchimatePackage.ARCHIMATE_MODEL__PROPERTIES: return IArchimatePackage.PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
+		if (baseClass == IDocumentable.class) {
+			switch (derivedFeatureID) {
+				case IArchimatePackage.ARCHIMATE_MODEL__DOCUMENTATION: return IArchimatePackage.DOCUMENTABLE__DOCUMENTATION;
 				default: return -1;
 			}
 		}
@@ -446,15 +454,9 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
 				default: return -1;
 			}
 		}
-		if (baseClass == IArchimateModelElement.class) {
+		if (baseClass == IFolderContainer.class) {
 			switch (derivedFeatureID) {
-				case IArchimatePackage.ARCHIMATE_MODEL__ARCHIMATE_MODEL: return IArchimatePackage.ARCHIMATE_MODEL_ELEMENT__ARCHIMATE_MODEL;
-				default: return -1;
-			}
-		}
-		if (baseClass == IProperties.class) {
-			switch (derivedFeatureID) {
-				case IArchimatePackage.ARCHIMATE_MODEL__PROPERTIES: return IArchimatePackage.PROPERTIES__PROPERTIES;
+				case IArchimatePackage.ARCHIMATE_MODEL__FOLDERS: return IArchimatePackage.FOLDER_CONTAINER__FOLDERS;
 				default: return -1;
 			}
 		}
@@ -474,9 +476,15 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
 				default: return -1;
 			}
 		}
-		if (baseClass == IIdentifier.class) {
+		if (baseClass == IProperties.class) {
 			switch (baseFeatureID) {
-				case IArchimatePackage.IDENTIFIER__ID: return IArchimatePackage.ARCHIMATE_MODEL__ID;
+				case IArchimatePackage.PROPERTIES__PROPERTIES: return IArchimatePackage.ARCHIMATE_MODEL__PROPERTIES;
+				default: return -1;
+			}
+		}
+		if (baseClass == IDocumentable.class) {
+			switch (baseFeatureID) {
+				case IArchimatePackage.DOCUMENTABLE__DOCUMENTATION: return IArchimatePackage.ARCHIMATE_MODEL__DOCUMENTATION;
 				default: return -1;
 			}
 		}
@@ -485,15 +493,9 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
 				default: return -1;
 			}
 		}
-		if (baseClass == IArchimateModelElement.class) {
+		if (baseClass == IFolderContainer.class) {
 			switch (baseFeatureID) {
-				case IArchimatePackage.ARCHIMATE_MODEL_ELEMENT__ARCHIMATE_MODEL: return IArchimatePackage.ARCHIMATE_MODEL__ARCHIMATE_MODEL;
-				default: return -1;
-			}
-		}
-		if (baseClass == IProperties.class) {
-			switch (baseFeatureID) {
-				case IArchimatePackage.PROPERTIES__PROPERTIES: return IArchimatePackage.ARCHIMATE_MODEL__PROPERTIES;
+				case IArchimatePackage.FOLDER_CONTAINER__FOLDERS: return IArchimatePackage.ARCHIMATE_MODEL__FOLDERS;
 				default: return -1;
 			}
 		}

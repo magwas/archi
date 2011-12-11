@@ -928,7 +928,7 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getArchimateModel_Purpose() {
+    public EAttribute getArchimateModel_File() {
 		return (EAttribute)archimateModelEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -937,17 +937,8 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getArchimateModel_File() {
-		return (EAttribute)archimateModelEClass.getEStructuralFeatures().get(1);
-	}
-
-    /**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
     public EAttribute getArchimateModel_Version() {
-		return (EAttribute)archimateModelEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)archimateModelEClass.getEStructuralFeatures().get(1);
 	}
 
     /**
@@ -1959,10 +1950,10 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
 		isCreated = true;
 
 		// Create classes and their features
-		adapterEClass = createEClass(ADAPTER);
-
 		identifierEClass = createEClass(IDENTIFIER);
 		createEAttribute(identifierEClass, IDENTIFIER__ID);
+
+		adapterEClass = createEClass(ADAPTER);
 
 		propertyEClass = createEClass(PROPERTY);
 		createEAttribute(propertyEClass, PROPERTY__KEY);
@@ -1986,7 +1977,6 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
 		createEReference(folderContainerEClass, FOLDER_CONTAINER__FOLDERS);
 
 		archimateModelEClass = createEClass(ARCHIMATE_MODEL);
-		createEAttribute(archimateModelEClass, ARCHIMATE_MODEL__PURPOSE);
 		createEAttribute(archimateModelEClass, ARCHIMATE_MODEL__FILE);
 		createEAttribute(archimateModelEClass, ARCHIMATE_MODEL__VERSION);
 
@@ -2204,24 +2194,17 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		archimateModelEClass.getESuperTypes().add(this.getFolderContainer());
-		archimateModelEClass.getESuperTypes().add(this.getNameable());
-		archimateModelEClass.getESuperTypes().add(this.getIdentifier());
 		archimateModelEClass.getESuperTypes().add(this.getArchimateModelElement());
-		archimateModelEClass.getESuperTypes().add(this.getProperties());
+		archimateModelEClass.getESuperTypes().add(this.getFolderContainer());
+		archimateModelElementEClass.getESuperTypes().add(this.getIdentifier());
+		archimateModelElementEClass.getESuperTypes().add(this.getNameable());
+		archimateModelElementEClass.getESuperTypes().add(this.getProperties());
+		archimateModelElementEClass.getESuperTypes().add(this.getDocumentable());
 		archimateModelElementEClass.getESuperTypes().add(this.getAdapter());
 		folderEClass.getESuperTypes().add(this.getArchimateModelElement());
 		folderEClass.getESuperTypes().add(this.getFolderContainer());
-		folderEClass.getESuperTypes().add(this.getNameable());
-		folderEClass.getESuperTypes().add(this.getIdentifier());
-		folderEClass.getESuperTypes().add(this.getDocumentable());
-		folderEClass.getESuperTypes().add(this.getProperties());
 		archimateElementEClass.getESuperTypes().add(this.getArchimateModelElement());
-		archimateElementEClass.getESuperTypes().add(this.getIdentifier());
 		archimateElementEClass.getESuperTypes().add(this.getCloneable());
-		archimateElementEClass.getESuperTypes().add(this.getNameable());
-		archimateElementEClass.getESuperTypes().add(this.getDocumentable());
-		archimateElementEClass.getESuperTypes().add(this.getProperties());
 		junctionElementEClass.getESuperTypes().add(this.getArchimateElement());
 		interfaceElementEClass.getESuperTypes().add(this.getArchimateElement());
 		junctionEClass.getESuperTypes().add(this.getJunctionElement());
@@ -2312,6 +2295,9 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
 		sketchModelActorEClass.getESuperTypes().add(this.getProperties());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(identifierEClass, IIdentifier.class, "Identifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getIdentifier_Id(), ecorePackage.getEString(), "id", null, 0, 1, IIdentifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(adapterEClass, IAdapter.class, "Adapter", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		EOperation op = addEOperation(adapterEClass, ecorePackage.getEJavaObject(), "getAdapter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
@@ -2320,9 +2306,6 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
 		op = addEOperation(adapterEClass, null, "setAdapter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEJavaObject(), "adapter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEJavaObject(), "object", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		initEClass(identifierEClass, IIdentifier.class, "Identifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getIdentifier_Id(), ecorePackage.getEString(), "id", null, 0, 1, IIdentifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(propertyEClass, IProperty.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getProperty_Key(), ecorePackage.getEString(), "key", "", 0, 1, IProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
@@ -2348,7 +2331,6 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
 		initEReference(getFolderContainer_Folders(), this.getFolder(), null, "folders", null, 0, -1, IFolderContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(archimateModelEClass, IArchimateModel.class, "ArchimateModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getArchimateModel_Purpose(), ecorePackage.getEString(), "purpose", null, 0, 1, IArchimateModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getArchimateModel_File(), this.getFile(), "file", null, 0, 1, IArchimateModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getArchimateModel_Version(), ecorePackage.getEString(), "version", "", 0, 1, IArchimateModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
@@ -2372,7 +2354,7 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
 		initEReference(getArchimateModelElement_ArchimateModel(), this.getArchimateModel(), null, "archimateModel", null, 0, 1, IArchimateModelElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(folderEClass, IFolder.class, "Folder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEReference(getFolder_Elements(), ecorePackage.getEObject(), null, "elements", null, 0, -1, IFolder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getFolder_Elements(), this.getArchimateModelElement(), null, "elements", null, 0, -1, IFolder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getFolder_Type(), this.getFolderType(), "type", null, 0, 1, IFolder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(archimateElementEClass, IArchimateElement.class, "ArchimateElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -2618,16 +2600,22 @@ public class ArchimatePackage extends EPackageImpl implements IArchimatePackage 
 			 "value", "@Id" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
+		  (getTextContent_Content(), 
+		   source, 
+		   new String[] {
+			 "value", "@Lob\n@Type(type = \"org.hibernate.type.TextType\")" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		   });		
+		addAnnotation
 		  (getDocumentable_Documentation(), 
 		   source, 
 		   new String[] {
 			 "value", "@Lob\n@Type(type = \"org.hibernate.type.TextType\")" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		   });		
 		addAnnotation
-		  (getArchimateModel_Purpose(), 
+		  (archimateModelElementEClass, 
 		   source, 
 		   new String[] {
-			 "value", "@Lob\n@Type(type = \"org.hibernate.type.TextType\")" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			 "value", "@Table(name=\"modelelement\")" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		   });
 	}
 

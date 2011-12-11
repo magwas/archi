@@ -34,12 +34,12 @@ import uk.ac.bolton.archimate.model.IProperty;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getId <em>Id</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getName <em>Name</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getProperties <em>Properties</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getArchimateModel <em>Archimate Model</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getFolders <em>Folders</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getName <em>Name</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getId <em>Id</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getDocumentation <em>Documentation</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getProperties <em>Properties</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getElements <em>Elements</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.Folder#getType <em>Type</em>}</li>
  * </ul>
@@ -153,8 +153,8 @@ public class Folder extends CDOObjectImpl implements IFolder {
 	 * @generated
 	 */
     @SuppressWarnings("unchecked")
-				public EList<EObject> getElements() {
-		return (EList<EObject>)eGet(IArchimatePackage.Literals.FOLDER__ELEMENTS, true);
+				public EList<IArchimateModelElement> getElements() {
+		return (EList<IArchimateModelElement>)eGet(IArchimatePackage.Literals.FOLDER__ELEMENTS, true);
 	}
 
     /**
@@ -226,21 +226,15 @@ public class Folder extends CDOObjectImpl implements IFolder {
 	 */
     @Override
     public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == IFolderContainer.class) {
-			switch (derivedFeatureID) {
-				case IArchimatePackage.FOLDER__FOLDERS: return IArchimatePackage.FOLDER_CONTAINER__FOLDERS;
-				default: return -1;
-			}
-		}
 		if (baseClass == INameable.class) {
 			switch (derivedFeatureID) {
 				case IArchimatePackage.FOLDER__NAME: return IArchimatePackage.NAMEABLE__NAME;
 				default: return -1;
 			}
 		}
-		if (baseClass == IIdentifier.class) {
+		if (baseClass == IProperties.class) {
 			switch (derivedFeatureID) {
-				case IArchimatePackage.FOLDER__ID: return IArchimatePackage.IDENTIFIER__ID;
+				case IArchimatePackage.FOLDER__PROPERTIES: return IArchimatePackage.PROPERTIES__PROPERTIES;
 				default: return -1;
 			}
 		}
@@ -250,9 +244,14 @@ public class Folder extends CDOObjectImpl implements IFolder {
 				default: return -1;
 			}
 		}
-		if (baseClass == IProperties.class) {
+		if (baseClass == IAdapter.class) {
 			switch (derivedFeatureID) {
-				case IArchimatePackage.FOLDER__PROPERTIES: return IArchimatePackage.PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
+		if (baseClass == IFolderContainer.class) {
+			switch (derivedFeatureID) {
+				case IArchimatePackage.FOLDER__FOLDERS: return IArchimatePackage.FOLDER_CONTAINER__FOLDERS;
 				default: return -1;
 			}
 		}
@@ -266,21 +265,15 @@ public class Folder extends CDOObjectImpl implements IFolder {
 	 */
     @Override
     public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == IFolderContainer.class) {
-			switch (baseFeatureID) {
-				case IArchimatePackage.FOLDER_CONTAINER__FOLDERS: return IArchimatePackage.FOLDER__FOLDERS;
-				default: return -1;
-			}
-		}
 		if (baseClass == INameable.class) {
 			switch (baseFeatureID) {
 				case IArchimatePackage.NAMEABLE__NAME: return IArchimatePackage.FOLDER__NAME;
 				default: return -1;
 			}
 		}
-		if (baseClass == IIdentifier.class) {
+		if (baseClass == IProperties.class) {
 			switch (baseFeatureID) {
-				case IArchimatePackage.IDENTIFIER__ID: return IArchimatePackage.FOLDER__ID;
+				case IArchimatePackage.PROPERTIES__PROPERTIES: return IArchimatePackage.FOLDER__PROPERTIES;
 				default: return -1;
 			}
 		}
@@ -290,9 +283,14 @@ public class Folder extends CDOObjectImpl implements IFolder {
 				default: return -1;
 			}
 		}
-		if (baseClass == IProperties.class) {
+		if (baseClass == IAdapter.class) {
 			switch (baseFeatureID) {
-				case IArchimatePackage.PROPERTIES__PROPERTIES: return IArchimatePackage.FOLDER__PROPERTIES;
+				default: return -1;
+			}
+		}
+		if (baseClass == IFolderContainer.class) {
+			switch (baseFeatureID) {
+				case IArchimatePackage.FOLDER_CONTAINER__FOLDERS: return IArchimatePackage.FOLDER__FOLDERS;
 				default: return -1;
 			}
 		}

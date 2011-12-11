@@ -129,9 +129,6 @@ public class ArchimateResourceFactory extends ResourceFactoryImpl {
             // "ArchimateModel" becomes "model"
             ext.setName(IArchimatePackage.Literals.ARCHIMATE_MODEL, "model");
             
-            // The "purpose" attribute becomes an element
-            ext.setFeatureKind(IArchimatePackage.Literals.ARCHIMATE_MODEL__PURPOSE, ExtendedMetaData.ELEMENT_FEATURE);
-
             // The "folders" list element becomes "folder"
             ext.setFeatureKind(IArchimatePackage.Literals.FOLDER_CONTAINER__FOLDERS, ExtendedMetaData.ELEMENT_FEATURE); // have to do this explicitly
             ext.setName(IArchimatePackage.Literals.FOLDER_CONTAINER__FOLDERS, "folder");

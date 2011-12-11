@@ -5,6 +5,14 @@
     nsURI="http://www.bolton.ac.uk/archimate" nsPrefix="archimate">
   <eClassifiers xsi:type="ecore:EDataType" name="File" instanceClassName="org.eclipse.emf.common.util.URI"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Identifier" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true">
+      <eAnnotations source="teneo.jpa">
+        <details key="value" value="@Id"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Adapter" abstract="true" interface="true">
     <eOperations name="getAdapter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
       <eParameters name="adapter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -13,14 +21,6 @@
       <eParameters name="adapter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
       <eParameters name="object" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Identifier" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        iD="true">
-      <eAnnotations source="teneo.jpa">
-        <details key="value" value="@Id"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Property">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -68,7 +68,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="folders" upperBound="-1"
         eType="#//Folder" containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArchimateModel" eSuperTypes="#//FolderContainer #//Nameable #//Identifier #//ArchimateModelElement #//Properties">
+  <eClassifiers xsi:type="ecore:EClass" name="ArchimateModel" eSuperTypes="#//ArchimateModelElement #//FolderContainer">
     <eOperations name="setDefaults"/>
     <eOperations name="addDerivedRelationsFolder" eType="#//Folder"/>
     <eOperations name="removeDerivedRelationsFolder"/>
@@ -80,27 +80,24 @@
     <eOperations name="getFolder" eType="#//Folder">
       <eParameters name="type" eType="#//FolderType"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="purpose" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="teneo.jpa">
-        <details key="value" value="@Lob&#xA;@Type(type = &quot;org.hibernate.type.TextType&quot;)"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" eType="#//File" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArchimateModelElement" abstract="true"
-      interface="true" eSuperTypes="#//Adapter">
+      interface="true" eSuperTypes="#//Identifier #//Nameable #//Properties #//Documentable #//Adapter">
+    <eAnnotations source="teneo.jpa">
+      <details key="value" value="@Table(name=&quot;modelelement&quot;)"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="archimateModel" eType="#//ArchimateModel"
         changeable="false" volatile="true" transient="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Folder" eSuperTypes="#//ArchimateModelElement #//FolderContainer #//Nameable #//Identifier #//Documentable #//Properties">
+  <eClassifiers xsi:type="ecore:EClass" name="Folder" eSuperTypes="#//ArchimateModelElement #//FolderContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"
-        resolveProxies="false"/>
+        eType="#//ArchimateModelElement" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//FolderType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArchimateElement" abstract="true" eSuperTypes="#//ArchimateModelElement #//Identifier #//Cloneable #//Nameable #//Documentable #//Properties"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArchimateElement" abstract="true" eSuperTypes="#//ArchimateModelElement #//Cloneable"/>
   <eClassifiers xsi:type="ecore:EClass" name="JunctionElement" abstract="true" interface="true"
       eSuperTypes="#//ArchimateElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceElement" abstract="true" interface="true"

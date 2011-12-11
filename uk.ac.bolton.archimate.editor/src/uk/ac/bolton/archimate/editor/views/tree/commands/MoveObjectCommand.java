@@ -8,8 +8,8 @@ package uk.ac.bolton.archimate.editor.views.tree.commands;
 
 import org.eclipse.gef.commands.Command;
 
+import uk.ac.bolton.archimate.model.IArchimateModelElement;
 import uk.ac.bolton.archimate.model.IFolder;
-import uk.ac.bolton.archimate.model.INameable;
 
 /**
  * Move Object Command
@@ -19,10 +19,10 @@ import uk.ac.bolton.archimate.model.INameable;
 public class MoveObjectCommand extends Command {
     private IFolder fOldParent;
     private IFolder fNewParent;
-    private INameable fElement;
+    private IArchimateModelElement fElement;
     private int fOldPos;
     
-    public MoveObjectCommand(IFolder newParent, INameable element) {
+    public MoveObjectCommand(IFolder newParent, IArchimateModelElement element) {
         super("Move " + element.getName());
         fOldParent = (IFolder)element.eContainer();
         fNewParent = newParent;
@@ -38,7 +38,7 @@ public class MoveObjectCommand extends Command {
     @Override
     public void undo() {
         fNewParent.getElements().remove(fElement);
-        fOldParent.getElements().add(fOldPos, fElement);
+        fOldParent.getElements().add(fOldPos,fElement);
     }
     
     @Override

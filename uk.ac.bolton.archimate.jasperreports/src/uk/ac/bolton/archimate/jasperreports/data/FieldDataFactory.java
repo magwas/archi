@@ -38,10 +38,6 @@ public class FieldDataFactory {
             String s = ((IDocumentable)dataElement).getDocumentation();
             return StringUtils.isSet(s) ? s : null;
         }
-        if("purpose".equals(fieldName) && dataElement instanceof IArchimateModel) {
-            String s = ((IArchimateModel)dataElement).getPurpose();
-            return StringUtils.isSet(s) ? s : null;
-        }
         if("relation_source".equals(fieldName) && dataElement instanceof IRelationship) {
             IRelationship relation = (IRelationship)dataElement;
             IArchimateElement source = relation.getSource();

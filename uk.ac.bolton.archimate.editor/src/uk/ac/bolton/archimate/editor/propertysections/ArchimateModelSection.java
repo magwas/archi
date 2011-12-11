@@ -49,8 +49,8 @@ public class ArchimateModelSection extends AbstractArchimatePropertySection {
                 refreshFileField();
             }
             // Model Purpose event (Undo/Redo and here!)
-            else if(feature == IArchimatePackage.Literals.ARCHIMATE_MODEL__PURPOSE) {
-                refreshPurposeField();
+            else if(feature == IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION) {
+                refreshDocumentationField();
             }
         }
     };
@@ -87,13 +87,13 @@ public class ArchimateModelSection extends AbstractArchimatePropertySection {
         // Text
         StyledTextControl styledTextControl = createStyledTextControl(parent, SWT.NONE);
         
-        fTextPurpose = new PropertySectionTextControl(styledTextControl.getControl(), IArchimatePackage.Literals.ARCHIMATE_MODEL__PURPOSE) {
+        fTextPurpose = new PropertySectionTextControl(styledTextControl.getControl(), IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION) {
             @Override
             protected void textChanged(String oldText, String newText) {
                 if(isAlive()) {
                     fIsExecutingCommand = true;
                     getCommandStack().execute(new EObjectFeatureCommand("Change text", fModel,
-                                                    IArchimatePackage.Literals.ARCHIMATE_MODEL__PURPOSE, newText));
+                                                    IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, newText));
                     fIsExecutingCommand = false;
                 }
             }
@@ -116,7 +116,7 @@ public class ArchimateModelSection extends AbstractArchimatePropertySection {
     protected void refreshControls() {
         refreshNameField();
         refreshFileField();
-        refreshPurposeField();
+        refreshDocumentationField();
     }
     
     protected void refreshNameField() {
@@ -136,7 +136,7 @@ public class ArchimateModelSection extends AbstractArchimatePropertySection {
         }
     }
     
-    protected void refreshPurposeField() {
+    protected void refreshDocumentationField() {
         if(fIsExecutingCommand) {
             return; 
         }

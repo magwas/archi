@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link uk.ac.bolton.archimate.model.IArchimateModel#getPurpose <em>Purpose</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.IArchimateModel#getFile <em>File</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.IArchimateModel#getVersion <em>Version</em>}</li>
  * </ul>
@@ -29,33 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface IArchimateModel extends IFolderContainer, INameable, IIdentifier, IArchimateModelElement, IProperties {
-    /**
-	 * Returns the value of the '<em><b>Purpose</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Purpose</em>' attribute isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-	 * @return the value of the '<em>Purpose</em>' attribute.
-	 * @see #setPurpose(String)
-	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getArchimateModel_Purpose()
-	 * @model annotation="teneo.jpa value='@Lob\n@Type(type = \"org.hibernate.type.TextType\")'"
-	 * @generated
-	 */
-    String getPurpose();
-
-    /**
-	 * Sets the value of the '{@link uk.ac.bolton.archimate.model.IArchimateModel#getPurpose <em>Purpose</em>}' attribute.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Purpose</em>' attribute.
-	 * @see #getPurpose()
-	 * @generated
-	 */
-    void setPurpose(String value);
-
+public interface IArchimateModel extends IArchimateModelElement, IFolderContainer {
     /**
 	 * Returns the value of the '<em><b>File</b></em>' attribute.
 	 * <!-- begin-user-doc -->

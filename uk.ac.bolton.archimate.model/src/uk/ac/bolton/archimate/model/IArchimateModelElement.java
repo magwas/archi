@@ -21,9 +21,10 @@ package uk.ac.bolton.archimate.model;
  *
  * @see uk.ac.bolton.archimate.model.IArchimatePackage#getArchimateModelElement()
  * @model interface="true" abstract="true"
+ *        annotation="teneo.jpa value='@Table(name=\"modelelement\")'"
  * @generated
  */
-public interface IArchimateModelElement extends IAdapter {
+public interface IArchimateModelElement extends IIdentifier, INameable, IProperties, IDocumentable, IAdapter {
     /**
 	 * Returns the value of the '<em><b>Archimate Model</b></em>' reference.
 	 * <!-- begin-user-doc -->

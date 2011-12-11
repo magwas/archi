@@ -35,11 +35,11 @@ import uk.ac.bolton.archimate.model.IProperty;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateElement#getArchimateModel <em>Archimate Model</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateElement#getId <em>Id</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateElement#getName <em>Name</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateElement#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateElement#getProperties <em>Properties</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateElement#getDocumentation <em>Documentation</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.ArchimateElement#getArchimateModel <em>Archimate Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -198,20 +198,15 @@ public abstract class ArchimateElement extends CDOObjectImpl implements IArchima
 	 */
     @Override
     public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == IIdentifier.class) {
-			switch (derivedFeatureID) {
-				case IArchimatePackage.ARCHIMATE_ELEMENT__ID: return IArchimatePackage.IDENTIFIER__ID;
-				default: return -1;
-			}
-		}
-		if (baseClass == ICloneable.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == INameable.class) {
 			switch (derivedFeatureID) {
 				case IArchimatePackage.ARCHIMATE_ELEMENT__NAME: return IArchimatePackage.NAMEABLE__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == IProperties.class) {
+			switch (derivedFeatureID) {
+				case IArchimatePackage.ARCHIMATE_ELEMENT__PROPERTIES: return IArchimatePackage.PROPERTIES__PROPERTIES;
 				default: return -1;
 			}
 		}
@@ -221,9 +216,13 @@ public abstract class ArchimateElement extends CDOObjectImpl implements IArchima
 				default: return -1;
 			}
 		}
-		if (baseClass == IProperties.class) {
+		if (baseClass == IAdapter.class) {
 			switch (derivedFeatureID) {
-				case IArchimatePackage.ARCHIMATE_ELEMENT__PROPERTIES: return IArchimatePackage.PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ICloneable.class) {
+			switch (derivedFeatureID) {
 				default: return -1;
 			}
 		}
@@ -237,20 +236,15 @@ public abstract class ArchimateElement extends CDOObjectImpl implements IArchima
 	 */
     @Override
     public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == IIdentifier.class) {
-			switch (baseFeatureID) {
-				case IArchimatePackage.IDENTIFIER__ID: return IArchimatePackage.ARCHIMATE_ELEMENT__ID;
-				default: return -1;
-			}
-		}
-		if (baseClass == ICloneable.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == INameable.class) {
 			switch (baseFeatureID) {
 				case IArchimatePackage.NAMEABLE__NAME: return IArchimatePackage.ARCHIMATE_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == IProperties.class) {
+			switch (baseFeatureID) {
+				case IArchimatePackage.PROPERTIES__PROPERTIES: return IArchimatePackage.ARCHIMATE_ELEMENT__PROPERTIES;
 				default: return -1;
 			}
 		}
@@ -260,9 +254,13 @@ public abstract class ArchimateElement extends CDOObjectImpl implements IArchima
 				default: return -1;
 			}
 		}
-		if (baseClass == IProperties.class) {
+		if (baseClass == IAdapter.class) {
 			switch (baseFeatureID) {
-				case IArchimatePackage.PROPERTIES__PROPERTIES: return IArchimatePackage.ARCHIMATE_ELEMENT__PROPERTIES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ICloneable.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

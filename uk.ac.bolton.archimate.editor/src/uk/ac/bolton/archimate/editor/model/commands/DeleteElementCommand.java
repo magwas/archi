@@ -8,8 +8,8 @@ package uk.ac.bolton.archimate.editor.model.commands;
 
 import org.eclipse.gef.commands.Command;
 
+import uk.ac.bolton.archimate.model.IArchimateModelElement;
 import uk.ac.bolton.archimate.model.IFolder;
-import uk.ac.bolton.archimate.model.INameable;
 
 
 /**
@@ -19,11 +19,11 @@ import uk.ac.bolton.archimate.model.INameable;
  */
 public class DeleteElementCommand extends Command {
     
-    private INameable fElement;
+    private IArchimateModelElement fElement;
     private int fIndex;
     private IFolder fFolder;
 
-    public DeleteElementCommand(INameable element) {
+    public DeleteElementCommand(IArchimateModelElement element) {
         fFolder = (IFolder)element.eContainer();
         fElement = element;
         setLabel("Delete " + element.getName());

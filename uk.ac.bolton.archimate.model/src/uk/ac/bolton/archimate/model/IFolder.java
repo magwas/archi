@@ -27,10 +27,10 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface IFolder extends IArchimateModelElement, IFolderContainer, INameable, IIdentifier, IDocumentable, IProperties {
+public interface IFolder extends IArchimateModelElement, IFolderContainer {
     /**
 	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+	 * The list contents are of type {@link uk.ac.bolton.archimate.model.IArchimateModelElement}.
 	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
@@ -42,7 +42,7 @@ public interface IFolder extends IArchimateModelElement, IFolderContainer, IName
 	 * @model containment="true"
 	 * @generated
 	 */
-    EList<EObject> getElements();
+    EList<IArchimateModelElement> getElements();
 
     /**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.

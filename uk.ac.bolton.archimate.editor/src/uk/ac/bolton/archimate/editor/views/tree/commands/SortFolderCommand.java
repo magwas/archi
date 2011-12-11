@@ -7,6 +7,7 @@
 package uk.ac.bolton.archimate.editor.views.tree.commands;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.eclipse.gef.commands.Command;
 
 import uk.ac.bolton.archimate.editor.model.IEditorModelManager;
 import uk.ac.bolton.archimate.model.IArchimateElement;
+import uk.ac.bolton.archimate.model.IArchimateModelElement;
 import uk.ac.bolton.archimate.model.IDiagramModelComponent;
 import uk.ac.bolton.archimate.model.IFolder;
 
@@ -28,15 +30,15 @@ import uk.ac.bolton.archimate.model.IFolder;
 public class SortFolderCommand extends Command implements Comparator<EObject>  {
     
     private IFolder fFolder;
-    private List<EObject> fList;
+    private List<IArchimateModelElement> fList;
 
     public SortFolderCommand(IFolder folder) {
         setLabel("Sort");
         fFolder = folder;
         
         // Keep a copy of the orginal order
-        fList = new ArrayList<EObject>();
-        for(EObject o : fFolder.getElements()) {
+        fList = new ArrayList<IArchimateModelElement>();
+        for(IArchimateModelElement o : fFolder.getElements()) {
             fList.add(o);
         }
     }

@@ -227,8 +227,8 @@ public class TreeModelViewerDragDropHandler {
             if(object instanceof IFolder && !newParent.getFolders().contains(object)) {
                 compoundCommand.add(new MoveFolderCommand(newParent, (IFolder)object));
             }
-            else if(object instanceof INameable && !newParent.getElements().contains(object)) {
-                compoundCommand.add(new MoveObjectCommand(newParent, (INameable)object));
+            else if(object instanceof IArchimateModelElement && !newParent.getElements().contains(object)) {
+                compoundCommand.add(new MoveObjectCommand(newParent, (IArchimateModelElement)object));
             }
         }
         
