@@ -15,27 +15,17 @@ import org.eclipse.emf.cdo.session.CDOSession;
 import org.eclipse.emf.cdo.transaction.CDOTransaction;
 import org.eclipse.emf.cdo.view.CDOAdapterPolicy;
 
-import org.eclipse.net4j.FactoriesProtocolProvider;
 import org.eclipse.net4j.Net4jUtil;
-import org.eclipse.net4j.buffer.IBufferProvider;
 import org.eclipse.net4j.connector.IConnector;
-import org.eclipse.net4j.protocol.IProtocolProvider;
-import org.eclipse.net4j.tcp.ITCPSelector;
 import org.eclipse.net4j.tcp.TCPUtil;
 import org.eclipse.net4j.util.container.ContainerUtil;
 import org.eclipse.net4j.util.container.IManagedContainer;
-import org.eclipse.net4j.util.lifecycle.Lifecycle;
-import org.eclipse.net4j.util.lifecycle.LifecycleUtil;
 import org.eclipse.net4j.util.om.OMPlatform;
 import org.eclipse.net4j.util.om.log.PrintLogHandler;
 import org.eclipse.net4j.util.om.trace.PrintTraceHandler;
 import org.eclipse.emf.common.util.URI;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 
 
 
