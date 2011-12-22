@@ -13,6 +13,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.IFilter;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
 import uk.ac.bolton.archimate.editor.diagram.editparts.IArchimateEditPart;
@@ -46,7 +47,10 @@ public class ArchimateElementSection extends AbstractArchimatePropertySection {
      */
     private Adapter eAdapter = new AdapterImpl() {
         @Override
-        public void notifyChanged(Notification msg) {
+        public void notifyChanged(final Notification msg) {
+            Display.getDefault().asyncExec(new Runnable() {
+            	public void run() {
+
             Object feature = msg.getFeature();
             // Element Name event (Undo/Redo and here)
             if(feature == IArchimatePackage.Literals.NAMEABLE__NAME) {
@@ -57,6 +61,8 @@ public class ArchimateElementSection extends AbstractArchimatePropertySection {
             else if(feature == IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION) {
                 refreshDocumentationField();
             }
+            	}
+            });         	
         }
     };
     

@@ -69,7 +69,7 @@ public class CDOResourceSet extends ResourceSetImpl implements ResourceSet {
 		String portstring = uri.port();
 		int port;
 		if (portstring == null) {
-			port = 3126;
+			port = 2036;
 		} else {
 			port = new Integer(portstring);
 		}

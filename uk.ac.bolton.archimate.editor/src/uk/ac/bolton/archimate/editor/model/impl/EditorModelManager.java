@@ -583,10 +583,14 @@ implements IEditorModelManager {
      */
     private class ECoreAdapter extends EContentAdapter {
         @Override
-        public void notifyChanged(Notification msg) {
+        public void notifyChanged(final Notification msg) {
             super.notifyChanged(msg);
-            // Forward on to listeners...
-            firePropertyChange(this, PROPERTY_ECORE_EVENT, null, msg);
+            Display.getDefault().asyncExec(new Runnable() {
+            	public void run() {
+                    // Forward on to listeners...
+                    firePropertyChange(this, PROPERTY_ECORE_EVENT, null, msg);
+            	}
+            	});
         }
     }
 }

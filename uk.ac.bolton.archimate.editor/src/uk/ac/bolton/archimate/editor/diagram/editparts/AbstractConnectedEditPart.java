@@ -17,6 +17,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gef.Request;
+import org.eclipse.swt.widgets.Display;
 
 import uk.ac.bolton.archimate.model.IArchimatePackage;
 import uk.ac.bolton.archimate.model.IDiagramModelConnection;
@@ -35,9 +36,13 @@ implements NodeEditPart {
     
     private Adapter adapter = new AdapterImpl() {
         @Override
-        public void notifyChanged(Notification msg) {
-            eCoreChanged(msg);
-        }
+        public void notifyChanged(final Notification msg) {
+            Display.getDefault().asyncExec(new Runnable() {
+            	public void run() {
+           eCoreChanged(msg);
+            	}
+            });
+      	}
     };
     
     /**
