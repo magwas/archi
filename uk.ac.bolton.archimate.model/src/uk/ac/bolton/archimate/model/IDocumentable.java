@@ -39,6 +39,7 @@ public interface IDocumentable extends CDOObject {
 	 * @see #setDocumentation(String)
 	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getDocumentable_Documentation()
 	 * @model default=""
+	 *        extendedMetaData="kind='element'"
 	 *        annotation="teneo.jpa value='@Lob\n@Type(type = \"org.hibernate.type.TextType\")'"
 	 * @generated
 	 */

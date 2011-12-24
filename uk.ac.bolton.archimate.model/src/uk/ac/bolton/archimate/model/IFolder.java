@@ -7,6 +7,7 @@
 package uk.ac.bolton.archimate.model;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
 public interface IFolder extends IArchimateModelElement, IFolderContainer {
 	/**
 	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link uk.ac.bolton.archimate.model.IArchimateModelElement}.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
@@ -38,9 +39,10 @@ public interface IFolder extends IArchimateModelElement, IFolderContainer {
 	 * @return the value of the '<em>Elements</em>' containment reference list.
 	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getFolder_Elements()
 	 * @model containment="true"
+	 *        extendedMetaData="name='element' kind='element'"
 	 * @generated
 	 */
-	EList<IArchimateModelElement> getElements();
+	EList<EObject> getElements();
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.

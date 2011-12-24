@@ -40,6 +40,7 @@ public interface IFolderContainer extends CDOObject {
 	 * @return the value of the '<em>Folders</em>' containment reference list.
 	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getFolderContainer_Folders()
 	 * @model containment="true"
+	 *        extendedMetaData="name='folder' kind='element'"
 	 * @generated
 	 */
 	EList<IFolder> getFolders();

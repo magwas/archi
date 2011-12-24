@@ -9,8 +9,10 @@ package uk.ac.bolton.archimate.model.util;
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,13 +40,28 @@ public class ArchimateResourceFactory extends ResourceFactoryImpl {
 	 */
 	@Override
 	public Resource createResource(URI uri) {
-		Resource result = new ArchimateResource(uri);
+		XMLResource result = new ArchimateResource(uri);
+		result.getDefaultSaveOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
+		result.getDefaultLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
+
+		result.getDefaultSaveOptions().put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+
+		result.getDefaultLoadOptions().put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+		result.getDefaultSaveOptions().put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+
+		result.getDefaultLoadOptions().put(XMLResource.OPTION_USE_LEXICAL_HANDLER, Boolean.TRUE);
 		return result;
 	}
 
-	public static Resource getOrCreateResource(URI uri) {
-		Resource result = new ArchimateResource(uri);
-		return result;
+	public static Resource getOrCreateResource(URI file) {
+		// FIXME -> persistence
+		return null;
+	}
+
+	public static ResourceSet createResourceSet() {
+		// FIXME -> persistence
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 } //ArchimateResourceFactory

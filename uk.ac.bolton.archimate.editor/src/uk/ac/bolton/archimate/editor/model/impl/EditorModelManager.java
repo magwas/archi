@@ -23,7 +23,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CommandStackListener;
@@ -40,13 +42,16 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 
+import uk.ac.bolton.archimate.compatibility.CompatibilityHandlerException;
+import uk.ac.bolton.archimate.compatibility.IncompatibleModelException;
+import uk.ac.bolton.archimate.compatibility.LaterModelVersionException;
+import uk.ac.bolton.archimate.compatibility.ModelCompatibility;
 import uk.ac.bolton.archimate.editor.ArchimateEditorPlugin;
 import uk.ac.bolton.archimate.editor.Logger;
 import uk.ac.bolton.archimate.editor.diagram.dialog.TargetSelectionDialog;
 import uk.ac.bolton.archimate.editor.diagram.util.AnimationUtil;
+import uk.ac.bolton.archimate.editor.model.IArchiveManager;
 import uk.ac.bolton.archimate.editor.model.IEditorModelManager;
-import uk.ac.bolton.archimate.editor.model.impl.ModelVersionChecker.IncompatibleModelVersionException;
-import uk.ac.bolton.archimate.editor.model.impl.ModelVersionChecker.LaterModelVersionException;
 import uk.ac.bolton.archimate.editor.preferences.Preferences;
 import uk.ac.bolton.archimate.editor.ui.services.EditorManager;
 import uk.ac.bolton.archimate.editor.utils.FileUtils;
@@ -159,6 +164,9 @@ implements IEditorModelManager {
         // New Command Stack
         createNewCommandStack(model);
         
+        // New Archive Manager
+        createNewArchiveManager(model);
+        
         firePropertyChange(this, PROPERTY_MODEL_CREATED, null, model);
         model.eAdapters().add(new ECoreAdapter());
         return model;
@@ -194,7 +202,10 @@ implements IEditorModelManager {
         
         // New Command Stack
         createNewCommandStack(model);
-
+        
+        // New Archive Manager
+        createNewArchiveManager(model);
+        
         model.eAdapters().add(new ECoreAdapter());
 
         firePropertyChange(this, PROPERTY_MODEL_OPENED, null, model);
@@ -202,15 +213,21 @@ implements IEditorModelManager {
     
     @Override
     public IArchimateModel loadModel(URI uri) {
+/* FIXME -> persistence
     	if(uri == null) {
         	System.out.println("loadModel null");
             return null;
         }
-        if(uri.isFile()&&!(new File(uri.toFileString()).exists())) {
-        	System.out.println("not opening2 "+uri.toString());
-        	return null;
-        }
-        Resource resource = ArchimateResourceFactory.getOrCreateResource(uri);
+        // Ascertain if this is an archive file
+        boolean useArchiveFormat = IArchiveManager.FACTORY.isArchiveFile(uri);
+        
+        // Create the Resource
+        ResourceSet resourceSet = ArchimateResourceFactory.createResourceSet();
+        Resource resource = resourceSet.createResource(useArchiveFormat ?
+                                                       IArchiveManager.FACTORY.createArchiveModelURI(file) :
+                                                       URI.createFileURI(file.getAbsolutePath()));
+
+        // Load the model file
         try {
             resource.load(null);
         }
@@ -219,38 +236,37 @@ implements IEditorModelManager {
         	//System.out.println("exception:"+ex);
         	//ex.printStackTrace();
             try {
-                ModelVersionChecker.checkErrors(resource);
+                ModelCompatibility.checkErrors(resource);
             }
-            // Incompatible
-            catch(IncompatibleModelVersionException exception) {
-                Logger.logError("Error opening model", exception);
+            // Incompatible, don't load it
+            catch(IncompatibleModelException ex1) {
                 MessageDialog.openError(Display.getCurrent().getActiveShell(),
                         "Error opening model",
-                        "Cannot open '" + uri +  "'. This version is incompatible. Please update to the latest version of Archi.");
-                return null;
-            }
-            // Wrong file type
-            catch(Exception ex2) {
-            	System.out.println("exception:"+ex2);
-            	ex2.printStackTrace();
-                MessageDialog.openError(Display.getCurrent().getActiveShell(),
-                        "Error opening model",
-                        "Cannot open '" + uri +  "'.");
+                        "Cannot open '" + file +  "'. " + "This model is incompatible."
+                        + "\n" + ex1.getMessage());
                 return null;
             }
         }
         
-        // Once loaded - Check version compatibility
+        // Once loaded - Check version number compatibility with user
         try {
-            ModelVersionChecker.checkVersion(resource);
+            ModelCompatibility.checkVersion(resource);
         }
-        catch(LaterModelVersionException exception) {
+        catch(LaterModelVersionException ex) {
             boolean answer = MessageDialog.openQuestion(Display.getCurrent().getActiveShell(),
                     "Opening model",
-                    "'" + uri +  "' is a later version model. Are you sure you want to continue opening it?");
+                    "'" + file +  "' is a later version model " + "(" + ex.getVersion() + ")." +
+                    " Are you sure you want to continue opening it?");
             if(!answer) {
                 return null;
             }
+        }
+        
+        // And then fix any backward compatibility issues
+        try {
+            ModelCompatibility.fixCompatibility(resource);
+        }
+        catch(CompatibilityHandlerException ex) {
         }
 
         IArchimateModel model = (IArchimateModel)resource.getContents().get(0);
@@ -261,14 +277,17 @@ implements IEditorModelManager {
        	model.eAdapters().add(new ECoreAdapter());
         // New Command Stack
         createNewCommandStack(model);
-
+        
+        // New Archive Manager
+        createNewArchiveManager(model);
+        
         // Initiate all diagram models to be marked as "saved" - this is for the editor view persistence
         markDiagramModelsAsSaved(model);
 
         // This last
         firePropertyChange(this, PROPERTY_MODEL_LOADED, null, model);
-
-        return model;
+*/
+        return null;
     }
     
     @Override
@@ -292,13 +311,16 @@ implements IEditorModelManager {
         // Delete the CommandStack *LAST* because GEF Editor(s) will still reference it!
         deleteCommandStack(model);
         
+        // Delete Archive Manager
+        deleteArchiveManager(model);
+
         return true;
     }
     
     /**
      * Show dialog to save modified model
      * @param model
-     * @return
+     * @return true if the user chose to save the model, false otherwise
      * @throws IOException 
      */
     private boolean askSaveModel(IArchimateModel model) throws IOException {
@@ -341,6 +363,7 @@ implements IEditorModelManager {
     }
     @Override
     public boolean saveModel(IArchimateModel model) throws IOException {
+    	/* FIXME -> persistence
     	checkForIds(model);
         // First time to save...
         if(model.getFile() == null) {
@@ -354,50 +377,31 @@ implements IEditorModelManager {
             model.setFile(file);
         }
         
-        // Save backup if it is a file
-        URI file = model.getFile();
-        if((file.isFile() && new File(file.toFileString()).exists())) {
-            FileUtils.copyFile(new File(model.getFile().toFileString()), new File(model.getFile().toFileString() + ".bak"), false);
+        File file = model.getFile();
+        
+        // Save backup
+        if(file.exists()) {
+            FileUtils.copyFile(file, new File(model.getFile().getAbsolutePath() + ".bak"), false);
         }
 
         // Set model version
         model.setVersion(ModelVersion.VERSION);
-        fRepoContents.get(model).save(null);
-
-        /*        
-        Resource resource = ArchimateResourceFactory.getOrCreateResource(model.getFile());
         
-        //FIXME: we should be able to come up with the resource actually containing the model, and save that.
-        System.out.println("got resource");
-        EList<EObject> contents = resource.getContents();
-        for (EObject i: resource.getContents()) {
-        	System.out.println("in resource: "+ i);
-        }
-        if (contents.isEmpty()) {
-        	resource.getContents().add(model);
-            System.out.println("added model");
-        } else {
-            System.out.println("doing nothing");
-        	
-        }
-        System.out.println("saving model");
-        for (EObject i: resource.getContents()) {
-        	System.out.println("in resource: "+ i);
-        }
-        resource.save(null);
-       	resource.getContents().remove(model);
+        // Use Archive Manager to save contents
+        IArchiveManager archiveManager = (IArchiveManager)model.getAdapter(IArchiveManager.class);
+        archiveManager.saveModel();
+        
         // Set CommandStack Save point
-        */
         CommandStack stack = (CommandStack)model.getAdapter(CommandStack.class);
         stack.markSaveLocation();
         // Send notification to Tree
         firePropertyChange(model, COMMAND_STACK_CHANGED, true, false);
         
-        // Set all diagram models to be marked as "saved" - this for the editor view persistence
+        // Set all diagram models to be marked as "saved" - this is for the editor view persistence
         markDiagramModelsAsSaved(model);
         
         firePropertyChange(this, PROPERTY_MODEL_SAVED, null, model);
-        
+*/        
         return true;
     }
     
@@ -524,6 +528,35 @@ implements IEditorModelManager {
         }
     }
     
+    /**
+     * Create a new ArchiveManager for the model
+     */
+    private IArchiveManager createNewArchiveManager(IArchimateModel model) {
+        IArchiveManager archiveManager = IArchiveManager.FACTORY.createArchiveManager(model);
+        model.setAdapter(IArchiveManager.class, archiveManager);
+        
+        // Load images now
+        try {
+            archiveManager.loadImages();
+        }
+        catch(IOException ex) {
+            Logger.logError("Could not load images", ex);
+            ex.printStackTrace();
+        }
+        
+        return archiveManager;
+    }
+    
+    /**
+     * Remove the model's ArchiveManager
+     */
+    private void deleteArchiveManager(IArchimateModel model) {
+        IArchiveManager archiveManager = (IArchiveManager)model.getAdapter(IArchiveManager.class);
+        if(archiveManager != null) {
+            archiveManager.dispose();
+        }
+    }
+
     //========================== Persist backing file  ==========================
 
     public void saveState() throws IOException {

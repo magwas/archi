@@ -1,43 +1,30 @@
 /**
- * Copyright (c) 2010 Bolton University, UK.
+ * Copyright (c) 2010-2011 Bolton University, UK.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the License
  * which accompanies this distribution in the file LICENSE.txt
  */
 package uk.ac.bolton.archimate.model.impl;
 
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.internal.cdo.CDOObjectImpl;
 
+import org.eclipse.emf.internal.cdo.CDOObjectImpl;
 
 import uk.ac.bolton.archimate.model.FolderType;
 import uk.ac.bolton.archimate.model.IAdapter;
-import uk.ac.bolton.archimate.model.IApplicationLayerElement;
-import uk.ac.bolton.archimate.model.IArchimateFactory;
 import uk.ac.bolton.archimate.model.IArchimateModel;
-import uk.ac.bolton.archimate.model.IArchimateModelElement;
 import uk.ac.bolton.archimate.model.IArchimatePackage;
-import uk.ac.bolton.archimate.model.IBusinessLayerElement;
 import uk.ac.bolton.archimate.model.IDiagramModel;
 import uk.ac.bolton.archimate.model.IDocumentable;
 import uk.ac.bolton.archimate.model.IFolder;
 import uk.ac.bolton.archimate.model.IFolderContainer;
-import uk.ac.bolton.archimate.model.IIdentifier;
-import uk.ac.bolton.archimate.model.IJunctionElement;
 import uk.ac.bolton.archimate.model.INameable;
 import uk.ac.bolton.archimate.model.IProperties;
 import uk.ac.bolton.archimate.model.IProperty;
-import uk.ac.bolton.archimate.model.IRelationship;
-import uk.ac.bolton.archimate.model.ITechnologyLayerElement;
-import uk.ac.bolton.archimate.model.util.IDAdapter;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,225 +47,26 @@ import uk.ac.bolton.archimate.model.util.IDAdapter;
  * @generated
  */
 public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
-    /**
-     * Adapter Map for arbitrary objects
-     */
-    private Map<Object, Object> fAdapterMap = new HashMap<Object, Object>();
-    
-    /**
-     * ID Adapter
-     */
-    private IDAdapter fIDAdapter = new IDAdapter();
-
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    protected ArchimateModel() {
-        super();
-        eAdapters().add(fIDAdapter);
-		setId("id_"+this.hashCode());
-    }
-    
-    /**
-     * Add any default folders
-     */
-    protected void addDefaultFolders() {
-        if(getFolder(FolderType.BUSINESS) == null) {
-            IFolder folder = IArchimateFactory.eINSTANCE.createFolder();
-            folder.setName("Business");
-            folder.setType(FolderType.BUSINESS);
-            getFolders().add(0, folder);
-        }
-
-        if(getFolder(FolderType.APPLICATION) == null) {
-            IFolder folder = IArchimateFactory.eINSTANCE.createFolder();
-            folder.setName("Application");
-            folder.setType(FolderType.APPLICATION);
-            getFolders().add(1, folder);
-        }
-
-        if(getFolder(FolderType.TECHNOLOGY) == null) {
-            IFolder folder = IArchimateFactory.eINSTANCE.createFolder();
-            folder.setName("Technology");
-            folder.setType(FolderType.TECHNOLOGY);
-            getFolders().add(2, folder);
-        }
-
-        if(getFolder(FolderType.CONNECTORS) == null) {
-            IFolder folder = IArchimateFactory.eINSTANCE.createFolder();
-            folder.setName("Connectors");
-            folder.setType(FolderType.CONNECTORS);
-            getFolders().add(3, folder);
-        }
-
-        if(getFolder(FolderType.RELATIONS) == null) {
-            IFolder folder = IArchimateFactory.eINSTANCE.createFolder();
-            folder.setName("Relations");
-            folder.setType(FolderType.RELATIONS);
-            getFolders().add(4, folder);
-        }
-
-        if(getFolder(FolderType.DIAGRAMS) == null) {
-            IFolder folder = IArchimateFactory.eINSTANCE.createFolder();
-            folder.setName("Views");
-            folder.setType(FolderType.DIAGRAMS);
-            getFolders().add(getFolders().size(), folder); // Make sure this is last
-        }
-    }
-    
-    /**
-     * <!-- begin-user-doc -->
-     * This folder is optional so we add it as needed
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public IFolder addDerivedRelationsFolder() {
-        addDefaultFolders(); // Check they haven't been deleted
-        
-        IFolder folder = IArchimateFactory.eINSTANCE.createFolder();
-        folder.setName("Derived Relations");
-        folder.setType(FolderType.DERIVED);
-        int index = getFolders().indexOf(getFolder(FolderType.RELATIONS)) + 1;
-        getFolders().add(index, folder);
-        
-        return folder;
-    }
-    
-    /**
-     * <!-- begin-user-doc -->
-     * This folder is optional so we add it as needed
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public void removeDerivedRelationsFolder() {
-        IFolder folder = getFolder(FolderType.DERIVED);
-        if(folder != null) {
-            getFolders().remove(folder);
-        }
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public IFolder getDefaultFolderForElement(EObject element) {
-        addDefaultFolders(); // Check they haven't been deleted
-        
-        if(element instanceof IBusinessLayerElement) {
-            return getFolder(FolderType.BUSINESS);
-        }
-        if(element instanceof IApplicationLayerElement) {
-            return getFolder(FolderType.APPLICATION);
-        }
-        if(element instanceof ITechnologyLayerElement) {
-            return getFolder(FolderType.TECHNOLOGY);
-        }
-        if(element instanceof IJunctionElement) {
-            return getFolder(FolderType.CONNECTORS);
-        }
-        if(element instanceof IRelationship) {
-            return getFolder(FolderType.RELATIONS);
-        }
-        if(element instanceof IDiagramModel) {
-            return getFolder(FolderType.DIAGRAMS);
-        }
-        
-        return null;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public IFolder getFolder(FolderType type) {
-        for(IFolder folder : getFolders()) {
-            if(folder.getType().equals(type)) {
-                return folder;
-            }
-        }
-        
-        return null;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public Object getAdapter(Object adapter) {
-        if(!fAdapterMap.containsKey(adapter) && eContainer() instanceof IAdapter) {
-            return ((IAdapter)eContainer()).getAdapter(adapter);
-        }
-        
-        return fAdapterMap.get(adapter);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public void setAdapter(Object adapter, Object object) {
-        fAdapterMap.put(adapter, object);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * Return the first diagram model or null
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public IDiagramModel getDefaultDiagramModel() {
-        EList<IDiagramModel> list = getDiagramModels();
-        return list.size() > 0 ? list.get(0) : null;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * Return the Diagram Models - could be empty list
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public EList<IDiagramModel> getDiagramModels() {
-        EList<IDiagramModel> list = new BasicEList<IDiagramModel>();
-        
-        EList<IFolder> fl = this.getFolders();
-        for(IFolder folder: fl) {
-            if(folder != null) {
-                _getDiagramModels(folder, list);
-            }        	
-        }
-        
-        return list;
-    }
-    
-    private void _getDiagramModels(IFolder folder, EList<IDiagramModel> list) {
-        for(EObject object : folder.getElements()) {
-            if(object instanceof IDiagramModel) {
-                list.add((IDiagramModel)object);
-            }
-        }
-        for(IFolder f : folder.getFolders()) {
-            _getDiagramModels(f, list);
-        }
-    }
-
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	protected ArchimateModel() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
 		return IArchimatePackage.Literals.ARCHIMATE_MODEL;
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -288,62 +76,53 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
 		return 0;
 	}
 
-				/**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getName() {
-		return (String)eGet(IArchimatePackage.Literals.NAMEABLE__NAME, true);
-	}
-
-    /**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    public void setName(String newName) {
-		eSet(IArchimatePackage.Literals.NAMEABLE__NAME, newName);
-	}
-
-    /**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    public String getId() {
+	public String getId() {
 		return (String)eGet(IArchimatePackage.Literals.IDENTIFIER__ID, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setId(String newId) {
+	public void setId(String newId) {
 		eSet(IArchimatePackage.Literals.IDENTIFIER__ID, newId);
 	}
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public IArchimateModel getArchimateModel() {
-        return this;
-    }
-
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-				public EList<IProperty> getProperties() {
+	public String getName() {
+		return (String)eGet(IArchimatePackage.Literals.NAMEABLE__NAME, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		eSet(IArchimatePackage.Literals.NAMEABLE__NAME, newName);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<IProperty> getProperties() {
 		return (EList<IProperty>)eGet(IArchimatePackage.Literals.PROPERTIES__PROPERTIES, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -352,7 +131,7 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
 		return (String)eGet(IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, true);
 	}
 
-				/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -361,26 +140,35 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
 		eSet(IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, newDocumentation);
 	}
 
-				/**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-				public EList<IFolder> getFolders() {
+	public IArchimateModel getArchimateModel() {
+		return (IArchimateModel)eGet(IArchimatePackage.Literals.ARCHIMATE_MODEL_ELEMENT__ARCHIMATE_MODEL, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<IFolder> getFolders() {
 		return (EList<IFolder>)eGet(IArchimatePackage.Literals.FOLDER_CONTAINER__FOLDERS, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public URI getFile() {
+	public URI getFile() {
 		return (URI)eGet(IArchimatePackage.Literals.ARCHIMATE_MODEL__FILE, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -389,48 +177,130 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
 		eSet(IArchimatePackage.Literals.ARCHIMATE_MODEL__FILE, newFile);
 	}
 
-				/**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getVersion() {
+	public String getVersion() {
 		return (String)eGet(IArchimatePackage.Literals.ARCHIMATE_MODEL__VERSION, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setVersion(String newVersion) {
+	public void setVersion(String newVersion) {
 		eSet(IArchimatePackage.Literals.ARCHIMATE_MODEL__VERSION, newVersion);
 	}
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public void setDefaults() {
-        // Element has no ID so allocate one
-        if(getId() == null) {
-            setId(fIDAdapter.getNewID());
-        }
-        else {
-            fIDAdapter.registerID(getId());
-        }
-
-        addDefaultFolders();
-    }
-    
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+	public void setDefaults() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IFolder addDerivedRelationsFolder() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void removeDerivedRelationsFolder() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IFolder getDefaultFolderForElement(EObject element) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IDiagramModel getDefaultDiagramModel() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<IDiagramModel> getDiagramModels() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IFolder getFolder(FolderType type) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object getAdapter(Object adapter) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAdapter(Object adapter, Object object) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == INameable.class) {
 			switch (derivedFeatureID) {
 				case IArchimatePackage.ARCHIMATE_MODEL__NAME: return IArchimatePackage.NAMEABLE__NAME;
@@ -463,13 +333,13 @@ public class ArchimateModel extends CDOObjectImpl implements IArchimateModel {
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == INameable.class) {
 			switch (baseFeatureID) {
 				case IArchimatePackage.NAMEABLE__NAME: return IArchimatePackage.ARCHIMATE_MODEL__NAME;

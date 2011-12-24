@@ -38,8 +38,8 @@ public class SortFolderCommand extends Command implements Comparator<EObject>  {
         
         // Keep a copy of the orginal order
         fList = new ArrayList<IArchimateModelElement>();
-        for(IArchimateModelElement o : fFolder.getElements()) {
-            fList.add(o);
+        for(EObject o : fFolder.getElements()) {
+            fList.add((IArchimateModelElement) o);
         }
     }
     

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 Bolton University, UK.
+ * Copyright (c) 2010-2011 Bolton University, UK.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the License
  * which accompanies this distribution in the file LICENSE.txt
@@ -7,8 +7,8 @@
 package uk.ac.bolton.archimate.model.impl;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 
 import uk.ac.bolton.archimate.model.IArchimatePackage;
 import uk.ac.bolton.archimate.model.IDiagramModelBendpoint;
@@ -29,10 +29,10 @@ import uk.ac.bolton.archimate.model.IProperty;
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getFont <em>Font</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getFontColor <em>Font Color</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getTextAlignment <em>Text Alignment</em>}</li>
+ *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getTextPosition <em>Text Position</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getProperties <em>Properties</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getText <em>Text</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getTextPosition <em>Text Position</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getSource <em>Source</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getTarget <em>Target</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelConnection#getBendpoints <em>Bendpoints</em>}</li>
@@ -45,327 +45,300 @@ import uk.ac.bolton.archimate.model.IProperty;
  * @generated
  */
 public class DiagramModelConnection extends DiagramModelComponent implements IDiagramModelConnection {
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected DiagramModelConnection() {
+	protected DiagramModelConnection() {
 		super();
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION;
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getFont() {
+	public String getFont() {
 		return (String)eGet(IArchimatePackage.Literals.FONT_ATTRIBUTE__FONT, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setFont(String newFont) {
+	public void setFont(String newFont) {
 		eSet(IArchimatePackage.Literals.FONT_ATTRIBUTE__FONT, newFont);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getFontColor() {
+	public String getFontColor() {
 		return (String)eGet(IArchimatePackage.Literals.FONT_ATTRIBUTE__FONT_COLOR, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setFontColor(String newFontColor) {
+	public void setFontColor(String newFontColor) {
 		eSet(IArchimatePackage.Literals.FONT_ATTRIBUTE__FONT_COLOR, newFontColor);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public int getTextAlignment() {
+	public int getTextAlignment() {
 		return (Integer)eGet(IArchimatePackage.Literals.FONT_ATTRIBUTE__TEXT_ALIGNMENT, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setTextAlignment(int newTextAlignment) {
+	public void setTextAlignment(int newTextAlignment) {
 		eSet(IArchimatePackage.Literals.FONT_ATTRIBUTE__TEXT_ALIGNMENT, newTextAlignment);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-				public EList<IProperty> getProperties() {
+	@SuppressWarnings("unchecked")
+	public EList<IProperty> getProperties() {
 		return (EList<IProperty>)eGet(IArchimatePackage.Literals.PROPERTIES__PROPERTIES, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getDocumentation() {
+	public String getDocumentation() {
 		return (String)eGet(IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setDocumentation(String newDocumentation) {
+	public void setDocumentation(String newDocumentation) {
 		eSet(IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, newDocumentation);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getText() {
+	public String getText() {
 		return (String)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__TEXT, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setText(String newText) {
+	public void setText(String newText) {
 		eSet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__TEXT, newText);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public int getTextPosition() {
-		return (Integer)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__TEXT_POSITION, true);
+	public int getTextPosition() {
+		return (Integer)eGet(IArchimatePackage.Literals.FONT_ATTRIBUTE__TEXT_POSITION, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setTextPosition(int newTextPosition) {
-		eSet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__TEXT_POSITION, newTextPosition);
+	public void setTextPosition(int newTextPosition) {
+		eSet(IArchimatePackage.Literals.FONT_ATTRIBUTE__TEXT_POSITION, newTextPosition);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public IDiagramModelObject getSource() {
+	public IDiagramModelObject getSource() {
 		return (IDiagramModelObject)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__SOURCE, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setSource(IDiagramModelObject newSource) {
+	public void setSource(IDiagramModelObject newSource) {
 		eSet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__SOURCE, newSource);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public IDiagramModelObject getTarget() {
+	public IDiagramModelObject getTarget() {
 		return (IDiagramModelObject)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__TARGET, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setTarget(IDiagramModelObject newTarget) {
+	public void setTarget(IDiagramModelObject newTarget) {
 		eSet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__TARGET, newTarget);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-				public EList<IDiagramModelBendpoint> getBendpoints() {
+	@SuppressWarnings("unchecked")
+	public EList<IDiagramModelBendpoint> getBendpoints() {
 		return (EList<IDiagramModelBendpoint>)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__BENDPOINTS, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public int getLineWidth() {
+	public int getLineWidth() {
 		return (Integer)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__LINE_WIDTH, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setLineWidth(int newLineWidth) {
+	public void setLineWidth(int newLineWidth) {
 		eSet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__LINE_WIDTH, newLineWidth);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getLineColor() {
+	public String getLineColor() {
 		return (String)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__LINE_COLOR, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setLineColor(String newLineColor) {
+	public void setLineColor(String newLineColor) {
 		eSet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__LINE_COLOR, newLineColor);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getType() {
-		return (String)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__TYPE, true);
+	public int getType() {
+		return (Integer)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__TYPE, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setType(String newType) {
+	public void setType(int newType) {
 		eSet(IArchimatePackage.Literals.DIAGRAM_MODEL_CONNECTION__TYPE, newType);
 	}
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public void connect(IDiagramModelObject source, IDiagramModelObject target) {
-        if(source == null || target == null) {
-            throw new IllegalArgumentException("Source or Target cannot be null");
-        }
-        if(source == target) {
-            //throw new IllegalArgumentException("Source cannot be the same as target!");
-        }
-        
-        // Same as before, don't bother
-
-        if(getSource() == source && getTarget() == target) {
-            return;
-        }
-        
-        disconnect();
-        setSource(source);
-        setTarget(target);
-        reconnect();
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public void disconnect() {
-    	IDiagramModelObject source = getSource();
-    	IDiagramModelObject target = getTarget();
-        if(source != null && target != null) {
-            source.removeConnection(this);
-            target.removeConnection(this);
-        }
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public void reconnect() {
-    	IDiagramModelObject source = getSource();
-    	IDiagramModelObject target = getTarget();
-        if(source != null && target != null) {
-            source.addConnection(this);
-            target.addConnection(this);
-        }
-    }
-
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public int getDefaultTextAlignment() {
+	public void connect(IDiagramModelObject source, IDiagramModelObject target) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public EObject getCopy() {
-        IDiagramModelConnection newConnection = (IDiagramModelConnection)super.getCopy();
-        newConnection.setSource(null);
-        newConnection.setTarget(null);
-        return newConnection;
-    }
-
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+	public void disconnect() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void reconnect() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getDefaultTextAlignment() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == IFontAttribute.class) {
 			switch (derivedFeatureID) {
 				case IArchimatePackage.DIAGRAM_MODEL_CONNECTION__FONT: return IArchimatePackage.FONT_ATTRIBUTE__FONT;
 				case IArchimatePackage.DIAGRAM_MODEL_CONNECTION__FONT_COLOR: return IArchimatePackage.FONT_ATTRIBUTE__FONT_COLOR;
 				case IArchimatePackage.DIAGRAM_MODEL_CONNECTION__TEXT_ALIGNMENT: return IArchimatePackage.FONT_ATTRIBUTE__TEXT_ALIGNMENT;
+				case IArchimatePackage.DIAGRAM_MODEL_CONNECTION__TEXT_POSITION: return IArchimatePackage.FONT_ATTRIBUTE__TEXT_POSITION;
 				default: return -1;
 			}
 		}
@@ -384,18 +357,19 @@ public class DiagramModelConnection extends DiagramModelComponent implements IDi
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == IFontAttribute.class) {
 			switch (baseFeatureID) {
 				case IArchimatePackage.FONT_ATTRIBUTE__FONT: return IArchimatePackage.DIAGRAM_MODEL_CONNECTION__FONT;
 				case IArchimatePackage.FONT_ATTRIBUTE__FONT_COLOR: return IArchimatePackage.DIAGRAM_MODEL_CONNECTION__FONT_COLOR;
 				case IArchimatePackage.FONT_ATTRIBUTE__TEXT_ALIGNMENT: return IArchimatePackage.DIAGRAM_MODEL_CONNECTION__TEXT_ALIGNMENT;
+				case IArchimatePackage.FONT_ATTRIBUTE__TEXT_POSITION: return IArchimatePackage.DIAGRAM_MODEL_CONNECTION__TEXT_POSITION;
 				default: return -1;
 			}
 		}

@@ -39,6 +39,7 @@ public interface ITextContent extends CDOObject {
 	 * @see #setContent(String)
 	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getTextContent_Content()
 	 * @model default=""
+	 *        extendedMetaData="kind='element'"
 	 *        annotation="teneo.jpa value='@Lob\n@Type(type = \"org.hibernate.type.TextType\")'"
 	 * @generated
 	 */

@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see uk.ac.bolton.archimate.model.IArchimatePackage#getArchimateModel()
- * @model
+ * @model extendedMetaData="name='model'"
  * @generated
  */
 public interface IArchimateModel extends IArchimateModelElement, IFolderContainer {

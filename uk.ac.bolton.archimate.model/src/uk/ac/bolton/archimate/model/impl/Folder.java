@@ -1,16 +1,15 @@
 /**
- * Copyright (c) 2010 Bolton University, UK.
+ * Copyright (c) 2010-2011 Bolton University, UK.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the License
  * which accompanies this distribution in the file LICENSE.txt
  */
 package uk.ac.bolton.archimate.model.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.internal.cdo.CDOObjectImpl;
 
@@ -22,7 +21,6 @@ import uk.ac.bolton.archimate.model.IArchimatePackage;
 import uk.ac.bolton.archimate.model.IDocumentable;
 import uk.ac.bolton.archimate.model.IFolder;
 import uk.ac.bolton.archimate.model.IFolderContainer;
-import uk.ac.bolton.archimate.model.IIdentifier;
 import uk.ac.bolton.archimate.model.INameable;
 import uk.ac.bolton.archimate.model.IProperties;
 import uk.ac.bolton.archimate.model.IProperty;
@@ -48,32 +46,26 @@ import uk.ac.bolton.archimate.model.IProperty;
  * @generated
  */
 public class Folder extends CDOObjectImpl implements IFolder {
-    /**
-     * Adapter Map for arbitrary objects
-     */
-    private Map<Object, Object> fAdapterMap = new HashMap<Object, Object>();
-
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-    protected Folder() {
-		super();
-		setId("id_"+this.hashCode());
-	}
-
-    /**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	protected Folder() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
 		return IArchimatePackage.Literals.FOLDER;
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -83,149 +75,146 @@ public class Folder extends CDOObjectImpl implements IFolder {
 		return 0;
 	}
 
-				/**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getName() {
-		return (String)eGet(IArchimatePackage.Literals.NAMEABLE__NAME, true);
-	}
-
-    /**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    public void setName(String newName) {
-		eSet(IArchimatePackage.Literals.NAMEABLE__NAME, newName);
-	}
-
-    /**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    public String getId() {
+	public String getId() {
 		return (String)eGet(IArchimatePackage.Literals.IDENTIFIER__ID, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setId(String newId) {
+	public void setId(String newId) {
 		eSet(IArchimatePackage.Literals.IDENTIFIER__ID, newId);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String getDocumentation() {
-		return (String)eGet(IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, true);
+	public String getName() {
+		return (String)eGet(IArchimatePackage.Literals.NAMEABLE__NAME, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setDocumentation(String newDocumentation) {
-		eSet(IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, newDocumentation);
+	public void setName(String newName) {
+		eSet(IArchimatePackage.Literals.NAMEABLE__NAME, newName);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-				public EList<IProperty> getProperties() {
+	@SuppressWarnings("unchecked")
+	public EList<IProperty> getProperties() {
 		return (EList<IProperty>)eGet(IArchimatePackage.Literals.PROPERTIES__PROPERTIES, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-				public EList<IArchimateModelElement> getElements() {
-		return (EList<IArchimateModelElement>)eGet(IArchimatePackage.Literals.FOLDER__ELEMENTS, true);
+	public String getDocumentation() {
+		return (String)eGet(IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public FolderType getType() {
-		return (FolderType)eGet(IArchimatePackage.Literals.FOLDER__TYPE, true);
+	public void setDocumentation(String newDocumentation) {
+		eSet(IArchimatePackage.Literals.DOCUMENTABLE__DOCUMENTATION, newDocumentation);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setType(FolderType newType) {
-		eSet(IArchimatePackage.Literals.FOLDER__TYPE, newType);
+	public IArchimateModel getArchimateModel() {
+		return (IArchimateModel)eGet(IArchimatePackage.Literals.ARCHIMATE_MODEL_ELEMENT__ARCHIMATE_MODEL, true);
 	}
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public Object getAdapter(Object adapter) {
-        if(!fAdapterMap.containsKey(adapter) && eContainer() instanceof IAdapter) {
-            return ((IAdapter)eContainer()).getAdapter(adapter);
-        }
-        
-        return fAdapterMap.get(adapter);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public void setAdapter(Object adapter, Object object) {
-        fAdapterMap.put(adapter, object);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public IArchimateModel getArchimateModel() {
-        if(eContainer() == null) {
-            return null;
-        }
-        return ((IArchimateModelElement)eContainer()).getArchimateModel();
-    }
-
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-				public EList<IFolder> getFolders() {
+	@SuppressWarnings("unchecked")
+	public EList<IFolder> getFolders() {
 		return (EList<IFolder>)eGet(IArchimatePackage.Literals.FOLDER_CONTAINER__FOLDERS, true);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+	@SuppressWarnings("unchecked")
+	public EList<EObject> getElements() {
+		return (EList<EObject>)eGet(IArchimatePackage.Literals.FOLDER__ELEMENTS, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FolderType getType() {
+		return (FolderType)eGet(IArchimatePackage.Literals.FOLDER__TYPE, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(FolderType newType) {
+		eSet(IArchimatePackage.Literals.FOLDER__TYPE, newType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object getAdapter(Object adapter) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAdapter(Object adapter, Object object) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == INameable.class) {
 			switch (derivedFeatureID) {
 				case IArchimatePackage.FOLDER__NAME: return IArchimatePackage.NAMEABLE__NAME;
@@ -258,13 +247,13 @@ public class Folder extends CDOObjectImpl implements IFolder {
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == INameable.class) {
 			switch (baseFeatureID) {
 				case IArchimatePackage.NAMEABLE__NAME: return IArchimatePackage.FOLDER__NAME;

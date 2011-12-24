@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link uk.ac.bolton.archimate.model.IDiagramModelConnection#getText <em>Text</em>}</li>
- *   <li>{@link uk.ac.bolton.archimate.model.IDiagramModelConnection#getTextPosition <em>Text Position</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.IDiagramModelConnection#getSource <em>Source</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.IDiagramModelConnection#getTarget <em>Target</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.IDiagramModelConnection#getBendpoints <em>Bendpoints</em>}</li>
@@ -32,21 +31,38 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface IDiagramModelConnection extends IDiagramModelComponent, IFontAttribute, IProperties, IDocumentable {
-	 
     /**
      * Text Position at source
      */
-    int TEXT_POSITION_SOURCE = 0;
+    int CONNECTION_TEXT_POSITION_SOURCE = 0;
 
     /**
      * Text Position at middle
      */
-    int TEXT_POSITION_MID = 1;
+    int CONNECTION_TEXT_POSITION_MIDDLE = 1;
     
     /**
      * Text Position at target
      */
-    int TEXT_POSITION_TARGET = 2;
+    int CONNECTION_TEXT_POSITION_TARGET = 2;
+    
+    /**
+     * Line Styles
+     */
+    // Since Archi version 1.7
+    int LINE_SOLID = 0;             // default
+    int ARROW_FILL_TARGET = 1;      // 1 << 0
+    int LINE_DASHED = 2;            // 1 << 1
+    int LINE_DOTTED = 4;            // 1 << 2
+    
+    // Since Archi version 2.1
+    int ARROW_NONE = 0;
+    int ARROW_FILL_SOURCE = 8;        // 1 << 3
+    int ARROW_HOLLOW_TARGET = 16;     // 1 << 4
+    int ARROW_HOLLOW_SOURCE = 32;     // 1 << 5
+    int ARROW_LINE_TARGET = 64;       // 1 << 6
+    int ARROW_LINE_SOURCE = 128;      // 1 << 7
+	
 
 	/**
 	 * Returns the value of the '<em><b>Text</b></em>' attribute.
@@ -60,7 +76,7 @@ public interface IDiagramModelConnection extends IDiagramModelComponent, IFontAt
 	 * @return the value of the '<em>Text</em>' attribute.
 	 * @see #setText(String)
 	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getDiagramModelConnection_Text()
-	 * @model default=""
+	 * @model default="" transient="true"
 	 * @generated
 	 */
 	String getText();
@@ -74,33 +90,6 @@ public interface IDiagramModelConnection extends IDiagramModelComponent, IFontAt
 	 * @generated
 	 */
 	void setText(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Text Position</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Text Position</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Text Position</em>' attribute.
-	 * @see #setTextPosition(int)
-	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getDiagramModelConnection_TextPosition()
-	 * @model default="1"
-	 * @generated
-	 */
-	int getTextPosition();
-
-	/**
-	 * Sets the value of the '{@link uk.ac.bolton.archimate.model.IDiagramModelConnection#getTextPosition <em>Text Position</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Text Position</em>' attribute.
-	 * @see #getTextPosition()
-	 * @generated
-	 */
-	void setTextPosition(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.
@@ -166,6 +155,7 @@ public interface IDiagramModelConnection extends IDiagramModelComponent, IFontAt
 	 * @return the value of the '<em>Bendpoints</em>' containment reference list.
 	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getDiagramModelConnection_Bendpoints()
 	 * @model containment="true"
+	 *        extendedMetaData="name='bendpoint' kind='element'"
 	 * @generated
 	 */
 	EList<IDiagramModelBendpoint> getBendpoints();
@@ -232,12 +222,12 @@ public interface IDiagramModelConnection extends IDiagramModelComponent, IFontAt
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see #setType(String)
+	 * @see #setType(int)
 	 * @see uk.ac.bolton.archimate.model.IArchimatePackage#getDiagramModelConnection_Type()
 	 * @model
 	 * @generated
 	 */
-	String getType();
+	int getType();
 
 	/**
 	 * Sets the value of the '{@link uk.ac.bolton.archimate.model.IDiagramModelConnection#getType <em>Type</em>}' attribute.
@@ -247,7 +237,7 @@ public interface IDiagramModelConnection extends IDiagramModelComponent, IFontAt
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(String value);
+	void setType(int value);
 
 	/**
 	 * <!-- begin-user-doc -->

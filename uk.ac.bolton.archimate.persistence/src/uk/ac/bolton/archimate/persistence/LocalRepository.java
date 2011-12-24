@@ -19,9 +19,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 
 import uk.ac.bolton.archimate.editor.Logger;
-import uk.ac.bolton.archimate.editor.model.impl.ModelVersionChecker;
-import uk.ac.bolton.archimate.editor.model.impl.ModelVersionChecker.IncompatibleModelVersionException;
-import uk.ac.bolton.archimate.editor.model.impl.ModelVersionChecker.LaterModelVersionException;
 import uk.ac.bolton.archimate.model.IArchimateModel;
 import uk.ac.bolton.archimate.model.IArchimatePackage;
 import uk.ac.bolton.archimate.model.impl.ArchimateModel;
@@ -52,55 +49,8 @@ public class LocalRepository extends ArchimateRepository {
 
 	@Override
 	IArchimateModel open(String modelname) {
-		File resourcepath=new File(repodir,modelname);
-		URI uri = URI.createFileURI(resourcepath.getAbsolutePath());
-		Resource resource = createResource(resourcepath);
-        try {
-            resource.load(null);
-        }
-        catch(IOException ex) {
-            // Error occured loading model. Was it a disaster?
-        	//System.out.println("exception:"+ex);
-        	//ex.printStackTrace();
-            try {
-                ModelVersionChecker.checkErrors(resource);
-            }
-            // Incompatible
-            catch(IncompatibleModelVersionException exception) {
-                Logger.logError("Error opening model", exception);
-                MessageDialog.openError(Display.getCurrent().getActiveShell(),
-                        "Error opening model",
-                        "Cannot open '" + uri +  "'. This version is incompatible. Please update to the latest version of Archi.");
-                return null;
-            }
-            // Wrong file type
-            catch(Exception ex2) {
-            	System.out.println("exception:"+ex2);
-            	ex2.printStackTrace();
-                MessageDialog.openError(Display.getCurrent().getActiveShell(),
-                        "Error opening model",
-                        "Cannot open '" + uri +  "'.");
-                return null;
-            }
-        }
-        
-        // Once loaded - Check version compatibility
-        try {
-            ModelVersionChecker.checkVersion(resource);
-        }
-        catch(LaterModelVersionException exception) {
-            boolean answer = MessageDialog.openQuestion(Display.getCurrent().getActiveShell(),
-                    "Opening model",
-                    "'" + uri +  "' is a later version model. Are you sure you want to continue opening it?");
-            if(!answer) {
-                return null;
-            }
-        }
-
-        IArchimateModel model = (IArchimateModel)resource.getContents().get(0);
-        model.setFile(uri);
-        model.setDefaults();
-        return model;
+		/* FIXME get it from EditorModelmanager */
+        return null;
 	}
 
 	@Override

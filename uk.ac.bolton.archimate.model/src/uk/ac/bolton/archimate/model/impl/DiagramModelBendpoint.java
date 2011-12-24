@@ -21,7 +21,6 @@ import uk.ac.bolton.archimate.model.IDiagramModelBendpoint;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelBendpoint#getWeight <em>Weight</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelBendpoint#getStartX <em>Start X</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelBendpoint#getStartY <em>Start Y</em>}</li>
  *   <li>{@link uk.ac.bolton.archimate.model.impl.DiagramModelBendpoint#getEndX <em>End X</em>}</li>
@@ -59,24 +58,6 @@ public class DiagramModelBendpoint extends CDOObjectImpl implements IDiagramMode
 	@Override
 	protected int eStaticFeatureCount() {
 		return 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public float getWeight() {
-		return (Float)eGet(IArchimatePackage.Literals.DIAGRAM_MODEL_BENDPOINT__WEIGHT, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setWeight(float newWeight) {
-		eSet(IArchimatePackage.Literals.DIAGRAM_MODEL_BENDPOINT__WEIGHT, newWeight);
 	}
 
 	/**

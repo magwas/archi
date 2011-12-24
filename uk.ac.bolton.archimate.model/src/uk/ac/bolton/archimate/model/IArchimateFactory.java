@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 Bolton University, UK.
+ * Copyright (c) 2010-2011 Bolton University, UK.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the License
  * which accompanies this distribution in the file LICENSE.txt
@@ -7,7 +7,6 @@
 package uk.ac.bolton.archimate.model;
 
 import org.eclipse.emf.ecore.EFactory;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -18,418 +17,553 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface IArchimateFactory extends EFactory {
-    /**
+	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    IArchimateFactory eINSTANCE = uk.ac.bolton.archimate.model.impl.ArchimateFactory.init();
+	IArchimateFactory eINSTANCE = uk.ac.bolton.archimate.model.impl.ArchimateFactory.init();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Property</em>'.
 	 * @generated
 	 */
-    IProperty createProperty();
+	IProperty createProperty();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Model</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Model</em>'.
 	 * @generated
 	 */
-    IArchimateModel createArchimateModel();
+	IArchimateModel createArchimateModel();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Folder</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Folder</em>'.
 	 * @generated
 	 */
-    IFolder createFolder();
+	IFolder createFolder();
 
-    /**
+	/**
+	 * Returns a new object of class '<em>Junction</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Junction</em>'.
+	 * @generated
+	 */
+	IJunction createJunction();
+
+	/**
+	 * Returns a new object of class '<em>And Junction</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>And Junction</em>'.
+	 * @generated
+	 */
+	IAndJunction createAndJunction();
+
+	/**
+	 * Returns a new object of class '<em>Or Junction</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Or Junction</em>'.
+	 * @generated
+	 */
+	IOrJunction createOrJunction();
+
+	/**
+	 * Returns a new object of class '<em>Access Relationship</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Access Relationship</em>'.
+	 * @generated
+	 */
+	IAccessRelationship createAccessRelationship();
+
+	/**
+	 * Returns a new object of class '<em>Aggregation Relationship</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Aggregation Relationship</em>'.
+	 * @generated
+	 */
+	IAggregationRelationship createAggregationRelationship();
+
+	/**
+	 * Returns a new object of class '<em>Assignment Relationship</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Assignment Relationship</em>'.
+	 * @generated
+	 */
+	IAssignmentRelationship createAssignmentRelationship();
+
+	/**
+	 * Returns a new object of class '<em>Association Relationship</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Association Relationship</em>'.
+	 * @generated
+	 */
+	IAssociationRelationship createAssociationRelationship();
+
+	/**
+	 * Returns a new object of class '<em>Composition Relationship</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Composition Relationship</em>'.
+	 * @generated
+	 */
+	ICompositionRelationship createCompositionRelationship();
+
+	/**
+	 * Returns a new object of class '<em>Flow Relationship</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Flow Relationship</em>'.
+	 * @generated
+	 */
+	IFlowRelationship createFlowRelationship();
+
+	/**
+	 * Returns a new object of class '<em>Realisation Relationship</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Realisation Relationship</em>'.
+	 * @generated
+	 */
+	IRealisationRelationship createRealisationRelationship();
+
+	/**
+	 * Returns a new object of class '<em>Specialisation Relationship</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Specialisation Relationship</em>'.
+	 * @generated
+	 */
+	ISpecialisationRelationship createSpecialisationRelationship();
+
+	/**
+	 * Returns a new object of class '<em>Triggering Relationship</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Triggering Relationship</em>'.
+	 * @generated
+	 */
+	ITriggeringRelationship createTriggeringRelationship();
+
+	/**
+	 * Returns a new object of class '<em>Used By Relationship</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Used By Relationship</em>'.
+	 * @generated
+	 */
+	IUsedByRelationship createUsedByRelationship();
+
+	/**
 	 * Returns a new object of class '<em>Business Activity</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Activity</em>'.
 	 * @generated
 	 */
-    IBusinessActivity createBusinessActivity();
+	IBusinessActivity createBusinessActivity();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Business Actor</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Actor</em>'.
 	 * @generated
 	 */
-    IBusinessActor createBusinessActor();
+	IBusinessActor createBusinessActor();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Business Collaboration</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Collaboration</em>'.
 	 * @generated
 	 */
-    IBusinessCollaboration createBusinessCollaboration();
+	IBusinessCollaboration createBusinessCollaboration();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Contract</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Contract</em>'.
 	 * @generated
 	 */
-    IContract createContract();
+	IContract createContract();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Business Event</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Event</em>'.
 	 * @generated
 	 */
-    IBusinessEvent createBusinessEvent();
+	IBusinessEvent createBusinessEvent();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Business Function</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Function</em>'.
 	 * @generated
 	 */
-    IBusinessFunction createBusinessFunction();
+	IBusinessFunction createBusinessFunction();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Business Interaction</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Interaction</em>'.
 	 * @generated
 	 */
-    IBusinessInteraction createBusinessInteraction();
+	IBusinessInteraction createBusinessInteraction();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Business Interface</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Interface</em>'.
 	 * @generated
 	 */
-    IBusinessInterface createBusinessInterface();
+	IBusinessInterface createBusinessInterface();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Meaning</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Meaning</em>'.
 	 * @generated
 	 */
-    IMeaning createMeaning();
+	IMeaning createMeaning();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Business Object</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Object</em>'.
 	 * @generated
 	 */
-    IBusinessObject createBusinessObject();
+	IBusinessObject createBusinessObject();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Business Process</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Process</em>'.
 	 * @generated
 	 */
-    IBusinessProcess createBusinessProcess();
+	IBusinessProcess createBusinessProcess();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Product</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Product</em>'.
 	 * @generated
 	 */
-    IProduct createProduct();
+	IProduct createProduct();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Representation</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Representation</em>'.
 	 * @generated
 	 */
-    IRepresentation createRepresentation();
+	IRepresentation createRepresentation();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Business Role</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Role</em>'.
 	 * @generated
 	 */
-    IBusinessRole createBusinessRole();
+	IBusinessRole createBusinessRole();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Business Service</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Business Service</em>'.
 	 * @generated
 	 */
-    IBusinessService createBusinessService();
+	IBusinessService createBusinessService();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Value</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Value</em>'.
 	 * @generated
 	 */
-    IValue createValue();
+	IValue createValue();
 
-    /**
+	/**
+	 * Returns a new object of class '<em>Application Collaboration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Application Collaboration</em>'.
+	 * @generated
+	 */
+	IApplicationCollaboration createApplicationCollaboration();
+
+	/**
 	 * Returns a new object of class '<em>Application Component</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Application Component</em>'.
 	 * @generated
 	 */
-    IApplicationComponent createApplicationComponent();
+	IApplicationComponent createApplicationComponent();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Application Function</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Application Function</em>'.
 	 * @generated
 	 */
-    IApplicationFunction createApplicationFunction();
+	IApplicationFunction createApplicationFunction();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Application Interaction</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Application Interaction</em>'.
 	 * @generated
 	 */
-    IApplicationInteraction createApplicationInteraction();
+	IApplicationInteraction createApplicationInteraction();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Application Interface</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Application Interface</em>'.
 	 * @generated
 	 */
-    IApplicationInterface createApplicationInterface();
+	IApplicationInterface createApplicationInterface();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Data Object</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Data Object</em>'.
 	 * @generated
 	 */
-    IDataObject createDataObject();
+	IDataObject createDataObject();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Application Service</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Application Service</em>'.
 	 * @generated
 	 */
-    IApplicationService createApplicationService();
+	IApplicationService createApplicationService();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Artifact</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Artifact</em>'.
 	 * @generated
 	 */
-    IArtifact createArtifact();
+	IArtifact createArtifact();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Communication Path</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Communication Path</em>'.
 	 * @generated
 	 */
-    ICommunicationPath createCommunicationPath();
+	ICommunicationPath createCommunicationPath();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Network</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Network</em>'.
 	 * @generated
 	 */
-    INetwork createNetwork();
+	INetwork createNetwork();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Infrastructure Interface</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Infrastructure Interface</em>'.
 	 * @generated
 	 */
-    IInfrastructureInterface createInfrastructureInterface();
+	IInfrastructureInterface createInfrastructureInterface();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Infrastructure Service</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Infrastructure Service</em>'.
 	 * @generated
 	 */
-    IInfrastructureService createInfrastructureService();
+	IInfrastructureService createInfrastructureService();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Node</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Node</em>'.
 	 * @generated
 	 */
-    INode createNode();
+	INode createNode();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>System Software</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>System Software</em>'.
 	 * @generated
 	 */
-    ISystemSoftware createSystemSoftware();
+	ISystemSoftware createSystemSoftware();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Device</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Device</em>'.
 	 * @generated
 	 */
-    IDevice createDevice();
+	IDevice createDevice();
 
-    /**
-	 * Returns a new object of class '<em>Diagram Model</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Diagram Model</em>'.
-	 * @generated
-	 */
-    IArchimateDiagramModel createArchimateDiagramModel();
-
-    /**
+	/**
 	 * Returns a new object of class '<em>Diagram Model Reference</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Diagram Model Reference</em>'.
 	 * @generated
 	 */
-    IDiagramModelReference createDiagramModelReference();
+	IDiagramModelReference createDiagramModelReference();
 
-    /**
-	 * Returns a new object of class '<em>Diagram Model Archimate Object</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Diagram Model Archimate Object</em>'.
-	 * @generated
-	 */
-    IDiagramModelArchimateObject createDiagramModelArchimateObject();
-
-    /**
+	/**
 	 * Returns a new object of class '<em>Diagram Model Group</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Diagram Model Group</em>'.
 	 * @generated
 	 */
-    IDiagramModelGroup createDiagramModelGroup();
+	IDiagramModelGroup createDiagramModelGroup();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Diagram Model Note</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Diagram Model Note</em>'.
 	 * @generated
 	 */
-    IDiagramModelNote createDiagramModelNote();
+	IDiagramModelNote createDiagramModelNote();
 
-    /**
+	/**
+	 * Returns a new object of class '<em>Diagram Model Image</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Diagram Model Image</em>'.
+	 * @generated
+	 */
+	IDiagramModelImage createDiagramModelImage();
+
+	/**
 	 * Returns a new object of class '<em>Diagram Model Connection</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Diagram Model Connection</em>'.
 	 * @generated
 	 */
-    IDiagramModelConnection createDiagramModelConnection();
+	IDiagramModelConnection createDiagramModelConnection();
 
-    /**
-	 * Returns a new object of class '<em>Diagram Model Archimate Connection</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Diagram Model Archimate Connection</em>'.
-	 * @generated
-	 */
-    IDiagramModelArchimateConnection createDiagramModelArchimateConnection();
-
-    /**
+	/**
 	 * Returns a new object of class '<em>Diagram Model Bendpoint</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Diagram Model Bendpoint</em>'.
 	 * @generated
 	 */
-    IDiagramModelBendpoint createDiagramModelBendpoint();
+	IDiagramModelBendpoint createDiagramModelBendpoint();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Bounds</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Bounds</em>'.
 	 * @generated
 	 */
-    IBounds createBounds();
-    
-    /**
+	IBounds createBounds();
+
+	/**
+	 * Returns a new object of class '<em>Diagram Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Diagram Model</em>'.
+	 * @generated
+	 */
+	IArchimateDiagramModel createArchimateDiagramModel();
+
+	/**
+	 * Returns a new object of class '<em>Diagram Model Archimate Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Diagram Model Archimate Object</em>'.
+	 * @generated
+	 */
+	IDiagramModelArchimateObject createDiagramModelArchimateObject();
+
+	/**
+	 * Returns a new object of class '<em>Diagram Model Archimate Connection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Diagram Model Archimate Connection</em>'.
+	 * @generated
+	 */
+	IDiagramModelArchimateConnection createDiagramModelArchimateConnection();
+
+	/**
 	 * Returns a new object of class '<em>Sketch Model</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Sketch Model</em>'.
 	 * @generated
 	 */
-    ISketchModel createSketchModel();
+	ISketchModel createSketchModel();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Sketch Model Sticky</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Sketch Model Sticky</em>'.
 	 * @generated
 	 */
-    ISketchModelSticky createSketchModelSticky();
+	ISketchModelSticky createSketchModelSticky();
 
-    /**
+	/**
 	 * Returns a new object of class '<em>Sketch Model Actor</em>'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Sketch Model Actor</em>'.
 	 * @generated
 	 */
-    ISketchModelActor createSketchModelActor();
+	ISketchModelActor createSketchModelActor();
 
     /**
      * Create a new Bounds object
@@ -441,139 +575,13 @@ public interface IArchimateFactory extends EFactory {
      */
     IBounds createBounds(int x, int y, int width, int height);
 
-    /**
-	 * Returns a new object of class '<em>Application Collaboration</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Application Collaboration</em>'.
-	 * @generated
-	 */
-    IApplicationCollaboration createApplicationCollaboration();
-
-    /**
-	 * Returns a new object of class '<em>Junction</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Junction</em>'.
-	 * @generated
-	 */
-    IJunction createJunction();
-
-    /**
-	 * Returns a new object of class '<em>And Junction</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>And Junction</em>'.
-	 * @generated
-	 */
-    IAndJunction createAndJunction();
-
-    /**
-	 * Returns a new object of class '<em>Or Junction</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Or Junction</em>'.
-	 * @generated
-	 */
-    IOrJunction createOrJunction();
-
-    /**
-	 * Returns a new object of class '<em>Access Relationship</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Access Relationship</em>'.
-	 * @generated
-	 */
-    IAccessRelationship createAccessRelationship();
-
-    /**
-	 * Returns a new object of class '<em>Aggregation Relationship</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Aggregation Relationship</em>'.
-	 * @generated
-	 */
-    IAggregationRelationship createAggregationRelationship();
-
-    /**
-	 * Returns a new object of class '<em>Assignment Relationship</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Assignment Relationship</em>'.
-	 * @generated
-	 */
-    IAssignmentRelationship createAssignmentRelationship();
-
-    /**
-	 * Returns a new object of class '<em>Association Relationship</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Association Relationship</em>'.
-	 * @generated
-	 */
-    IAssociationRelationship createAssociationRelationship();
-
-    /**
-	 * Returns a new object of class '<em>Composition Relationship</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Composition Relationship</em>'.
-	 * @generated
-	 */
-    ICompositionRelationship createCompositionRelationship();
-
-    /**
-	 * Returns a new object of class '<em>Flow Relationship</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Flow Relationship</em>'.
-	 * @generated
-	 */
-    IFlowRelationship createFlowRelationship();
-
-    /**
-	 * Returns a new object of class '<em>Realisation Relationship</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Realisation Relationship</em>'.
-	 * @generated
-	 */
-    IRealisationRelationship createRealisationRelationship();
-
-    /**
-	 * Returns a new object of class '<em>Specialisation Relationship</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Specialisation Relationship</em>'.
-	 * @generated
-	 */
-    ISpecialisationRelationship createSpecialisationRelationship();
-
-    /**
-	 * Returns a new object of class '<em>Triggering Relationship</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Triggering Relationship</em>'.
-	 * @generated
-	 */
-    ITriggeringRelationship createTriggeringRelationship();
-
-    /**
-	 * Returns a new object of class '<em>Used By Relationship</em>'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Used By Relationship</em>'.
-	 * @generated
-	 */
-    IUsedByRelationship createUsedByRelationship();
-
-    /**
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-    IArchimatePackage getArchimatePackage();
+	IArchimatePackage getArchimatePackage();
 
 } //IArchimateFactory
