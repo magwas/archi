@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -33,6 +32,41 @@ import org.eclipse.swt.graphics.ImageLoader;
  * @author Phillip Beauvoir
  */
 public final class ZipUtils {
+	
+    /**
+     * @param file
+     * @return True if file is an archive zip file
+     * @throws IOException 
+     */
+    public static boolean isZipFile(File file) throws IOException {
+        // Signature first 4 bytes of zip file
+        final byte[] sig = new byte[] { 0x50, 0x4B, 0x3, 0x4 };
+        
+        if(file != null && file.canRead()) {
+            byte[] buf = new byte[4];
+
+            FileInputStream is = null;
+            try {
+                is = new FileInputStream(file);
+                is.read(buf);
+            }
+            finally {
+                if(is != null) {
+                    is.close();
+                }
+            }
+
+            for(int i = 0; i < buf.length; i++) {
+                if(buf[i] != sig[i]) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+        
+        return false;
+    }
 	
     /**
      * Add all files and sub-files to the Zip
@@ -111,7 +145,7 @@ public final class ZipUtils {
         } 
         
         int bytesRead;
-        final int bufSize = 1024;
+        final int bufSize = 8192;
         byte buf[] = new byte[bufSize];
         
         ZipEntry zipEntry = new ZipEntry(entryName);
@@ -308,7 +342,7 @@ public final class ZipUtils {
 		ZipInputStream zIn;
 		ZipEntry zipEntry;
 		int bytesRead;
-		final int bufSize = 1024;
+		final int bufSize = 8192;
 		byte buf[] = new byte[bufSize];
 		
 		// Ensure that the parent Folder exists
@@ -338,12 +372,6 @@ public final class ZipUtils {
 		
 		while((bytesRead = zIn.read(buf)) != -1) {
 			out.write(buf, 0, bytesRead);
-			try {
-				// Allow other things to happen
-				Thread.sleep(2);
-			} catch(InterruptedException ex) {
-				ex.printStackTrace();
-			}
 		}
 		
 		out.flush();
@@ -357,20 +385,23 @@ public final class ZipUtils {
 	}
 	
 	/**
-	 * Gets all file names out of a zip file in sorted name order
-	 * Returns a list String names or null if none
+	 * Gets all entry names out of a zip file and returns a list of entry names excluding directories
 	 * @param zipFile
-	 * @return
+	 * @return a list of entry names which may be empty if the zip file does not exist
 	 * @throws IOException
 	 */
-	public static String[] getZipFileEntryNames(File zipFile) throws IOException {
-		ZipInputStream zIn = null;
+	public static List<String> getZipFileEntryNames(File zipFile) throws IOException {
+        List<String> fileList = new ArrayList<String>();
+
+        if(zipFile == null || !zipFile.canRead()) {
+            return fileList;
+        }
+        
+        ZipInputStream zIn = null;
 		ZipEntry zipEntry;
-		final int bufSize = 1024;
-		List<String> fileList = new ArrayList<String>();
+		final int bufSize = 1024 * 16;
 		
 		BufferedInputStream in = new BufferedInputStream(new FileInputStream(zipFile), bufSize);
-		
 		zIn = new ZipInputStream(in);
 		
 		try {
@@ -392,10 +423,7 @@ public final class ZipUtils {
             zIn.close();
         }
 		
-		String[] names = new String[fileList.size()];
-		fileList.toArray(names);
-		Arrays.sort(names);
-		return names;
+		return fileList;
 	}
 	
 	/**
@@ -427,7 +455,7 @@ public final class ZipUtils {
 		ZipInputStream zIn = null;
 		ZipEntry zipEntry;
 		int bytesRead;
-		final int bufSize = 512;
+		final int bufSize = 1024;
 		byte buf[] = new byte[bufSize];
 		
 		in = new BufferedInputStream(new FileInputStream(zipFile), bufSize);

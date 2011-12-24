@@ -19,7 +19,6 @@ import org.eclipse.emf.internal.cdo.CDOObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import uk.ac.bolton.archimate.model.IAdapter;
-import uk.ac.bolton.archimate.model.IArchimateFactory;
 import uk.ac.bolton.archimate.model.IArchimateModel;
 import uk.ac.bolton.archimate.model.IArchimateModelElement;
 import uk.ac.bolton.archimate.model.IArchimatePackage;
@@ -232,13 +231,9 @@ public abstract class DiagramModel extends CDOObjectImpl implements IDiagramMode
      * @generated NOT
      */
     public EObject getCopy() {
-        IDiagramModel newDiagramModel = (IDiagramModel)IArchimateFactory.eINSTANCE.create(eClass());
-        
-        newDiagramModel.setName(getName());
-        newDiagramModel.setConnectionRouterType(getConnectionRouterType());
-        newDiagramModel.setDocumentation(getDocumentation());
-        newDiagramModel.getProperties().addAll(EcoreUtil.copyAll(getProperties()));
-        
+        IDiagramModel newDiagramModel = EcoreUtil.copy(this);
+        newDiagramModel.setId(null); // need a new ID
+        newDiagramModel.getChildren().clear(); // need to do this!
         return newDiagramModel;
     }
 

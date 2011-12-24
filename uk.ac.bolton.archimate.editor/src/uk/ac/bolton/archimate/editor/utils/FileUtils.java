@@ -12,9 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Random;
-import java.util.Vector;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -224,7 +222,7 @@ public final class FileUtils  {
 	        }
 	    }
 	    
-	    int bufSize = 1024;
+	    int bufSize = 1024 * 64;
 	    byte[] buf = new byte[bufSize];
 	    BufferedInputStream bis = new BufferedInputStream(new FileInputStream(srcFile), bufSize);
 	    BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(destFile), bufSize);
@@ -289,8 +287,8 @@ public final class FileUtils  {
 	
     /**
 	 * Sort a list of files into Folders first, files second
-	 * @param files
-	 * @return
+	 * @param files The array of files
+	 * @return The sorted files as an array
 	 */
 	public static File[] sortFiles(File[] files) {
 	    if(files == null || files.length == 0) {
