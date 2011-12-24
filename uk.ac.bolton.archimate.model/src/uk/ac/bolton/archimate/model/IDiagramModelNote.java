@@ -14,7 +14,7 @@ package uk.ac.bolton.archimate.model;
  *
  *
  * @see uk.ac.bolton.archimate.model.IArchimatePackage#getDiagramModelNote()
- * @model extendedMetaData="name='Note'"
+ * @model
  * @generated
  */
 public interface IDiagramModelNote extends IDiagramModelObject, ITextContent {

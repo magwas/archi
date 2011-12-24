@@ -12,7 +12,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Random;
+import java.util.Vector;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 

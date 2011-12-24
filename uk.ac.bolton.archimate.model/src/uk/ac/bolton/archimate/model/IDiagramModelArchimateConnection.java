@@ -20,7 +20,7 @@ package uk.ac.bolton.archimate.model;
  * </p>
  *
  * @see uk.ac.bolton.archimate.model.IArchimatePackage#getDiagramModelArchimateConnection()
- * @model extendedMetaData="name='Connection'"
+ * @model
  * @generated
  */
 public interface IDiagramModelArchimateConnection extends IDiagramModelConnection {

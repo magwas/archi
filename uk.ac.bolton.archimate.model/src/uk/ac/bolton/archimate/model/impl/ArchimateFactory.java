@@ -225,14 +225,14 @@ public class ArchimateFactory extends EFactoryImpl implements IArchimateFactory 
 	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public IArchimateModel createArchimateModel() {
-        ArchimateModel archimateModel = new ArchimateModel();
-        return archimateModel;
-    }
+		ArchimateModel archimateModel = new ArchimateModel();
+		return archimateModel;
+	}
 
     /**
 	 * <!-- begin-user-doc -->
