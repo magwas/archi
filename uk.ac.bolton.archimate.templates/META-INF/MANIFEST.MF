@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  uk.ac.bolton.archimate.editor,
  uk.ac.bolton.jdom,
- uk.ac.bolton.archimate.widgets
+ uk.ac.bolton.archimate.widgets,
+ uk.ac.bolton.archimate.persistence
 Bundle-ClassPath: uk.ac.bolton.archimate.templates.jar
 Bundle-Activator: uk.ac.bolton.archimate.templates.ArchimateEditorTemplatesPlugin
 Bundle-ActivationPolicy: lazy

@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.core.runtime,
  uk.ac.bolton.jdom,
  uk.ac.bolton.archimate.compatibility,
  uk.ac.bolton.archimate.help,
- uk.ac.bolton.archimate.templates
+ uk.ac.bolton.archimate.templates,
+ uk.ac.bolton.archimate.persistence;bundle-version="2.0.0"
 Bundle-ClassPath: uk.ac.bolton.archimate.canvas.jar
 Bundle-Activator: uk.ac.bolton.archimate.canvas.CanvasEditorPlugin
 Bundle-ActivationPolicy: lazy

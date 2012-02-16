@@ -7,5 +7,6 @@ Fragment-Host: uk.ac.bolton.archimate.editor
 Bundle-Vendor: Bolton University
 Require-Bundle: org.junit4,
  org.eclipse.net4j.util;bundle-version="2.0.0",
- org.eclipse.emf.cdo;bundle-version="2.0.0"
+ org.eclipse.emf.cdo;bundle-version="2.0.0",
+ uk.ac.bolton.archimate.persistence;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

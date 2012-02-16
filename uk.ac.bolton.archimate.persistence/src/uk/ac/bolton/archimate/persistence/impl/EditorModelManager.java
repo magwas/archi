@@ -4,7 +4,7 @@
  * are made available under the terms of the License
  * which accompanies this distribution in the file LICENSE.txt
  *******************************************************************************/
-package uk.ac.bolton.archimate.editor.model.impl;
+package uk.ac.bolton.archimate.persistence.impl;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -48,13 +48,6 @@ import uk.ac.bolton.archimate.compatibility.LaterModelVersionException;
 import uk.ac.bolton.archimate.compatibility.ModelCompatibility;
 import uk.ac.bolton.archimate.editor.ArchimateEditorPlugin;
 import uk.ac.bolton.archimate.editor.Logger;
-import uk.ac.bolton.archimate.editor.diagram.dialog.TargetSelectionDialog;
-import uk.ac.bolton.archimate.editor.diagram.util.AnimationUtil;
-import uk.ac.bolton.archimate.editor.model.IArchiveManager;
-import uk.ac.bolton.archimate.editor.model.IEditorModelManager;
-import uk.ac.bolton.archimate.editor.preferences.Preferences;
-import uk.ac.bolton.archimate.editor.ui.services.EditorManager;
-import uk.ac.bolton.archimate.editor.utils.FileUtils;
 import uk.ac.bolton.archimate.model.FolderType;
 import uk.ac.bolton.archimate.model.IArchimateFactory;
 import uk.ac.bolton.archimate.model.IArchimateModel;
@@ -62,6 +55,8 @@ import uk.ac.bolton.archimate.model.IDiagramModel;
 import uk.ac.bolton.archimate.model.IIdentifier;
 import uk.ac.bolton.archimate.model.ModelVersion;
 import uk.ac.bolton.archimate.model.util.ArchimateResourceFactory;
+import uk.ac.bolton.archimate.persistence.IArchiveManager;
+import uk.ac.bolton.archimate.persistence.IEditorModelManager;
 import uk.ac.bolton.jdom.JDOMUtils;
 
 

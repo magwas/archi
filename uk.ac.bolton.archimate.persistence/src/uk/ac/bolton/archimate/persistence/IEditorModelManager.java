@@ -4,7 +4,7 @@
  * are made available under the terms of the License
  * which accompanies this distribution in the file LICENSE.txt
  *******************************************************************************/
-package uk.ac.bolton.archimate.editor.model;
+package uk.ac.bolton.archimate.persistence;
 
 import java.beans.PropertyChangeListener;
 
@@ -13,8 +13,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 
-import uk.ac.bolton.archimate.editor.model.impl.EditorModelManager;
 import uk.ac.bolton.archimate.model.IArchimateModel;
+import uk.ac.bolton.archimate.persistence.impl.EditorModelManager;
 
 
 /**

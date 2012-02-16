@@ -4,7 +4,7 @@
  * are made available under the terms of the License
  * which accompanies this distribution in the file LICENSE.txt
  *******************************************************************************/
-package uk.ac.bolton.archimate.editor.model;
+package uk.ac.bolton.archimate.persistence;
 
 import org.eclipse.swt.graphics.Image;
 

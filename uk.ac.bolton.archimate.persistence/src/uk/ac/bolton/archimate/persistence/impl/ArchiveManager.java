@@ -4,7 +4,7 @@
  * are made available under the terms of the License
  * which accompanies this distribution in the file LICENSE.txt
  *******************************************************************************/
-package uk.ac.bolton.archimate.editor.model.impl;
+package uk.ac.bolton.archimate.persistence.impl;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -31,15 +31,15 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
-import uk.ac.bolton.archimate.editor.model.IArchiveManager;
-import uk.ac.bolton.archimate.editor.model.ICachedImage;
-import uk.ac.bolton.archimate.editor.model.IEditorModelManager;
-import uk.ac.bolton.archimate.editor.utils.FileUtils;
-import uk.ac.bolton.archimate.editor.utils.ZipUtils;
 import uk.ac.bolton.archimate.model.IArchimateModel;
 import uk.ac.bolton.archimate.model.IArchimatePackage;
 import uk.ac.bolton.archimate.model.IDiagramModelImageProvider;
 import uk.ac.bolton.archimate.model.util.ArchimateResourceFactory;
+import uk.ac.bolton.archimate.persistence.IArchiveManager;
+import uk.ac.bolton.archimate.persistence.ICachedImage;
+import uk.ac.bolton.archimate.persistence.IEditorModelManager;
+import uk.ac.bolton.archimate.persistence.utils.FileUtils;
+import uk.ac.bolton.archimate.persistence.utils.ZipUtils;
 
 
 /**
@@ -227,11 +227,7 @@ public class ArchiveManager implements IArchiveManager {
     @Override
     public void saveModel() throws IOException {
         File file = new File (fModel.getFile().toFileString());
-        
-        if(file == null) {
-            return;
-        }
-        
+                
         if(hasImages()) {
             saveModelToArchiveFile(file);
         }

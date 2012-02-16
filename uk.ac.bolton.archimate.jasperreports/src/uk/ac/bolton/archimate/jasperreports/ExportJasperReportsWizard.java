@@ -36,10 +36,10 @@ import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.widgets.Display;
 
 import uk.ac.bolton.archimate.editor.diagram.util.DiagramUtils;
-import uk.ac.bolton.archimate.editor.utils.FileUtils;
 import uk.ac.bolton.archimate.jasperreports.data.ArchimateModelDataSource;
 import uk.ac.bolton.archimate.model.IArchimateModel;
 import uk.ac.bolton.archimate.model.IDiagramModel;
+import uk.ac.bolton.archimate.persistence.utils.FileUtils;
 
 
 /**

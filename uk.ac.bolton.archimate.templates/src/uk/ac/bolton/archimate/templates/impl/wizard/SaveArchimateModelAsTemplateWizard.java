@@ -26,10 +26,10 @@ import org.eclipse.swt.widgets.Display;
 import org.jdom.Document;
 import org.jdom.Element;
 
-import uk.ac.bolton.archimate.editor.model.IArchiveManager;
-import uk.ac.bolton.archimate.editor.utils.ZipUtils;
 import uk.ac.bolton.archimate.model.IArchimateModel;
 import uk.ac.bolton.archimate.model.IDiagramModel;
+import uk.ac.bolton.archimate.persistence.IArchiveManager;
+import uk.ac.bolton.archimate.persistence.utils.ZipUtils;
 import uk.ac.bolton.archimate.templates.impl.model.ArchimateModelTemplate;
 import uk.ac.bolton.archimate.templates.impl.model.ArchimateTemplateManager;
 import uk.ac.bolton.archimate.templates.model.ITemplateGroup;

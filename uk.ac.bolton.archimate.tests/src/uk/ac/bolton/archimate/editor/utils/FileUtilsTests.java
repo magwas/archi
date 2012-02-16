@@ -23,6 +23,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import uk.ac.bolton.archimate.Testing;
+import uk.ac.bolton.archimate.persistence.utils.FileUtils;
+
 
 
 /**

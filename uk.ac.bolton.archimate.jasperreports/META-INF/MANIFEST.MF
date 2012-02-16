@@ -16,7 +16,8 @@ Bundle-ClassPath: lib/commons-beanutils-1.8.0.jar,
  uk.ac.bolton.archimate.jasperreports.jar
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
- uk.ac.bolton.archimate.editor
+ uk.ac.bolton.archimate.editor,
+ uk.ac.bolton.archimate.persistence;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: uk.ac.bolton.archimate.jasperreports.JasperReportsPlugin
 Import-Package: org.eclipse.emf.cdo

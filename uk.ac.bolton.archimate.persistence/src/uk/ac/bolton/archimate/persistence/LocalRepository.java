@@ -49,8 +49,77 @@ public class LocalRepository extends ArchimateRepository {
 
 	@Override
 	IArchimateModel open(String modelname) {
-		/* FIXME get it from EditorModelmanager */
-        return null;
+
+        // Ascertain if this is an archive file
+        boolean useArchiveFormat = IArchiveManager.FACTORY.isArchiveFile(uri);
+        
+        // Create the Resource
+        ResourceSet resourceSet = ArchimateResourceFactory.createResourceSet();
+        Resource resource = resourceSet.createResource(useArchiveFormat ?
+                                                       IArchiveManager.FACTORY.createArchiveModelURI(file) :
+                                                       URI.createFileURI(file.getAbsolutePath()));
+
+        // Load the model file
+        try {
+            resource.load(null);
+        }
+        catch(IOException ex) {
+            // Error occured loading model. Was it a disaster?
+        	//System.out.println("exception:"+ex);
+        	//ex.printStackTrace();
+            try {
+                ModelCompatibility.checkErrors(resource);
+            }
+            // Incompatible, don't load it
+            catch(IncompatibleModelException ex1) {
+                MessageDialog.openError(Display.getCurrent().getActiveShell(),
+                        "Error opening model",
+                        "Cannot open '" + file +  "'. " + "This model is incompatible."
+                        + "\n" + ex1.getMessage());
+                return null;
+            }
+        }
+        
+        // Once loaded - Check version number compatibility with user
+        try {
+            ModelCompatibility.checkVersion(resource);
+        }
+        catch(LaterModelVersionException ex) {
+            boolean answer = MessageDialog.openQuestion(Display.getCurrent().getActiveShell(),
+                    "Opening model",
+                    "'" + file +  "' is a later version model " + "(" + ex.getVersion() + ")." +
+                    " Are you sure you want to continue opening it?");
+            if(!answer) {
+                return null;
+            }
+        }
+        
+        // And then fix any backward compatibility issues
+        try {
+            ModelCompatibility.fixCompatibility(resource);
+        }
+        catch(CompatibilityHandlerException ex) {
+        }
+
+        IArchimateModel model = (IArchimateModel)resource.getContents().get(0);
+        model.setFile(uri);
+        model.setDefaults();
+        getModels().add(model);
+        fRepoContents.put(model,resource);
+       	model.eAdapters().add(new ECoreAdapter());
+        // New Command Stack
+        createNewCommandStack(model);
+        
+        // New Archive Manager
+        createNewArchiveManager(model);
+        
+        // Initiate all diagram models to be marked as "saved" - this is for the editor view persistence
+        markDiagramModelsAsSaved(model);
+
+        // This last
+        firePropertyChange(this, PROPERTY_MODEL_LOADED, null, model);
+
+        return model;
 	}
 
 	@Override
