@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Archi JUnit Test Support
 Bundle-SymbolicName: com.archimatetool.testsupport
-Bundle-Version: 1.0.0
+Bundle-Version: 2.7.1.qualifier
 Bundle-Vendor: Phillip Beauvoir
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.archimatetool.tests,

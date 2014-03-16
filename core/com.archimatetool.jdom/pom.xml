@@ -8,7 +8,6 @@
   </parent>
  
   <artifactId>com.archimatetool.jdom</artifactId>
-    <version>2.0.5.qualifier</version>
   <packaging>eclipse-plugin</packaging>
  
 </project>

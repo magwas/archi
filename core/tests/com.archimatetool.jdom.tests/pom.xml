@@ -10,7 +10,6 @@
  
   <artifactId>com.archimatetool.jdom.tests</artifactId>
   <packaging>eclipse-test-plugin</packaging>
-  <version>1.0.0</version>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>

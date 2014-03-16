@@ -22,7 +22,7 @@ override_dh_clean:
 override_dh_auto_install:
 	dh_auto_install
 	mkdir -p debian/archi/usr/share
-	tar xz -C debian/archi/usr/share/ -f com.archimatetool.build/target/products/Archi/Archi-lnx32_64-2.7.0.tar.gz
+	tar xz -C debian/archi/usr/share/ -f target/upload/Archi-lnx32_64-*.tar.gz
 	mv debian/archi/usr/share/Archi debian/archi/usr/share/archi
 	mkdir -p debian/archi/usr/bin
 	ln -sf /usr/share/archi/Archi-Ubuntu.sh debian/archi/usr/bin/archi

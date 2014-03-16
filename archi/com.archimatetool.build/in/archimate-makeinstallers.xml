@@ -18,10 +18,11 @@
 	<target name="init">
 	    
 		<!-- USER DEPENDENT VALUES - EDIT THESE VALUES FOR A BUILD -->
-	    <property name="jre.win32.dir"          location="c:\dev\jre7"/>			<!-- Location of the bundled JRE for Windows -->
-		<property name="jre.mac64.zip"    		location="c:\dev\jre-mac64.zip"/>	<!-- Location of the bundled JRE for Mac -->
-		<property name="docs.dir"     			location="../../docs"/>				<!-- Location of the generated PDF docs -->
-		<property name="version" 				value="2.7.0"/>						<!-- Version of the Build -->
+        <property name="extras_dir" location="target/archi-extras"/>
+	    <property name="jre.win32.dir"          location="${extras_dir}/jre-windows"/>			<!-- Location of the bundled JRE for Windows -->
+		<property name="jre.mac64.dir"    		location="${extras_dir}/jre-macosx"/>	<!-- Location of the bundled JRE for Mac -->
+		<property name="docs.dir"     			location="../com.archimatetool.htmlmerger/target"/>				<!-- Location of the generated PDF docs -->
+		<property name="version" 				value="@project.version@"/>						<!-- Version of the Build -->
 		
 		<property name="app.name" 				value="Archi"/>
 		
@@ -154,6 +155,7 @@
 
     	<!-- copy our Info.plist file over -->
         <copy file="${src.dir}/branding/mac/Info.plist" todir="${tmp.dir}/${mac.contents.dir}" overwrite="true"/>
+        <replace file="${tmp.dir}/${mac.contents.dir}/Info.plist" token="@project.version@" value="${project.version}"/>
 
         <!-- Move the plugin and configuration files into the .app folder -->
 		<move todir="${tmp.dir}/${mac.app}">

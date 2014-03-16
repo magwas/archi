@@ -5,13 +5,12 @@
 
   <parent>
     <groupId>com.archimatetool</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>build</artifactId>
     <version>2.7.1.qualifier</version>
   </parent>
 
   <groupId>com.archimatetool</groupId>
   <artifactId>com.archimatetool.build</artifactId>
-  <version>2.7.0.qualifier</version>
   <packaging>eclipse-repository</packaging>
   <build>
     <plugins>
@@ -43,6 +42,32 @@
       </configuration>
       </plugin>
       <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>install</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target</outputDirectory>
+              <resources>          
+                <resource>
+                  <directory>${basedir}/in</directory>
+                  <filtering>true</filtering>
+                  <includes>
+                    <include>windows-installer.iss</include>
+                    <include>archimate-makeinstallers.xml</include>
+                  </includes>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
          <artifactId>maven-antrun-plugin</artifactId>    
            <inherited>false</inherited>
               <executions>
@@ -50,7 +75,8 @@
                    <phase>install</phase>
                    <configuration>
                      <tasks>
-                       <ant antfile="archimate-makeinstallers-mvn.xml">
+                        <property name="product.version" value="${product.version}"/>
+                       <ant antfile="target/archimate-makeinstallers.xml">
                        </ant>
                     </tasks>
                  </configuration>
@@ -76,11 +102,16 @@
           <executable>wine</executable>
           <arguments>
             <argument>target/archi-extras/Innosetup/ISCC.exe</argument>
+<<<<<<< HEAD
             <argument>windows-installer-mvn.iss</argument>
+=======
+            <argument>target/windows-installer.iss</argument>
+>>>>>>> version, document generation, nls script
           </arguments>
         </configuration>
       </plugin>
     </plugins>
   </build>
 </project>
+
 

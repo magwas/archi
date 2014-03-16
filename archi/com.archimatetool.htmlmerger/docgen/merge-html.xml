@@ -10,9 +10,9 @@
 	
 	<!-- Init some stuff -->
 	<target name="init">
-	    <property name="class.path" location="../bin"/>
-		<property name="tmp.dir" location="../temp"/>
-		<property name="src.dir" location="../../com.archimatetool.help/help"/>
+	    <property name="class.path" location="target/classes"/>
+		<property name="tmp.dir" location="target/temp"/>
+		<property name="src.dir" location="../../core/com.archimatetool.help/help"/>
 		
 		<!-- EDIT THIS VERSION NUMBER!!! -->
 		<property name="archi.version" value="2.7.0"/>

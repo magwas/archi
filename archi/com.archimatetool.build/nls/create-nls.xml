@@ -16,7 +16,7 @@
 			"nls_version" should be the version of the language packs
 	  	</description>
 		<property name="lang_code"					value="en"/>
-		<property name="archi_version"				value="2.7.0"/>
+		<property name="archi_version"				value="${project.version}"/>
 		<property name="nls_version"				value="1.0.1"/>
 	</target>
 	
@@ -35,8 +35,8 @@
 		<!-- com.archimatetool.canvas -->
 		<property name="canvas.prj.src"    			value="com.archimatetool.canvas"/>
 		<property name="canvas.prj.tgt"    			value="${canvas.prj.src}.${lang_code}"/>
-		<property name="canvas.loc.src"    			location="../../${canvas.prj.src}"/>
-		<property name="canvas.loc.tgt"    			location="../../${main.dir}/${canvas.prj.tgt}"/>
+		<property name="canvas.loc.src"    			location="../../../core/${canvas.prj.src}"/>
+		<property name="canvas.loc.tgt"    			location="../../../core/${main.dir}/${canvas.prj.tgt}"/>
 
     	<antcall target="create_archi_project">
     		<param name="prj.src"  					value="${canvas.prj.src}"/>
@@ -56,8 +56,8 @@
 		<!-- com.archimatetool.csv -->
 		<property name="csv.prj.src"    			value="com.archimatetool.csv"/>
 		<property name="csv.prj.tgt"    			value="${csv.prj.src}.${lang_code}"/>
-		<property name="csv.loc.src"    			location="../../${csv.prj.src}"/>
-		<property name="csv.loc.tgt"    			location="../../${main.dir}/${csv.prj.tgt}"/>
+		<property name="csv.loc.src"    			location="../../../core/${csv.prj.src}"/>
+		<property name="csv.loc.tgt"    			location="../../../core/${main.dir}/${csv.prj.tgt}"/>
     	
 		<antcall target="create_archi_project">
     		<param name="prj.src"  					value="${csv.prj.src}"/>
@@ -70,8 +70,8 @@
 		<!-- com.archimatetool.editor -->
 		<property name="editor.prj.src"    			value="com.archimatetool.editor"/>
 		<property name="editor.prj.tgt"    			value="${editor.prj.src}.${lang_code}"/>
-		<property name="editor.loc.src"    			location="../../${editor.prj.src}"/>
-		<property name="editor.loc.tgt"    			location="../../${main.dir}/${editor.prj.tgt}"/>
+		<property name="editor.loc.src"    			location="../../../core/${editor.prj.src}"/>
+		<property name="editor.loc.tgt"    			location="../../../core/${main.dir}/${editor.prj.tgt}"/>
     	
 		<antcall target="create_archi_project">
     		<param name="prj.src"  					value="${editor.prj.src}"/>
@@ -84,8 +84,8 @@
 		<!-- com.archimatetool.help -->
 		<property name="help.prj.src"    			value="com.archimatetool.help"/>
 		<property name="help.prj.tgt"    			value="${help.prj.src}.${lang_code}"/>
-		<property name="help.loc.src"    			location="../../${help.prj.src}"/>
-		<property name="help.loc.tgt"    			location="../../${main.dir}/${help.prj.tgt}"/>
+		<property name="help.loc.src"    			location="../../../core/${help.prj.src}"/>
+		<property name="help.loc.tgt"    			location="../../../core/${main.dir}/${help.prj.tgt}"/>
     	
 		<antcall target="create_archi_project">
     		<param name="prj.src"  					value="${help.prj.src}"/>
@@ -107,8 +107,8 @@
 		<!-- com.archimatetool.jasperreports -->
 		<property name="jasperreports.prj.src"    	value="com.archimatetool.jasperreports"/>
 		<property name="jasperreports.prj.tgt"    	value="${jasperreports.prj.src}.${lang_code}"/>
-		<property name="jasperreports.loc.src"    	location="../../${jasperreports.prj.src}"/>
-		<property name="jasperreports.loc.tgt"    	location="../../${main.dir}/${jasperreports.prj.tgt}"/>
+		<property name="jasperreports.loc.src"    	location="../../../core/${jasperreports.prj.src}"/>
+		<property name="jasperreports.loc.tgt"    	location="../../../core/${main.dir}/${jasperreports.prj.tgt}"/>
     	
 		<antcall target="create_archi_project">
     		<param name="prj.src"  					value="${jasperreports.prj.src}"/>
@@ -127,8 +127,8 @@
 		<!-- com.archimatetool.model -->
 		<property name="model.prj.src"    			value="com.archimatetool.model"/>
 		<property name="model.prj.tgt"    			value="${model.prj.src}.${lang_code}"/>
-		<property name="model.loc.src"    			location="../../${model.prj.src}"/>
-		<property name="model.loc.tgt"    			location="../../${main.dir}/${model.prj.tgt}"/>
+		<property name="model.loc.src"    			location="../../../core/${model.prj.src}"/>
+		<property name="model.loc.tgt"    			location="../../../core/${main.dir}/${model.prj.tgt}"/>
     	
 		<antcall target="create_archi_project">
     		<param name="prj.src"  					value="${model.prj.src}"/>
@@ -141,8 +141,8 @@
 		<!-- com.archimatetool.reports -->
 		<property name="reports.prj.src"    		value="com.archimatetool.reports"/>
 		<property name="reports.prj.tgt"    		value="${reports.prj.src}.${lang_code}"/>
-		<property name="reports.loc.src"    		location="../../${reports.prj.src}"/>
-		<property name="reports.loc.tgt"    		location="../../${main.dir}/${reports.prj.tgt}"/>
+		<property name="reports.loc.src"    		location="../../../core/${reports.prj.src}"/>
+		<property name="reports.loc.tgt"    		location="../../../core/${main.dir}/${reports.prj.tgt}"/>
     	
 		<antcall target="create_archi_project">
     		<param name="prj.src"  					value="${reports.prj.src}"/>
@@ -155,8 +155,8 @@
 		<!-- com.archimatetool.templates -->
 		<property name="templates.prj.src"    		value="com.archimatetool.templates"/>
 		<property name="templates.prj.tgt"    		value="${templates.prj.src}.${lang_code}"/>
-		<property name="templates.loc.src"    		location="../../${templates.prj.src}"/>
-		<property name="templates.loc.tgt"    		location="../../${main.dir}/${templates.prj.tgt}"/>
+		<property name="templates.loc.src"    		location="../../../core/${templates.prj.src}"/>
+		<property name="templates.loc.tgt"    		location="../../../core/${main.dir}/${templates.prj.tgt}"/>
     	
 		<antcall target="create_archi_project">
     		<param name="prj.src"  					value="${templates.prj.src}"/>
@@ -175,8 +175,8 @@
 		<!-- com.archimatetool.zest -->
 		<property name="zest.prj.src"    			value="com.archimatetool.zest"/>
 		<property name="zest.prj.tgt"    			value="${zest.prj.src}.${lang_code}"/>
-		<property name="zest.loc.src"    			location="../../${zest.prj.src}"/>
-		<property name="zest.loc.tgt"    			location="../../${main.dir}/${zest.prj.tgt}"/>
+		<property name="zest.loc.src"    			location="../../../core/${zest.prj.src}"/>
+		<property name="zest.loc.tgt"    			location="../../../core/${main.dir}/${zest.prj.tgt}"/>
     	
 		<antcall target="create_archi_project">
     		<param name="prj.src"  					value="${zest.prj.src}"/>

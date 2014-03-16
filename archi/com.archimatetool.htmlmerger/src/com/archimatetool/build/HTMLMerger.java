@@ -29,10 +29,10 @@ import java.util.Scanner;
 @SuppressWarnings("nls")
 public class HTMLMerger {
     
-    private static File HELP_SRC_FOLDER = new File("../../com.archimatetool.help/help/Text");
-    private static File TARGET_FOLDER = new File("../temp/Text");
+    private static File HELP_SRC_FOLDER = new File("../../core/com.archimatetool.help/help/Text");
+    private static File TARGET_FOLDER = new File("target/temp/Text");
     private static File HTML_OUTPUT_FILE = new File(TARGET_FOLDER, "Archi User Guide.html");
-    private static File HTML_FILES_LIST = new File("html_contents.list");
+    private static File HTML_FILES_LIST = new File("docgen/html_contents.list");
     
     /**
      * @param args

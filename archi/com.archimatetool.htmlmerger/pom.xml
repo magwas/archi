@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.archimatetool</groupId>
+    <artifactId>build</artifactId>
+    <version>2.7.1.qualifier</version>
+  </parent>
+
+  <groupId>com.archimatetool</groupId>
+  <artifactId>com.archimatetool.htmlmerger</artifactId>
+  <packaging>eclipse-plugin</packaging>
+  <build>
+    <plugins>
+      <plugin>
+         <artifactId>maven-antrun-plugin</artifactId>    
+           <inherited>false</inherited>
+              <executions>
+                 <execution>
+                   <phase>install</phase>
+                   <configuration>
+                     <tasks>
+                       <ant antfile="docgen/merge-html.xml">
+                       </ant>
+                    </tasks>
+                 </configuration>
+                 <goals>
+                    <goal>run</goal>
+                </goals>
+              </execution>
+           </executions>
+       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2.1</version>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <executable>wkhtmltopdf</executable>
+          <arguments>
+            <argument>target/temp/Text/Archi User Guide.html</argument>
+            <argument>target/Archi User Guide.pdf</argument>
+          </arguments>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
