@@ -6,8 +6,8 @@
   <packaging>pom</packaging>
   <modules>
 
-    <module>com.archimatetool.build</module>
     <module>com.archimatetool.htmlmerger</module>
+    <module>com.archimatetool.build</module>
 <!-- all tests are already ran
     <module>tests/com.archimatetool.tests</module>
     -->
