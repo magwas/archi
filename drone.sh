@@ -3,6 +3,7 @@
 # e.g:
 # ./drone.sh "Travis Zorp <mag+travis@magwas.rulez.org>" "magwas,archistyledhtml@frs.sourceforge.net:/home/pfs/project/archici"
 set -x
+date
 mvnversion=$(grep version pom.xml |head -1|sed 's/.*<version>//;s/<.*//')
 branchname=$(echo $DRONE_BRANCH-$DRONE_BUILD_NUMBER | sed 'sA/A-A')
 ./updatever.sh $branchname
@@ -26,4 +27,5 @@ fi
 dest=target/upload
 mv ../*.deb $dest
 kill `ps ax |grep xterm|grep -v grep|awk '{print $1}'`
-scp -r target/upload/* $2/$DEPLOYMENT
+date
+#scp -r target/upload/* $2/$DEPLOYMENT
