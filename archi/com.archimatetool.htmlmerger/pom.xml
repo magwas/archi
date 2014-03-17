@@ -45,8 +45,9 @@
           </execution>
         </executions>
         <configuration>
-          <executable>wkhtmltopdf</executable>
+          <executable>xvfb-run</executable>
           <arguments>
+            <argument>wkhtmltopdf</argument>
             <argument>target/temp/Text/Archi User Guide.html</argument>
             <argument>target/Archi User Guide.pdf</argument>
           </arguments>
