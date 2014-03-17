@@ -25,4 +25,5 @@ else
 fi
 dest=target/upload
 mv ../*.deb $dest
-#scp -r target/upload/* $2/$DEPLOYMENT
+kill `ps ax |grep xterm|grep -v grep|awk '{print $1}'`
+scp -r target/upload/* $2/$DEPLOYMENT
