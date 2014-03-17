@@ -8,13 +8,13 @@ branchname=$(echo $DRONE_BRANCH-$DRONE_BUILD_NUMBER | sed 'sA/A-A')
 ./updatever.sh $branchname
 version=$(echo $mvnversion |sed "s/qualifier/$branchname/")
 mkdir ~/Downloads
+(wget -O ~/Downloads/archi-extra.tar.gz.in http://magwas.rulez.org/archi-extra.tar.gz && mv ~/Downloads/archi-extra.tar.gz.in ~/Downloads/archi-extra.tar.gz)&
 sudo apt-get update
 sudo apt-get install libwebkitgtk-1.0-0 devscripts maven xvfb wine wkhtmltopdf
 sudo Xvfb -nolock :99 -screen 0 1024x768x24+32&
 export DISPLAY=:99
-(wget -q -O ~/Downloads/archi-extra.tar.gz.in http://magwas.rulez.org/archi-extra.tar.gz || mv ~/Downloads/archi-extra.tar.gz.in ~/Downloads/archi-extra.tar.gz)&
 sleep 3s; xterm&#keep the display
-#mvn integration-test
+mvn install
 DEBEMAIL="$1" dch -v $version -b -D zenta --force-distribution "drone.io $DRONE_BRANCH build $DRONE_BUILD_NUMBER"
 echo yes |debuild -us -uc
 if [ $DRONE_BRANCH = "master" ]

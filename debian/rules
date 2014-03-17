@@ -13,11 +13,11 @@
 	dh $@ 
 
 override_dh_auto_build:
-	mvn -Pno-unit-tests install
+	echo "expected to run after mvn install"
 
 override_dh_clean:
 	dh_clean
-	rm -rf `find -type d -name target` `find -type f -name '*.class'` ./com.archimatetool.templates/com.archimatetool.templates.jar ./com.archimatetool.export.svg/com.archimatetool.export.svg.jar ./com.archimatetool.model/com.archimatetool.model.jar ./com.archimatetool.canvas/com.archimatetool.canvas.jar ./com.archimatetool.jdom/com.archimatetool.jdom.jar ./com.archimatetool.jasperreports/com.archimatetool.jasperreports.jar ./com.archimatetool.editor/com.archimatetool.editor.jar ./com.archimatetool.help/com.archimatetool.help.jar ./com.archimatetool.widgets/com.archimatetool.widgets.jar ./com.archimatetool.reports/com.archimatetool.reports.jar ./com.archimatetool.zest/com.archimatetool.zest.jar
+	rm -rf `find -type d -name target|grep -v ^./target` `find -type f -name '*.class'` ./com.archimatetool.templates/com.archimatetool.templates.jar ./com.archimatetool.export.svg/com.archimatetool.export.svg.jar ./com.archimatetool.model/com.archimatetool.model.jar ./com.archimatetool.canvas/com.archimatetool.canvas.jar ./com.archimatetool.jdom/com.archimatetool.jdom.jar ./com.archimatetool.jasperreports/com.archimatetool.jasperreports.jar ./com.archimatetool.editor/com.archimatetool.editor.jar ./com.archimatetool.help/com.archimatetool.help.jar ./com.archimatetool.widgets/com.archimatetool.widgets.jar ./com.archimatetool.reports/com.archimatetool.reports.jar ./com.archimatetool.zest/com.archimatetool.zest.jar
 
 override_dh_auto_install:
 	dh_auto_install

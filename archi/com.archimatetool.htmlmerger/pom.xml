@@ -46,9 +46,6 @@
         </executions>
         <configuration>
           <executable>wkhtmltopdf</executable>
-          <environmentVariables>
-            <DISPLAY>:99</DISPLAY>
-          </environmentVariables>
           <arguments>
             <argument>file://${project.basedir}/target/temp/Text/Archi User Guide.html</argument>
             <argument>target/Archi User Guide.pdf</argument>

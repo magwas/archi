@@ -34,7 +34,7 @@
 	
     <target name="download">
         <!--get src="http://magwas.rulez.org/archi-extra.tar.gz" dest="target/archi-extra.tar.gz"/-->
-        <waitfor>
+        <waitfor maxwait="10" maxwaitunit="minute">
                 <available file="${user.home}/Downloads/archi-extra.tar.gz"/>
         </waitfor>
         <get src="file:///${user.home}/Downloads/archi-extra.tar.gz" dest="target/archi-extra.tar.gz"/>
