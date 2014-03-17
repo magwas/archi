@@ -25,4 +25,4 @@ else
 fi
 dest=target/upload
 mv ../*.deb $dest
-scp -r target/upload/* $2
+#scp -r target/upload/* $2/$DEPLOYMENT
