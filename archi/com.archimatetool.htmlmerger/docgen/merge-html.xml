@@ -35,7 +35,7 @@
 	</target>
 
 	<target name="merge_html">
-		<java classname="com.archimatetool.build.HTMLMerger" classpath="${class.path}">
+		<java classname="com.archimatetool.build.HTMLMerger" classpath="${class.path}" fork="true">
 			<sysproperty key="ArchiVersion" value="${archi.version}"/>
 	    </java>
 	</target>

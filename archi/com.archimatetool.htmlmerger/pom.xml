@@ -22,7 +22,7 @@
                    <phase>install</phase>
                    <configuration>
                      <tasks>
-                       <ant antfile="docgen/merge-html.xml">
+                       <ant antfile="docgen/merge-html.xml" dir="${project.basedir}">
                        </ant>
                     </tasks>
                  </configuration>
