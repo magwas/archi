@@ -39,7 +39,7 @@ public class HTMLMerger {
      */
     public static void main(String[] args) {
         try {
-            System.out.println("Opening Output Stream...");
+            System.out.printf("Opening Output Stream with cwd=%s...\n", System.getProperty("user.dir"));
             TARGET_FOLDER.mkdirs();
             Writer out = new OutputStreamWriter(new FileOutputStream(HTML_OUTPUT_FILE));
             
