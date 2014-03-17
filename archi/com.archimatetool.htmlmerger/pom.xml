@@ -50,7 +50,7 @@
             <DISPLAY>:99</DISPLAY>
           </environmentVariables>
           <arguments>
-            <argument>target/temp/Text/Archi User Guide.html</argument>
+            <argument>file://${project.basedir}/target/temp/Text/Archi User Guide.html</argument>
             <argument>target/Archi User Guide.pdf</argument>
           </arguments>
         </configuration>
