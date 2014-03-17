@@ -1,4 +1,10 @@
 <project>
+  <parent>
+    <groupId>com.archimatetool</groupId>
+    <artifactId>toplevel</artifactId>
+    <!--version--><version>2.7.1.qualifier</version>
+  </parent>
+
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.archimatetool</groupId>
   <artifactId>build</artifactId>
@@ -17,39 +23,6 @@
     <tycho-version>0.19.0</tycho-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
- 
-  <repositories>
-   <repository>
-     <id>3.8</id>
-     <layout>p2</layout>
-     <url>http://download.eclipse.org/eclipse/updates/3.8/R-3.8.1-201209141540</url>
-   </repository>
-   <repository>
-     <id>orbit</id>
-     <layout>p2</layout>
-     <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository/</url>
-   </repository>
-   <repository>
-     <id>3.8updates</id>
-     <layout>p2</layout>
-     <url>http://download.eclipse.org/eclipse/updates/3.8</url>
-   </repository>
-   <repository>
-     <id>EMF</id>
-     <layout>p2</layout>
-     <url>http://download.eclipse.org/modeling/emf/emf/updates/releases/</url>
-   </repository>
-   <repository>
-     <id>GEF</id>
-     <layout>p2</layout>
-     <url>http://download.eclipse.org/tools/gef/updates/releases/</url>
-   </repository>
-   <!--repository>
-     <id>indigo</id>
-     <layout>p2</layout>
-     <url>http://download.eclipse.org/releases/indigo</url>
-   </repository-->
-  </repositories>
  
   <build>
     <plugins>

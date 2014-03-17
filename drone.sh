@@ -27,5 +27,8 @@ fi
 dest=target/upload
 mv ../*.deb $dest
 kill `ps ax |grep xterm|grep -v grep|awk '{print $1}'`
+ps ax |grep Xvfb|egrep -v "grep|sudo"|awk '{print $1}' |xargs sudo kill 
+ps afx
 date
-#scp -r target/upload/* $2/$DEPLOYMENT
+scp -r target/upload/* $2/$DEPLOYMENT
+date
