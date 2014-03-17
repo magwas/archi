@@ -45,10 +45,11 @@
           </execution>
         </executions>
         <configuration>
-          <executable>xvfb-run</executable>
+          <executable>wkhtmltopdf</executable>
+          <environmentVariables>
+            <DISPLAY>:99</DISPLAY>
+          </environmentVariables>
           <arguments>
-            <argument>--auto-servernum</argument>
-            <argument>wkhtmltopdf</argument>
             <argument>target/temp/Text/Archi User Guide.html</argument>
             <argument>target/Archi User Guide.pdf</argument>
           </arguments>
