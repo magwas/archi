@@ -14,7 +14,7 @@ sudo Xvfb -nolock :99 -screen 0 1024x768x24+32&
 export DISPLAY=:99
 wget -q -O ~/Downloads/archi-extra.tar.gz http://magwas.rulez.org/archi-extra.tar.gz
 xterm&#keep the display
-mvn integration-test
+#mvn integration-test
 DEBEMAIL="$1" dch -v $version -b -D zenta --force-distribution "drone.io $DRONE_BRANCH build $DRONE_BUILD_NUMBER"
 echo yes |debuild -us -uc
 if [ $DRONE_BRANCH = "master" ]
