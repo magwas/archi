@@ -17,8 +17,8 @@ mvn install
 date
 mkdir -p target/upload
 mv archi/com.archimatetool.build/target/products/Archi-*.zip target/upload
-scp -r target/upload $1/intermediate/$version
 tar czf target/upload/branding.tar.gz archi/com.archimatetool.build/branding/
+scp -r target/upload $1/intermediate/$version
 git clone git@github.com:magwas/archi-packager.git target/archi-packager
 echo $version >target/archi-packager/version
 cd target/archi-packager
