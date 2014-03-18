@@ -67,49 +67,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-         <artifactId>maven-antrun-plugin</artifactId>    
-           <inherited>false</inherited>
-              <executions>
-                 <execution>
-                   <phase>install</phase>
-                   <configuration>
-                     <tasks>
-                        <property name="product.version" value="${product.version}"/>
-                       <ant antfile="target/archimate-makeinstallers.xml">
-                       </ant>
-                    </tasks>
-                 </configuration>
-                 <goals>
-                    <goal>run</goal>
-                </goals>
-              </execution>
-           </executions>
-       </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.2.1</version>
-        <executions>
-          <execution>
-            <phase>install</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <executable>wine</executable>
-          <arguments>
-            <argument>target/archi-extras/Innosetup/ISCC.exe</argument>
-<<<<<<< HEAD
-            <argument>windows-installer-mvn.iss</argument>
-=======
-            <argument>target/windows-installer.iss</argument>
->>>>>>> version, document generation, nls script
-          </arguments>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
 </project>
