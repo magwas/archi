@@ -13,12 +13,14 @@ sudo apt-get install libwebkitgtk-1.0-0 devscripts maven xvfb wine wkhtmltopdf
 sudo Xvfb -nolock :99 -screen 0 1024x768x24+32&
 export DISPLAY=:99
 sleep 3s; xterm&#keep the display
-mkdir -p target
-git clone git@github.com:magwas/archi-packager.git target/archi-packager
-echo $version >target/archi-packager/version
 mvn install
 date
+mkdir -p target/upload
+mv archi/com.archimatetool.build/target/products/Archi-*.zip target/upload
 scp -r target/upload $1/intermediate/$version
+tar czf target/upload/branding.tar.gz archi/com.archimatetool.build/branding/
+git clone git@github.com:magwas/archi-packager.git target/archi-packager
+echo $version >target/archi-packager/version
 cd target/archi-packager
 git add version archimate-makeinstallers.xml windows-installer.iss
 git commit -m "archi build $version"
