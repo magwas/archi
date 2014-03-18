@@ -5,7 +5,7 @@
 #define VERSION "${project.version}"
 #define APPNAME "Archi"
 #define APP_EXE "Archi.exe"
-#define SOURCE_DIR "products\Archi\Archi_win"
+#define SOURCE_DIR "archi\com.archiatetool.build\products\Archi\Archi_win"
 
 ; Registry entries
 #define FILE_EXT ".archimate"

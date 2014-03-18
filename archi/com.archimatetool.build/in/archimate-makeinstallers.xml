@@ -21,12 +21,12 @@
         <property name="extras_dir" location="target/archi-extras"/>
 	    <property name="jre.win32.dir"          location="${extras_dir}/jre-windows"/>			<!-- Location of the bundled JRE for Windows -->
 		<property name="jre.mac64.dir"    		location="${extras_dir}/jre-macosx"/>	<!-- Location of the bundled JRE for Mac -->
-		<property name="docs.dir"     			location="../com.archimatetool.htmlmerger/target"/>				<!-- Location of the generated PDF docs -->
+		<property name="docs.dir"     			location="archi/com.archimatetool.htmlmerger/target"/>				<!-- Location of the generated PDF docs -->
 		<property name="version" 				value="@project.version@"/>						<!-- Version of the Build -->
 		
 		<property name="app.name" 				value="Archi"/>
 		
-		<property name="src.dir"     			location="."/>
+		<property name="src.dir"     			location="archi/com/archimatetool/build"/>
 	    <property name="output.dir"             location="/${app.name}"/>
 	    <property name="folder.name"            value="${app.name}"/>
 	    <property name="tmp.dir"                location="${output.dir}/${folder.name}"/>
