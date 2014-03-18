@@ -23,4 +23,8 @@ cd target/archi-packager
 git add version archimate-makeinstallers.xml windows-installer.iss
 git commit -m "archi build $version"
 git push
+kill `ps ax |grep xterm|grep -v grep|awk '{print $1}'`
+ps ax |grep Xvfb|egrep -v "grep|sudo"|awk '{print $1}' |xargs sudo kill 
+ps afx
 date
+exit 0
