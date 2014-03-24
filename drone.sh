@@ -6,7 +6,7 @@ set -x
 date
 mvnversion=$(grep version pom.xml |head -1|sed 's/.*<version>//;s/<.*//')
 branchname=$(echo $DRONE_BRANCH-$DRONE_BUILD_NUMBER | sed 'sA/A-A')
-version=$(echo $mvnversion |sed "s/qualifier/$branchname/")
+updatever $branchname
 mkdir ~/Downloads
 (wget -q -O ~/Downloads/archi-extra.tar.gz.in http://magwas.rulez.org/archi-extra.tar.gz && mv ~/Downloads/archi-extra.tar.gz.in ~/Downloads/archi-extra.tar.gz)&
 sudo apt-get update
