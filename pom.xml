@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.archimatetool</groupId>
   <artifactId>parent</artifactId>
-  <version>2.7.1.qualifier</version>
+  <!--version--><version>2.7.1.qualifier</version>
   <packaging>pom</packaging>
   <modules>
 
@@ -109,6 +109,11 @@
               <os>macosx</os>
               <ws>cocoa</ws>
               <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>macosx</os>
+              <ws>cocoa</ws>
+              <arch>x86</arch>
             </environment>
           </environments>
         </configuration>

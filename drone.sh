@@ -1,12 +1,12 @@
 #!/bin/bash
-# usage: $0 <debemail> <uploadtarget>
+# usage: $0 <uploadtarget>
 # e.g:
 # ./drone.sh "magwas,archistyledhtml@frs.sourceforge.net:/home/pfs/project/archici"
 set -x
 date
 mvnversion=$(grep version pom.xml |head -1|sed 's/.*<version>//;s/<.*//')
 branchname=$(echo $DRONE_BRANCH-$DRONE_BUILD_NUMBER | sed 'sA/A-A')
-version=$(echo $mvnversion |sed "s/qualifier/$branchname/")
+./updatever $branchname
 mkdir ~/Downloads
 (wget -q -O ~/Downloads/archi-extra.tar.gz.in http://magwas.rulez.org/archi-extra.tar.gz && mv ~/Downloads/archi-extra.tar.gz.in ~/Downloads/archi-extra.tar.gz)&
 sudo apt-get update
@@ -27,6 +27,6 @@ ps ax |grep Xvfb|egrep -v "grep|sudo"|awk '{print $1}' |xargs sudo kill
 ps afx
 date
 mkdir -p target/upload
-mv com.archimatetool.build/target/products/Archi/Archi-* target/upload
+mv com.archimatetool.build/target/products/com.archimatetool.editor.product/Archi-* target/upload
 scp -r target/upload/* $1/$DEPLOYMENT
 date
