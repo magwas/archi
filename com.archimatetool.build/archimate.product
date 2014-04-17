@@ -19,7 +19,6 @@
 
    <windowImages i16="/com.archimatetool.editor/img/app-16.png" i32="/com.archimatetool.editor/img/app-32.png" i48="/com.archimatetool.editor/img/app-48.png" i64="/com.archimatetool.editor/img/app-64.png" i128="/com.archimatetool.editor/img/app-128.png"/>
 
-
    <launcher name="Archi">
       <linux icon="branding/linux/icon.xpm"/>
       <macosx icon="branding/mac/icon.icns"/>
@@ -52,6 +51,7 @@
       <plugin id="javax.el"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.servlet.jsp"/>
+      <plugin id="nz.co.cyma.integrations.archigitsync.plugin"/>
       <plugin id="org.apache.jasper.glassfish"/>
       <plugin id="org.apache.lucene"/>
       <plugin id="org.apache.lucene.analysis"/>
@@ -112,6 +112,7 @@
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.eclipse.zest.core"/>
       <plugin id="org.eclipse.zest.layouts"/>
+      <plugin id="org.rulez.magwas.styledhtml"/>
    </plugins>
 
    <features>
