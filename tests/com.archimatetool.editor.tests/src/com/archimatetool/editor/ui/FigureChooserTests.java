@@ -48,6 +48,7 @@ public class FigureChooserTests {
     
     @Test
     public void testGetDefaultFigureTypeForNewDiagramElement() {
+        Preferences.STORE.setValue(IPreferenceConstants.BUSINESS_INTERFACE_FIGURE, 0);
         for(EClass eClass : FigureChooser.FIGURE_CLASSES) {
             int type = FigureChooser.getDefaultFigureTypeForNewDiagramElement((IArchimateElement)IArchimateFactory.eINSTANCE.create(eClass));
             assertEquals(0, type);

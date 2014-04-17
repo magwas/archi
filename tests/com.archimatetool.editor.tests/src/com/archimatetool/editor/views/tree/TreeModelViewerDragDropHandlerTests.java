@@ -306,66 +306,7 @@ public class TreeModelViewerDragDropHandlerTests {
         event = createMockDropTargetEvent(childElement);
         assertFalse(dragHandler.isValidDropTarget(event));
     }
-
-    @Test
-    public void testHasCommonAncestorFolder() {
-        // Test with folders and elements that have a root model
-        IFolder businessFolder = model.getFolder(FolderType.BUSINESS);
-        IFolder appFolder = model.getFolder(FolderType.APPLICATION);
-        __doTestHasCommonAncestorFolderWithTheseFolders(businessFolder, appFolder);
-        
-        // Test with folders and elements that have no root model
-        IFolder parent1 = IArchimateFactory.eINSTANCE.createFolder();
-        IFolder parent2 = IArchimateFactory.eINSTANCE.createFolder();
-        __doTestHasCommonAncestorFolderWithTheseFolders(parent1, parent2);
-    }
     
-    private void __doTestHasCommonAncestorFolderWithTheseFolders(IFolder parentFolder1, IFolder parentFolder2) {
-        /*
-        
-        businessFolder 
-                   |-- f2
-                        |-- e1
-                   |-- f3
-                        |-- e2
-        appFolder
-                   |-- f4
-                        |-- e3
-                   |-- f5
-                        |-- e4
-         
-         */
-      
-        IFolder f2 = IArchimateFactory.eINSTANCE.createFolder();
-        IFolder f3 = IArchimateFactory.eINSTANCE.createFolder();
-        parentFolder1.getFolders().add(f2);
-        parentFolder1.getFolders().add(f3);
-        IArchimateElement e1 = IArchimateFactory.eINSTANCE.createBusinessActor();
-        f2.getElements().add(e1);
-        IArchimateElement e2 = IArchimateFactory.eINSTANCE.createBusinessActor();
-        f3.getElements().add(e2);
-        
-        IFolder f4 = IArchimateFactory.eINSTANCE.createFolder();
-        IFolder f5 = IArchimateFactory.eINSTANCE.createFolder();
-        parentFolder2.getFolders().add(f4);
-        parentFolder2.getFolders().add(f5);
-        IArchimateElement e3 = IArchimateFactory.eINSTANCE.createApplicationComponent();
-        f4.getElements().add(e3);
-        IArchimateElement e4 = IArchimateFactory.eINSTANCE.createApplicationComponent();
-        f5.getElements().add(e4);
-        
-        // Same common ancestor
-        assertTrue(dragHandler.hasCommonAncestorFolder(f2, f3));
-        assertTrue(dragHandler.hasCommonAncestorFolder(f2, e1));
-        assertTrue(dragHandler.hasCommonAncestorFolder(f3, e1));
-        assertTrue(dragHandler.hasCommonAncestorFolder(e1, e2));
-        
-        // Different common ancestors
-        assertFalse(dragHandler.hasCommonAncestorFolder(f2, f4));
-        assertFalse(dragHandler.hasCommonAncestorFolder(f3, f5));
-        assertFalse(dragHandler.hasCommonAncestorFolder(f3, e3));
-        assertFalse(dragHandler.hasCommonAncestorFolder(e1, e4));
-    }
     
     @Test
     public void testCanDropObject() {

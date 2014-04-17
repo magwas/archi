@@ -279,13 +279,8 @@ public class TreeModelViewerDragDropHandler {
         // Dragging onto a Folder
         Object parent = getTargetParent(event);
         if(parent instanceof IFolder) {
-            IFolder targetfolder = (IFolder)parent;
             IStructuredSelection selection = (IStructuredSelection)LocalSelectionTransfer.getTransfer().getSelection();
             for(Object object : selection.toList()) {
-                // must have the same top folder type - a restriction which one day we should not enforce!
-                if(!hasCommonAncestorFolder(targetfolder, (EObject)object)) {
-                    return false;
-                }
                 if(!canDropObject(object, (TreeItem)event.item)) {
                     return false;
                 }
@@ -296,21 +291,6 @@ public class TreeModelViewerDragDropHandler {
         return false;
     }
     
-    /**
-     * Check if eObject1 and eObject2 have a common ancestor folder
-     * i.e dragged objects can only share the same hole
-     */
-    boolean hasCommonAncestorFolder(EObject eObject1, EObject eObject2) {
-        while(eObject1.eContainer() instanceof IFolder) {
-            eObject1 = eObject1.eContainer();
-        }
-
-        while(eObject2.eContainer() instanceof IFolder) {
-            eObject2 = eObject2.eContainer();
-        }
-        
-        return (eObject1 == eObject2);
-    }
 
     /**
      * Return true if object can be dropped on a target tree item
