@@ -39,16 +39,24 @@
   </properties>
  
   <repositories>
+<!--   <repository>
+     <id>egit</id>
+     <layout>p2</layout>
+     <url>http://download.eclipse.org/egit/updates</url>
+   </repository>
+-->
    <repository>
      <id>3.8</id>
      <layout>p2</layout>
      <url>http://download.eclipse.org/eclipse/updates/3.8/R-3.8.1-201209141540</url>
    </repository>
+<!--
    <repository>
      <id>orbit</id>
      <layout>p2</layout>
      <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository/</url>
    </repository>
+-->
    <repository>
      <id>3.8updates</id>
      <layout>p2</layout>
@@ -120,6 +128,4 @@
       </plugin>
     </plugins>
   </build>
-   
- 
 </project>
