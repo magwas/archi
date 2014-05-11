@@ -19,6 +19,7 @@
 
    <windowImages i16="/com.archimatetool.editor/img/app-16.png" i32="/com.archimatetool.editor/img/app-32.png" i48="/com.archimatetool.editor/img/app-48.png" i64="/com.archimatetool.editor/img/app-64.png" i128="/com.archimatetool.editor/img/app-128.png"/>
 
+
    <launcher name="Archi">
       <linux icon="branding/linux/icon.xpm"/>
       <macosx icon="branding/mac/icon.icns"/>
@@ -29,8 +30,10 @@
       </win>
    </launcher>
 
+
    <vm>
    </vm>
+
 
    <plugins>
       <plugin id="com.archimatetool.canvas"/>
@@ -71,6 +74,7 @@
       <plugin id="org.eclipse.emf.ecore.xmi"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.ds"/>
       <plugin id="org.eclipse.equinox.http.jetty"/>
       <plugin id="org.eclipse.equinox.http.registry"/>
       <plugin id="org.eclipse.equinox.http.servlet"/>
@@ -79,6 +83,7 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
+      <plugin id="org.eclipse.equinox.simpleconfigurator"/>
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
       <plugin id="org.eclipse.equinox.weaving.hook" fragment="true"/>
       <plugin id="org.eclipse.gef"/>
@@ -115,5 +120,13 @@
       <feature id="org.eclipse.help" version="1.0.0.v20080603-7r7xEHJEJkZu5nE6Q4Qrtvu6JZ9L"/>
    </features>
 
+   <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.osgi" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
+   </configurations>
 
 </product>
