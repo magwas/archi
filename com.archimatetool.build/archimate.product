@@ -19,7 +19,6 @@
 
    <windowImages i16="/com.archimatetool.editor/img/app-16.png" i32="/com.archimatetool.editor/img/app-32.png" i48="/com.archimatetool.editor/img/app-48.png" i64="/com.archimatetool.editor/img/app-64.png" i128="/com.archimatetool.editor/img/app-128.png"/>
 
-
    <launcher name="Archi">
       <linux icon="branding/linux/icon.xpm"/>
       <macosx icon="branding/mac/icon.icns"/>
@@ -30,24 +29,29 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
-
 
    <plugins>
       <plugin id="com.archimatetool.canvas"/>
       <plugin id="com.archimatetool.csv"/>
       <plugin id="com.archimatetool.editor"/>
+      <plugin id="com.archimatetool.editor.browser"/>
       <plugin id="com.archimatetool.editor.fullscreen.macos" fragment="true"/>
       <plugin id="com.archimatetool.editor.launch.win32" fragment="true"/>
+      <plugin id="com.archimatetool.editor.tests" fragment="true"/>
       <plugin id="com.archimatetool.export.svg"/>
+      <plugin id="com.archimatetool.export.svg.tests" fragment="true"/>
       <plugin id="com.archimatetool.help"/>
+      <plugin id="com.archimatetool.importexportexample"/>
       <plugin id="com.archimatetool.jasperreports"/>
       <plugin id="com.archimatetool.jdom"/>
+      <plugin id="com.archimatetool.jdom.tests" fragment="true"/>
       <plugin id="com.archimatetool.model"/>
+      <plugin id="com.archimatetool.model.tests" fragment="true"/>
       <plugin id="com.archimatetool.reports"/>
       <plugin id="com.archimatetool.templates"/>
+      <plugin id="com.archimatetool.testsupport"/>
       <plugin id="com.archimatetool.widgets"/>
       <plugin id="com.archimatetool.zest"/>
       <plugin id="com.ibm.icu"/>
@@ -114,6 +118,7 @@
       <plugin id="org.eclipse.zest.core"/>
       <plugin id="org.eclipse.zest.layouts"/>
       <plugin id="org.hamcrest.core"/>
+      <plugin id="org.junit"/>
    </plugins>
 
    <features>
@@ -125,8 +130,6 @@
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
-      <plugin id="org.eclipse.osgi" autoStart="true" startLevel="1" />
-      <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
    </configurations>
 
 </product>

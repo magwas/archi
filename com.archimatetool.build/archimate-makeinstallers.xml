@@ -215,13 +215,13 @@
         <copy file="${tmp.dir}/Archi.ini" tofile="${tmp.dir}/Archi64.ini" overwrite="true"/>
     	<delete file="${tmp.dir}/Archi.ini"/>
 
-        <!-- copy 32-bit build -->
+        <!-- copy 32-bit build 
 		<copy todir="${tmp.dir}" >
 			<fileset dir="${output_lnx32.dir}"/>
 		</copy>
     	
-    	<!-- rename Archi to Archi32 -->
     	<move file="${tmp.dir}/${app.name}" tofile="${tmp.dir}/${app.name}32"/>
+        -->
     	
         <!-- copy 64-bit build -->
 		<copy todir="${tmp.dir}" overwrite="false">
